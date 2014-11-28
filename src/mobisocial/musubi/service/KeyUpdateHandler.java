@@ -134,9 +134,12 @@ public class KeyUpdateHandler extends ContentObserver {
     	for (MIdentity id : ids) {
     		IBIdentity ident = IdentitiesManager.toIBIdentity(id,
     				IdentitiesManager.computeTemporalFrameFromPrincipal(id.principal_));
+    		//by haoyuheng
+    		/*
     		if (ident.authority_ == Authority.PhoneNumber) {
     		    ident = new IBIdentity(ident.authority_, ident.principal_, 0L);
     		}
+    		*/
     		idsToUpdate.add(ident);
     		Log.i(TAG, "Identity principal: " + id.principal_);
     	}
@@ -262,7 +265,7 @@ public class KeyUpdateHandler extends ContentObserver {
 	    			try {
 						IBSignatureScheme.UserKey sKey = mIdentityProvider.syncGetSignatureKey(ibid);
 		    			assert(sKey != null);
-		    			Log.d(TAG, "Adding signature user key for " + id.principal_);
+		    			Log.d(TAG, "Adding signature user key for " + id.principal_+" "+hid.temporalFrame_);
 		    			MSignatureUserKey key = new MSignatureUserKey();
 	    				key.identityId_ = id.id_;
 	    				key.when_ = hid.temporalFrame_;

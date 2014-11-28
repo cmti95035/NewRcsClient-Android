@@ -1042,7 +1042,9 @@ public class AccountLinkDialog  extends DialogFragment {
         SQLiteOpenHelper databaseSource = App.getDatabaseSource(mActivity);
         IdentitiesManager im = new IdentitiesManager(databaseSource);
         MIdentity id = im.getIdentityForIBHashedIdentity(toAdd);
+        Log.d(TAG, "Setting up " + "0");
         if (id == null) {
+        	Log.d(TAG, "Setting up " + "1");
             id = new MIdentity();
             id.claimed_ = false;
             id.owned_ = false;
@@ -1061,12 +1063,21 @@ public class AccountLinkDialog  extends DialogFragment {
         Set<MPendingIdentity> pendingIdents = pManager.lookupIdentities(id.id_);
         
         if (!id.owned_) {
+        	Log.d(TAG, "Setting up " + "2");
             // Add this account so that it can be tracked
             Message m = sAccountLooperThread.obtainMessage();
             m.what = MSG_ADD_TO_DATABASE;
             Job job = new AccountLooperThread.Job();
             job.mDialog = AccountLinkDialog.this;
-            job.mDetails = new AccountDetails(toAdd.principal_, toAdd.principal_, ACCOUNT_TYPE_PHONE, id.owned_);
+            /*
+             * by haoyuheng
+             * set the id.owned_ true
+             */
+           
+            //job.mDetails = new AccountDetails(toAdd.principal_, toAdd.principal_, ACCOUNT_TYPE_PHONE, id.owned_);
+            job.mDetails = new AccountDetails(toAdd.principal_, toAdd.principal_, ACCOUNT_TYPE_PHONE, true);
+            
+            
             m.obj = job;
             sAccountLooperThread.sendMessage(m);
             
@@ -1179,6 +1190,8 @@ public class AccountLinkDialog  extends DialogFragment {
                             if (mid != null) {
                                 PendingIdentityManager pManager = new PendingIdentityManager(databaseSource);
                                 int unnotified = pManager.getUnnotifiedIdentities(mid.id_).size();
+                                
+                                Log.i(TAG,mid.owned_+" "+unnotified);
                                 
                                 if (mid.owned_ && unnotified == 0) {
                                     job.mDialog.mAccountAdapter.setAccountStatus(job.mId, AccountStatus.CONNECTED);

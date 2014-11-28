@@ -303,8 +303,8 @@ public class AphidIdentityProvider implements IdentityProvider {
     		throw new IdentityProviderException.Auth(
     				new IBIdentity(Authority.Facebook, fAccount, 0));
     	}
-	}
-
+	}	
+	
 	String getFacebookAccount() {
 	    MyAccountManager am = new MyAccountManager(App.getDatabaseSource(mContext));
         MMyAccount[] acc = am.getClaimedAccounts(AccountLinkDialog.ACCOUNT_TYPE_FACEBOOK);
@@ -313,6 +313,34 @@ public class AphidIdentityProvider implements IdentityProvider {
         	return identity.principal_;
         }
         return null;
+	}
+	/*
+	 * Cache the current phone number token
+	 */
+	private void cacheCurrentPhonenumberToken() throws IdentityProviderException{
+		SQLiteOpenHelper db = App.getDatabaseSource(mContext);
+		MyAccountManager am = new MyAccountManager(db);
+		MMyAccount[] accounts = am.getClaimedAccounts(AccountLinkDialog.ACCOUNT_TYPE_PHONE);
+		for (MMyAccount account : accounts) {
+        	String pToken = null;
+        	String phoneAccount = account.accountName_;
+        	if (phoneAccount != null) {
+        	    
+        	    pToken = phoneAccount+"helloworld";
+        	    
+        		Log.d(TAG, "phone account:" + phoneAccount);
+        	}
+        	if (pToken != null) {
+        		setTokenForUser(Authority.PhoneNumber, phoneAccount, pToken);
+        		Log.d(TAG, "phone  token:" + pToken);
+        	}
+        	else if (phoneAccount != null && pToken == null) {
+        		// Authentication failures should be reported
+        		sendNotification("Phone");
+        		throw new IdentityProviderException.Auth(
+        				new IBIdentity(Authority.PhoneNumber, phoneAccount, 0));
+        	}
+		}
 	}
 	
 	private byte[] getAphidResultForIdentity(IBIdentity ident, String property)
@@ -341,6 +369,11 @@ public class AphidIdentityProvider implements IdentityProvider {
 			}
 		}
 		
+		//by haoyuheng
+		// add the token of phonenumber.
+		cacheCurrentPhonenumberToken();
+	
+		
 		String aphidType = null;
 		String aphidToken = null;
 		// Get a service-specific token if it exists
@@ -361,10 +394,13 @@ public class AphidIdentityProvider implements IdentityProvider {
     			}
     			break;
     		case PhoneNumber:
+    			aphidType = "phone";
     		    // Aphid doesn't return keys for a phone number without verification
-    		    throw new IdentityProviderException.TwoPhase(ident);
+    		    //throw new IdentityProviderException.TwoPhase(ident);
 		}
 
+		Log.i(TAG,"aphidType "+aphidType+" "+"aphidToken "+aphidToken);
+		
         // Do not ask the server for identities we don't know how to handle
 		if (aphidType == null || aphidToken == null) {
 		    throw new IdentityProviderException(ident);

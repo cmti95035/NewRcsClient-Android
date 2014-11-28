@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 public class UserKeyManager {
 	final SQLiteOpenHelper databaseSource_;
@@ -98,6 +99,7 @@ public class UserKeyManager {
 	}
 	//TODO: compiled statement
 	public IBSignatureScheme.UserKey getSignatureKey(MIdentity from, IBHashedIdentity me) throws NeedsKey.Signature {
+		Log.i("UserKeymanager","getSignatureKey "+String.valueOf(me.temporalFrame_));
 		SQLiteDatabase db = initializeDatabase();
 		Cursor c = db.query(
 			MSignatureUserKey.TABLE, 
