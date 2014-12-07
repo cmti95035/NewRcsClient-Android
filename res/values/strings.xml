@@ -111,5 +111,7 @@
     <string name="qr_scan_friend">Scan a Friend</string>
     <string name="title_claim_key">Verify Account</string>
     <string name="country_code">+</string>
+    <string name="cloud_storage_description">connect to the cloud storage, messages will be allowed to storage more than 2 weeks, and more.</string>
+    
     
 </resources>

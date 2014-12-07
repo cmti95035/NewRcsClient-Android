@@ -83,6 +83,8 @@ public class SettingsActivity extends MusubiBaseActivity implements Filterable {
         mLabels.add("Profile");
         mLabels.add("Accounts");
         mLabels.add("Settings");
+       
+        
         SQLiteOpenHelper SQLiteOpenHelper = App.getDatabaseSource(this);
         IdentitiesManager identitiesManager = new IdentitiesManager(SQLiteOpenHelper);
         long myId = identitiesManager.getOwnedIdentities().get(0).id_;
@@ -111,7 +113,7 @@ public class SettingsActivity extends MusubiBaseActivity implements Filterable {
 		        case SETTINGS :
 		        	Log.w(TAG, "viewing settings q");
 		        	mViewPager.setCurrentItem(2);
-		        	break;
+		        	break;	
 		        default :
 		        	mViewPager.setCurrentItem(0);
 		        	break;

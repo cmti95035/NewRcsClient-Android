@@ -80,6 +80,30 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" >
             </TextView>
         </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/cloudstorage_section"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_margin="5dip" >
+            <TextView
+                android:id="@+id/set_cloud_storage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Clould Storage Settings"
+                android:textAppearance="?android:attr/textAppearanceLarge" >
+            </TextView>
+
+             <ImageView
+                 android:id="@+id/set_cloud_storage_goto"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:src="@drawable/abc_ic_go_to" />
+            
+        </LinearLayout>
 
         <CheckedTextView
             android:id="@+id/share_apps"

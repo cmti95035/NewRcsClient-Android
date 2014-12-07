@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import mobisocial.musubi.App;
 import mobisocial.musubi.R;
+import mobisocial.musubi.cloudstorage.CloudStorageActivity;
 import mobisocial.musubi.model.DbContactAttributes;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
@@ -69,6 +70,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -187,7 +189,7 @@ public class SettingsFragment extends Fragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			settings = mActivity.getSharedPreferences(
-					SettingsActivity.PREFS_NAME, 0);
+					SettingsActivity.PREFS_NAME, 0);  
 
 			DialogInterface.OnClickListener radioBtnListener = new DialogInterface.OnClickListener() {
 				@Override
@@ -408,6 +410,7 @@ public class SettingsFragment extends Fragment {
 	CheckedTextView wifiFingerprinting_;
 	CheckedTextView vibrating_;
 	CheckedTextView anonStats_;
+	LinearLayout cloudstorage; 
 
 	public static SettingsFragment newInstance() {
 		SettingsFragment frag = new SettingsFragment();
@@ -432,6 +435,21 @@ public class SettingsFragment extends Fragment {
 		setRingtone_ = (TextView) v.findViewById(R.id.set_ringtone);
 		vibrating_ = (CheckedTextView) v.findViewById(R.id.vibrating);
 		anonStats_ = (CheckedTextView) v.findViewById(R.id.report_stats);
+		
+		//by haoyuheng
+		
+		cloudstorage = (LinearLayout)v.findViewById(R.id.cloudstorage_section);
+		cloudstorage.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();    
+                intent.setClass(mActivity, CloudStorageActivity.class);
+                SettingsFragment.this.startActivity(intent); 
+			}
+			
+		});
 
 		// connect the global tv mode toggle to the shared preferences
 		vibrating_.setOnClickListener(new VibratingListener());
@@ -441,7 +459,7 @@ public class SettingsFragment extends Fragment {
 		shareContactInfo_.setOnClickListener(new ShareContactListener());
 		vacuumDatabase_.setOnClickListener(new VacuumDatabaseListener());
 		anonStats_.setOnClickListener(new AnonStatsListener());
-
+		
 		
 		v.findViewById(R.id.settings_item_ringtone).setOnClickListener(new SetRingtoneListener());
 		
