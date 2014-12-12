@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import mobisocial.musubi.R;
 
 import android.os.Bundle;
@@ -29,8 +32,7 @@ import android.widget.Toast;
 public class CloudStorageActivity extends Activity {
 
 	 
-	private static final String dropboxAppKey = "m2xgu9kayi3gzlp";
-    private static final String dropboxAppSecret = "leikpr9er6j71pw";
+	
     private static final int REQUEST_LINK_TO_DBX = 0;
     
     private static String baiduApiKey = "jmWK4EfYlQtMpUbWcU2GRlWF"; //your api_key";
@@ -46,7 +48,6 @@ public class CloudStorageActivity extends Activity {
 	
 	Baidu baidu = null;
 	Dropbox dp = null;
-	public static AccessTokenManager accessTokenManager = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,7 @@ public class CloudStorageActivity extends Activity {
 		baidu = new Baidu();
 		dp  = new Dropbox();
 		
-		accessTokenManager = new AccessTokenManager(this);
-        accessTokenManager.initToken();
+		AccessTokenManager.initToken(this);
 		
 		
 		CurrentCloudStorage = getIsCloudStorageConnected();
@@ -93,7 +93,7 @@ public class CloudStorageActivity extends Activity {
 	
 	protected void ConnectToDropbox() {
 		// TODO Auto-generated method stub
-		dp.SetAccount(getApplicationContext(), dropboxAppKey, dropboxAppSecret);
+		dp.SetAccount(getApplicationContext());
 		if (dp.hasLinkedAccount()) {
 			setIsCloudStorageConnected(CloudStorage.DROPBOX);  
 		}else{
@@ -112,6 +112,16 @@ public class CloudStorageActivity extends Activity {
             if (resultCode == Activity.RESULT_OK) {
             	setIsCloudStorageConnected(CloudStorage.DROPBOX);            	
             	Log.e("ddd","Link to Dropbox success.");
+            	
+            	JSONObject json = new JSONObject();
+            	try {
+					json.put("test", "fdsafdsafsd");
+					dp.SaveMeseages(json);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	
             } else {
                 Toast.makeText(this, "Link to Dropbox failed or was cancelled.", 1000);
                 Log.e("ddd","Link to Dropbox failed or was cancelled.");
@@ -124,7 +134,7 @@ public class CloudStorageActivity extends Activity {
 
 	protected void ConnectToBaidu() {
 		// TODO Auto-generated method stub		
-		baidu.SetAccount(this, baiduApiKey,"");
+		baidu.SetAccount(this);
 		baidu.Login(this, 1);		
 	}
 
@@ -230,16 +240,15 @@ public class CloudStorageActivity extends Activity {
 	
 	}
 
-	
 
 	private CloudStorage getIsCloudStorageConnected() {
 		// TODO Auto-generated method stub
-		dp.SetAccount(getApplicationContext(), dropboxAppKey, dropboxAppSecret);		
+		dp.SetAccount(getApplicationContext());		
 		if (dp.hasLinkedAccount()) {
 			return CloudStorage.DROPBOX;
 		}
 		
-		if(baidu.hasLinkedAccount()){
+		if(baidu.hasLinkedAccount(this)){
 			return CloudStorage.BAIDU;
 		}
 		return CloudStorage.NONE;
@@ -249,14 +258,14 @@ public class CloudStorageActivity extends Activity {
 		// TODO Auto-generated method stub
 		
 		if(CurrentCloudStorage == CloudStorage.DROPBOX && storage == CloudStorage.NONE){
-			dp.SetAccount(getApplicationContext(), dropboxAppKey, dropboxAppSecret);		
+			dp.SetAccount(getApplicationContext());		
 			if (dp.hasLinkedAccount()) {
 				dp.Logout(this);
 			}
 		}
 		
 		if(CurrentCloudStorage == CloudStorage.BAIDU && storage == CloudStorage.NONE){
-			if(baidu.hasLinkedAccount())
+			if(baidu.hasLinkedAccount(this))
 				baidu.Logout(this);
 		}
 		CurrentCloudStorage = storage;

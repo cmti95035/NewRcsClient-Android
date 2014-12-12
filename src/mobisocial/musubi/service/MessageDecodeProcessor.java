@@ -24,6 +24,8 @@ import java.util.Date;
 
 import mobisocial.musubi.App;
 import mobisocial.musubi.R;
+import mobisocial.musubi.cloudstorage.Baidu;
+import mobisocial.musubi.cloudstorage.Dropbox;
 import mobisocial.musubi.encoding.DiscardMessage;
 import mobisocial.musubi.encoding.IncomingMessage;
 import mobisocial.musubi.encoding.MessageDecoder;
@@ -78,6 +80,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Scans for inbound encoded objects that need to be decoded.
@@ -105,6 +108,10 @@ public class MessageDecodeProcessor extends ContentObserver {
     final IdentityProvider mIdentityProvider;
 	HandlerThread mThread;
 
+	//by haoyuheng
+	Dropbox dp = null;    
+    Baidu baidu = null;
+
     public static MessageDecodeProcessor newInstance(Context context, SQLiteOpenHelper dbh, KeyUpdateHandler keyUpdateService, IdentityProvider identityProvider) {
         HandlerThread thread = new HandlerThread("MessageDecodeThread");
         thread.setPriority(Thread.MIN_PRIORITY);
@@ -126,6 +133,12 @@ public class MessageDecodeProcessor extends ContentObserver {
         mDeviceManager = new DeviceManager(mDatabaseSource);
     	mContactThumbnailCache = App.getContactCache(context);
     	mIdentityProvider = identityProvider;
+    	
+
+        dp = new Dropbox();
+        dp.SetAccount(mContext.getApplicationContext());        
+        baidu = new Baidu();
+    	//baidu.SetAccount(mContext);          	
 
         TestSettingsProvider.Settings settings = App.getTestSettings(context);
         if(settings != null) {
@@ -538,6 +551,8 @@ public class MessageDecodeProcessor extends ContentObserver {
                 object.renderable_ = false;
                 object.processed_ = false;
                 mObjectManager.insertObject(object);
+                
+                //SaveMessages(object);
 
                 // Grant app access
                 if (!MusubiContentProvider.isSuperApp(obj.appId)) {
@@ -554,6 +569,17 @@ public class MessageDecodeProcessor extends ContentObserver {
                 mDB.endTransaction();
             }
             return true;
+		}
+
+		private void SaveMessages(MObject object) {
+			// TODO Auto-generated method stub
+			if (dp.hasLinkedAccount()) {
+     			dp.SaveMeseages(object);
+     		}else if(baidu.hasLinkedAccount(mContext)){
+     			baidu.SaveMeseages(object,mContext);     			//
+     		}else{
+     			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
+     		}
 		}
 	}
 }

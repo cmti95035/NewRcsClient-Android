@@ -25,6 +25,8 @@ import java.util.Set;
 
 import mobisocial.metrics.UsageMetrics;
 import mobisocial.musubi.App;
+import mobisocial.musubi.cloudstorage.Baidu;
+import mobisocial.musubi.cloudstorage.Dropbox;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.model.DbObjCache;
 import mobisocial.musubi.model.DbRelation;
@@ -58,6 +60,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Scans for messages that should be sent over the network.
@@ -74,6 +77,10 @@ class ObjPipelineProcessor extends ContentObserver {
     private final ProfileScanningObjHandler mProfileScanner;
     private final Musubi mMusubi;
     final HandlerThread mThread;
+    
+  //by haoyuheng
+  	Dropbox dp = null;    
+    Baidu baidu = null;
 
     public static ObjPipelineProcessor newInstance(Context context) {
         HandlerThread thread = new HandlerThread("ObjPipelineThread");
@@ -91,6 +98,12 @@ class ObjPipelineProcessor extends ContentObserver {
         mPendingParentHashes = new HashSet<String>();
         mNotificationHandler = new NotificationHandler(context);
         mProfileScanner = new ProfileScanningObjHandler();
+        
+        
+
+        dp = new Dropbox();
+        dp.SetAccount(mContext.getApplicationContext());        
+        baidu = new Baidu();
     }
 
     @Override
@@ -207,6 +220,9 @@ class ObjPipelineProcessor extends ContentObserver {
 		                feedsToNotify.add(feed.id_);
 		            }
 		            keepObject = helper.processObject(mContext, feed, sender, object);
+		            
+		            Log.e(TAG,object.json_);
+		            
 		            object.processed_ = true;
 
 	                if (setParent && object.renderable_) {
@@ -237,6 +253,13 @@ class ObjPipelineProcessor extends ContentObserver {
 
 	            resolver.notifyChange(MusubiContentProvider.uriForItem(Provided.OBJECTS, id), this);
 	            mNotificationHandler.handle(helper, sender.owned_, obj);
+	            
+	           
+	            //save im cloud
+	            SaveMessages(object);
+
+	            
+	            
         	} catch(Exception e) {
         	    Log.e(TAG, "Error processing object " + object.id_ + ": " + object.type_, e);
                 mDatabaseManager.getObjectManager().delete(object.id_);
@@ -257,6 +280,17 @@ class ObjPipelineProcessor extends ContentObserver {
         }
     }
 
+    private void SaveMessages(MObject object) {
+		// TODO Auto-generated method stub
+		if (dp.hasLinkedAccount()) {
+ 			dp.SaveMeseages(object);
+ 		}else if(baidu.hasLinkedAccount(mContext)){
+ 			baidu.SaveMeseages(object,mContext);     			//
+ 		}else{
+ 			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
+ 		}
+	}
+    
     DbObj getDbObj(MObject object, JSONObject json) throws JSONException {
         String appId = mDatabaseManager.getAppManager().getAppIdentifier(object.appId_);
         String type = object.type_;

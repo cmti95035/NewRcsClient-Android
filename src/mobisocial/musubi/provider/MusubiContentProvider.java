@@ -79,7 +79,7 @@ public class MusubiContentProvider extends ContentProvider {
     public static final String AUTHORITY = "org.musubi.db";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-    static final boolean DBG = false;
+    static final boolean DBG = true;
     private DatabaseManager mDatabaseManager;
 
 	private static MusubiContentProvider sInstance;
@@ -519,6 +519,8 @@ public class MusubiContentProvider extends ContentProvider {
             }
         }
 
+        Log.e(TAG,"come to picture");
+        
         byte[] raw = null;
         if (values.containsKey(DbObj.COL_RAW)) {
             raw = values.getAsByteArray(DbObj.COL_RAW);
@@ -526,19 +528,26 @@ public class MusubiContentProvider extends ContentProvider {
                 throw new DbInsertionError("Bad format for raw field");
             }
 
+            Log.e(TAG,"come to picture 1 "+json.toString());
             // XXX this seems like a horrible place for this.
 
         	//scale down pictures that come in too large
             //this also stored them in the corral
             //if its already in the corral, don't rescale because we already
             //compressed this, and we don't really want another copy
+            
+            
         	if(type.equals(PictureObj.TYPE) && json != null && !json.has("localUri")) {
+        		
+        		Log.e(TAG,"come to picture 2");
         		byte[] new_raw = handleDownscalePicture(raw, json);
         		if(raw != new_raw) {
         			jsonSrc = json.toString();
         		}
         		raw = new_raw;
         	}
+        	
+        	
             if (raw.length > DatabaseFile.SIZE_LIMIT) {
         		throw new DbInsertionError("Messasge raw size too large for sending");
             }
@@ -587,8 +596,12 @@ public class MusubiContentProvider extends ContentProvider {
     }
 
     private byte[] handleDownscalePicture(byte[] raw, JSONObject json) {
+    	
+    	Log.e(TAG,"come to picture 3");
+    	
     	//TODO: corral storage directly from within the web app
     	Uri corralUri = ContentCorral.storeContent(getContext(), raw, CorralDownloadClient.typeForBytes(raw, PictureObj.TYPE));
+    	Log.e(TAG,corralUri.toString());
     	if(corralUri == null)
     		return raw;
     	try {
@@ -715,6 +728,9 @@ public class MusubiContentProvider extends ContentProvider {
     }
 
     Uri insertObjWithContentValues(String parentAppId, ContentValues values) {
+    	
+    	if (DBG) Log.e(TAG, "insertObjWithContentValues");
+    	
     	MObject object;
         try {
             prepareObjRelations(getDatabaseManager().getDatabase(), values);

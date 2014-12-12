@@ -87,6 +87,7 @@ public class GalleryAction extends FeedAction {
                     public void run() {
                         try {
                         	Uri uri = data.getData();
+                        	Log.e(TAG,uri.toString());
                             // TODO: mimeType; local_uri = data.toString();
                             MemObj outboundObj = PictureObj.from(mmContext, uri, true);
                             Helpers.sendToFeed(mmContext, outboundObj, mmFeedUri);

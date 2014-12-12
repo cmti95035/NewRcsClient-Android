@@ -30,6 +30,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 
 public class ObjectManager extends ManagerBase {
     private SQLiteStatement mSqlInsertObj;
@@ -92,6 +93,7 @@ public class ObjectManager extends ManagerBase {
     }
 
     public void insertObject(MObject obj) {
+    	Log.e("insertObject",obj.json_);
         SQLiteDatabase db = initializeDatabase();
         if (mSqlInsertObj == null) {
             synchronized (this) {
@@ -129,6 +131,7 @@ public class ObjectManager extends ManagerBase {
     }
 
     public void updateObject(MObject obj) {
+    	Log.e("updateObject",obj.json_);
         SQLiteDatabase db = initializeDatabase();
         if (mSqlUpdateObj == null) {
             synchronized (this) {

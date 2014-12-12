@@ -31,4 +31,5 @@ public class Message {
 	public Recipient[] r;
 	/* the encrypted data */
 	public byte[] d;
+	
 }

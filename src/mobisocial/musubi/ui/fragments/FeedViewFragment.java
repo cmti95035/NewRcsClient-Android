@@ -259,6 +259,9 @@ public class FeedViewFragment extends ListFragment implements OnScrollListener,
                     publishProgress("Fetching web story...");
                 }
                 obj = ObjFactory.objForText(mText);
+                
+                Log.i(TAG,obj.getJson().toString());
+                
                 Helpers.sendToFeed(mActivity, obj, mFeedUri);
             }
             return obj;

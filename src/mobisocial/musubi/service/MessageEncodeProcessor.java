@@ -29,6 +29,9 @@ import java.util.Set;
 
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.musubi.App;
+import mobisocial.musubi.cloudstorage.Baidu;
+import mobisocial.musubi.cloudstorage.CloudStorageActivity.CloudStorage;
+import mobisocial.musubi.cloudstorage.Dropbox;
 import mobisocial.musubi.encoding.MessageEncoder;
 import mobisocial.musubi.encoding.NeedsKey;
 import mobisocial.musubi.encoding.ObjEncoder;
@@ -72,6 +75,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Scans for outbound objects that need to be encoded. Encodes the messages and
@@ -104,6 +108,11 @@ public class MessageEncodeProcessor extends ContentObserver {
     final TLongArrayList mFinishedProcessing = new TLongArrayList();
 	private final SQLiteOpenHelper mDatabaseSource;
 
+	//by haoyuheng
+	Dropbox dp = null;    
+    Baidu baidu = null;
+	
+	
     public static MessageEncodeProcessor newInstance(Context context, SQLiteOpenHelper dbh, KeyUpdateHandler keyUpdateService, IdentityProvider identityProvider) {
         HandlerThread thread = new HandlerThread("MessageEncodeThread");
         thread.setPriority(Thread.MIN_PRIORITY);
@@ -120,6 +129,11 @@ public class MessageEncodeProcessor extends ContentObserver {
         mHelper = dbh;
         mDatabaseManager = new DatabaseManager(mContext);
 
+        dp = new Dropbox();
+        dp.SetAccount(mContext.getApplicationContext());        
+        baidu = new Baidu();
+    	//baidu.SetAccount(mContext);
+        
         TestSettingsProvider.Settings settings = App.getTestSettings(context);
         if(settings != null) {
         	mSynchronousKeyFetch = settings.mSynchronousKeyFetchInMessageEncodeDecode;
@@ -317,12 +331,18 @@ public class MessageEncodeProcessor extends ContentObserver {
                         return;
                     }
 
+                    Log.e(TAG, object.toString());
+                    
+                    //SaveMessages(object);
+                    
+                    
                     // check for auto-uploads
                     if (json.has(CorralDownloadClient.OBJ_LOCAL_URI)) {
                         boolean autoUpload = !PictureObj.TYPE.equals(object.type_);
                         prepareUpload(object, json, autoUpload);
                         pendingUploadSinceLastNotify |= autoUpload;
-                    }
+                        Log.e("CorralDownloadClient","fdad "+autoUpload);
+                    }//
                 }
 
                 OutgoingMessage om = new OutgoingMessage();
@@ -413,6 +433,23 @@ public class MessageEncodeProcessor extends ContentObserver {
                 Log.e(TAG, "Failed to encode obj " + objId, e);
             }
         }
+
+		private void SaveMessages(MObject object) {
+			// TODO Auto-generated method stub
+			
+     		if (dp.hasLinkedAccount()) {
+     			dp.SaveMeseages(object);
+     		}else if(baidu.hasLinkedAccount(mContext)){
+     			baidu.SaveMeseages(object,mContext);     			//
+     		}else{
+     			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
+     		}
+		}
+
+		private void SaveImages() {
+			// TODO Auto-generated method stub
+			
+		}
     }
 
     void prepareUpload(MObject object, JSONObject json, boolean submitJob) {
@@ -434,4 +471,5 @@ public class MessageEncodeProcessor extends ContentObserver {
             mDatabaseSource.getWritableDatabase().insert(MPendingUpload.TABLE, null, values);
         }
     }
+
 }

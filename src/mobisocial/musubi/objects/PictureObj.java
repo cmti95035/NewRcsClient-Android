@@ -25,6 +25,8 @@ import java.lang.ref.SoftReference;
 import mobisocial.musubi.App;
 import mobisocial.musubi.ImageGalleryActivity;
 import mobisocial.musubi.R;
+import mobisocial.musubi.cloudstorage.Baidu;
+import mobisocial.musubi.cloudstorage.Dropbox;
 import mobisocial.musubi.feed.iface.Activator;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.feed.iface.FeedRenderer;
@@ -64,6 +66,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PictureObj extends DbEntryHandler implements FeedRenderer, Activator {
 	public static final String TAG = "PictureObj";
@@ -76,6 +79,8 @@ public class PictureObj extends DbEntryHandler implements FeedRenderer, Activato
     public static final int MAX_IMAGE_HEIGHT = 720;
     public static final int MAX_IMAGE_SIZE = 40*1024;
 
+
+    
     @Override
     public String getType() {
         return TYPE;
@@ -101,6 +106,8 @@ public class PictureObj extends DbEntryHandler implements FeedRenderer, Activato
     }
 
     public static MemObj from(Context context, Uri imageUri, boolean referenceOrig) throws IOException {
+    	
+    	Log.e(TAG,imageUri.toString());
     	return from(context, imageUri, referenceOrig, null);
     }
     
@@ -250,6 +257,7 @@ public class PictureObj extends DbEntryHandler implements FeedRenderer, Activato
 
 	@Override
 	public boolean processObject(Context context, MFeed feed, MIdentity sender, MObject object) {
+		
 	    DbObj obj = App.getMusubi(context).objForId(object.id_);
 	    File thumbFile = CorralDownloadClient.localFileForContent(obj, true);
         try {
@@ -258,12 +266,20 @@ public class PictureObj extends DbEntryHandler implements FeedRenderer, Activato
             IOUtils.copy(fin, fout);
             String[] paths = new String[] { thumbFile.getAbsolutePath() };
             MediaScannerConnection.scanFile(context, paths, null, null);
+            
+            JSONObject json = new JSONObject(object.json_);
+            json.put("AppPath", thumbFile.getAbsolutePath());
+            object.json_ = json.toString();
         } catch (IOException e) {
             Log.e(TAG, "Error saving thumbnail", e);
             thumbFile.delete();
-        }
+        } catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    return true;
 	}
+
 
 	static byte[] mTempData;
 	static byte[] getTempData() {

@@ -39,21 +39,21 @@ public class AccessTokenManager implements Parcelable {
 
 
     //accessToken信息
-    private String accessToken = null;
+    private static String accessToken = null;
 
     //token过期时间
-    private long expireTime = 0;
+    private static long expireTime = 0;
 
     //当前的上下文环境
-    private Context context = null;
+    private static Context context = null;
 
     /**
      * 构建AccessTokenManager类
      * 
      * @param context 当前的上下文环境，通常为××Activity。this等
      */
-    public AccessTokenManager(Context context) {
-        this.context = context;
+    public AccessTokenManager(Context mcontext) {
+        context = mcontext;
         compareWithConfig();
     }
 
@@ -75,14 +75,14 @@ public class AccessTokenManager implements Parcelable {
     /**
      * 检查当token信息与配置文件是否保持一致，若不一致则对当前的token信息进行初始化
      */
-    private void compareWithConfig() {
-        if (this.context == null) {
+    private static void compareWithConfig() {
+        if (context == null) {
             return;
         }
         /**
          * 对配置的权限信息进行监控，保持多个AccessTokenManager对象之间的，权限信息一致。
          */
-        final SharedPreferences sp = this.context.getSharedPreferences(BAIDU_SDK_CONFIG,
+        final SharedPreferences sp = context.getSharedPreferences(BAIDU_SDK_CONFIG,
                 Context.MODE_PRIVATE);
         sp.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
 
@@ -90,7 +90,7 @@ public class AccessTokenManager implements Parcelable {
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 String acToken = sp.getString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, null);
                 if (accessToken != null && !accessToken.equals(acToken)) {
-                        initToken();                   
+                        initToken(context);                   
                 }
             }
         });
@@ -101,16 +101,18 @@ public class AccessTokenManager implements Parcelable {
      * 从SharedPreference中读取token数据，并初步判断数据的有效性
      *
      */
-    protected void initToken() {
+    protected static void initToken(Context mcontext) {
+    	context = mcontext;
+        compareWithConfig();
         SharedPreferences sp = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE);
         if (sp == null) {
             return;
         }
-        this.accessToken = sp.getString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, null);      
+        accessToken = sp.getString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, null);      
         long expires = sp.getLong(BAIDU_SDK_CONFIG_PROP_EXPIRE_SECONDS, 0);
         long createTime = sp.getLong(BAIDU_SDK_CONFIG_PROP_CREATE_TIME, 0);
         long current = System.currentTimeMillis();
-        this.expireTime = createTime + expires;
+        expireTime = createTime + expires;
         if (expireTime != 0 && expireTime < current) {
             clearToken();
         }
@@ -120,14 +122,14 @@ public class AccessTokenManager implements Parcelable {
     /**
      * 清楚SharedPreference中的所有数据
      */
-    protected void clearToken() {
+    protected static void clearToken() {
         Editor editor = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE).edit();
         editor.remove(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN);
         editor.remove(BAIDU_SDK_CONFIG_PROP_CREATE_TIME);
         editor.remove(BAIDU_SDK_CONFIG_PROP_EXPIRE_SECONDS);
         editor.commit();
-        this.accessToken = null;
-        this.expireTime = 0;
+        accessToken = null;
+        expireTime = 0;
     }
 
     /**
@@ -139,25 +141,25 @@ public class AccessTokenManager implements Parcelable {
         if (values == null || values.isEmpty()) {
             return;
         }
-        this.accessToken = values.getString("access_token");
+        accessToken = values.getString("access_token");
         long expiresIn = Long.parseLong(values.getString("expires_in"));
-        this.expireTime = System.currentTimeMillis() + expiresIn;
+        expireTime = System.currentTimeMillis() + expiresIn;
         Editor editor = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE).edit();
-        editor.putString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, this.accessToken);
+        editor.putString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, accessToken);
         editor.putLong(BAIDU_SDK_CONFIG_PROP_CREATE_TIME, System.currentTimeMillis());
         editor.putLong(BAIDU_SDK_CONFIG_PROP_EXPIRE_SECONDS, expiresIn);
         editor.commit();
 
     }
-    protected void storeToken(BaiduOAuthResponse values) {
+    protected static void storeToken(BaiduOAuthResponse values) {
         if (values == null) {
             return;
         }
-        this.accessToken = values.getAccessToken();
+        accessToken = values.getAccessToken();
         long expiresIn = Long.parseLong(values.getExpiresIn());
-        this.expireTime = System.currentTimeMillis() + expiresIn;
+        expireTime = System.currentTimeMillis() + expiresIn;
         Editor editor = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE).edit();
-        editor.putString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, this.accessToken);
+        editor.putString(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN, accessToken);
         editor.putLong(BAIDU_SDK_CONFIG_PROP_CREATE_TIME, System.currentTimeMillis());
         editor.putLong(BAIDU_SDK_CONFIG_PROP_EXPIRE_SECONDS, expiresIn);
         editor.commit();
@@ -197,15 +199,16 @@ public class AccessTokenManager implements Parcelable {
 
     /**
      * 判断当前的token信息是否有效
+     * @param mContext 
      * 
      * @return true/false
      */
-    protected boolean isSessionVaild()  {
-        if (this.accessToken == null || this.expireTime == 0) {
-            initToken();
+    protected static boolean isSessionVaild(Context mContext)  {
+        if (accessToken == null || expireTime == 0) {
+            initToken(mContext);
         }
-	    return this.accessToken != null && this.expireTime != 0
-			    && System.currentTimeMillis() < this.expireTime;
+	    return accessToken != null && expireTime != 0
+			    && System.currentTimeMillis() < expireTime;
     }
 
     /**
@@ -214,11 +217,11 @@ public class AccessTokenManager implements Parcelable {
      * @return accessToken
      *
      */
-    public String getAccessToken() {
-        if (this.accessToken == null) {
-            initToken();
+    public static String getAccessToken() {
+        if (accessToken == null) {
+            initToken(context);
         }
-        return this.accessToken;
+        return accessToken;
     }
 
 }

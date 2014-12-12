@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Musubi</string>
+    <string name="app_name">StickyPOMI</string>
     <string name="pick_feed">Pick a Feed</string>
     <string name="app_store_name">App Corral</string>
     <string name="profile">Profile</string>

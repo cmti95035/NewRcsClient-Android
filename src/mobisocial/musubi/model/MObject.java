@@ -16,6 +16,9 @@
 
 package mobisocial.musubi.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import mobisocial.socialkit.musubi.DbObj;
 
 /**
@@ -94,4 +97,24 @@ public class MObject {
 	public boolean deleted_;
 	public boolean renderable_;
 	public boolean processed_;
+	
+	public JSONObject GetCloudJson(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put("ID", id_);
+			json.put("Feed", feedId_);
+			json.put("Sender", identityId_);
+			json.put("Timestamp", timestamp_);
+			json.put("Message", json_);
+			json.put("Type",type_);	
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return json;
+		
+	}
+	
 }
