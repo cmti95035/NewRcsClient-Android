@@ -283,6 +283,7 @@ class ObjPipelineProcessor extends ContentObserver {
     private void SaveMessages(MObject object) {
 		// TODO Auto-generated method stub
 		if (dp.hasLinkedAccount()) {
+			Log.e(TAG,"dropbox linked");
  			dp.SaveMeseages(object);
  		}else if(baidu.hasLinkedAccount(mContext)){
  			baidu.SaveMeseages(object,mContext);     			//
