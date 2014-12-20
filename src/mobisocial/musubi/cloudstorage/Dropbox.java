@@ -26,8 +26,8 @@ import android.widget.TextView;
 public class Dropbox implements CloudStorage {
 
 	
-	private static final String dropboxAppKey = "m2xgu9kayi3gzlp";
-    private static final String dropboxAppSecret = "leikpr9er6j71pw";
+	private static final String dropboxAppKey = "3bduqwpgg381rlj";
+    private static final String dropboxAppSecret = "h8a2ka5f2vm8ttk";
 	private DbxAccountManager mDbxAcctMgr;
 	
 	public Dropbox(){
