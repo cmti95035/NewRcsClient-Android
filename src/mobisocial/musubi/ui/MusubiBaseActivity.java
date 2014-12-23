@@ -55,7 +55,7 @@ public abstract class MusubiBaseActivity extends FragmentActivity
     protected static final String TAG = "MusubiActivity";
     private static int REQUEST_ACTIVITY_CALLOUT = 39;
     private static ActivityCallout mCurrentCallout;
-    public static final boolean DBG = false;
+    public static final boolean DBG = true;
     //if this is set then this is a dead activity, i.e. it will be finished before
     //the end of onCreate
     protected boolean mBootstrapping;

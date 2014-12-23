@@ -82,6 +82,8 @@ public class AppSelectDialog extends DialogFragment implements LoaderCallbacks<L
     private static final String TAG = "LaunchAppDialog";
     private static final boolean DBG = MusubiBaseActivity.DBG;
     private Uri mFeedUri;
+    private boolean mIsFeedSnap = false;
+    
     private MusubiAppAdapter mAppAdapter;
     private boolean mHomeScreen;
     private IMusubiApp mSelectedApp;
@@ -91,19 +93,21 @@ public class AppSelectDialog extends DialogFragment implements LoaderCallbacks<L
     
     private static final String ARG_FEED_URI = "feedUri";
     private static final String ARG_HOME_SCREEN = "homeScreen";
-
+    private static final String ARG_FEED_SNAP = "feedsnap";
+    
     static final String CATEGORY_MUSUBI_MENU = "musubi.intent.category.MENU";
 
     public static final String SKETCH_APP_ID = "musubi.sketch";
     public static final String SHOUT_APP_ID = "musubi.shout";
 
-    public static AppSelectDialog newInstance(boolean forHomeScreen, Uri feedUri) {
+    public static AppSelectDialog newInstance(boolean forHomeScreen, Uri feedUri,boolean mIsFeedSnap) {
         if (DBG) Log.d(TAG, "New AppSelectDialog.");
 
         AppSelectDialog frag = new AppSelectDialog();
         Bundle args = new Bundle();
         args.putParcelable(ARG_FEED_URI, feedUri);
         args.putBoolean(ARG_HOME_SCREEN, forHomeScreen);
+        args.putBoolean(ARG_FEED_SNAP, mIsFeedSnap);
         frag.setArguments(args);
         return frag;
     }
@@ -121,6 +125,8 @@ public class AppSelectDialog extends DialogFragment implements LoaderCallbacks<L
 
         mFeedUri = getArguments().getParcelable(ARG_FEED_URI);
         mHomeScreen = getArguments().getBoolean(ARG_HOME_SCREEN);
+        mIsFeedSnap = getArguments().getBoolean(ARG_FEED_SNAP);
+        
         if (getTargetFragment() != null) {
             setRetainInstance(true);
         }
@@ -171,7 +177,8 @@ public class AppSelectDialog extends DialogFragment implements LoaderCallbacks<L
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        a.onClick(context, mFeedUri);
+                    	a.onClick(context, mFeedUri,mIsFeedSnap);
+                        
                         Dialog d = getDialog();
                         if (d != null) d.dismiss();
                     }

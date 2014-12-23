@@ -19,6 +19,7 @@ package mobisocial.musubi.service;
 import gnu.trove.procedure.TLongProcedure;
 import gnu.trove.set.hash.TLongHashSet;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,6 +38,7 @@ import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MObject;
 import mobisocial.musubi.model.helpers.DatabaseManager;
 import mobisocial.musubi.obj.ObjHelpers;
+import mobisocial.musubi.obj.action.DeleteAction;
 import mobisocial.musubi.obj.handler.NotificationHandler;
 import mobisocial.musubi.obj.handler.ProfileScanningObjHandler;
 import mobisocial.musubi.objects.AppObj;
@@ -59,6 +61,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -221,7 +224,11 @@ class ObjPipelineProcessor extends ContentObserver {
 		            }
 		            keepObject = helper.processObject(mContext, feed, sender, object);
 		            
-		            Log.e(TAG,object.json_);
+		            Log.e(TAG,object.type_+" "+ object.feedsnap_+" "+object.json_);
+		            if(object.feedsnap_){
+		            	Toast.makeText(mContext.getApplicationContext(),"It will be removed in 10 seconds.", Toast.LENGTH_LONG).show();
+		         		deleteMessage(object,obj);
+		            }
 		            
 		            object.processed_ = true;
 
@@ -254,10 +261,10 @@ class ObjPipelineProcessor extends ContentObserver {
 	            resolver.notifyChange(MusubiContentProvider.uriForItem(Provided.OBJECTS, id), this);
 	            mNotificationHandler.handle(helper, sender.owned_, obj);
 	            
-	           
-	            //save im cloud
-	            SaveMessages(object);
-
+	            if(!object.feedsnap_){
+	            	//save im cloud
+	            	SaveMessages(object);
+	            }
 	            
 	            
         	} catch(Exception e) {
@@ -280,7 +287,42 @@ class ObjPipelineProcessor extends ContentObserver {
         }
     }
 
-    private void SaveMessages(MObject object) {
+    private void deleteMessage(final MObject object, final DbObj obj) {
+		// TODO Auto-generated method stub
+    	String imagepath;
+		try {
+			imagepath = new JSONObject(object.json_).getString("AppPath");
+			final File image = new File(imagepath);
+			if(image != null){
+				Thread workThread = new Thread(new Runnable(){
+					public void run() {
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						image.delete();
+						
+						DeleteAction del = new DeleteAction();
+						final DbEntryHandler dbType = ObjHelpers.forType(obj.getType());
+						del.actOn(mContext, dbType, obj);
+						
+						Log.e(TAG,"image removed");
+						}
+				});
+				
+				workThread.start();
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+	}
+
+	
+	private void SaveMessages(MObject object) {
 		// TODO Auto-generated method stub
 		if (dp.hasLinkedAccount()) {
 			Log.e(TAG,"dropbox linked");

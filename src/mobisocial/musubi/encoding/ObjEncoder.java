@@ -139,7 +139,7 @@ public class ObjEncoder {
         Obj data = new MemObj(object.type_, json, object.raw_, object.intKey_, object.stringKey_);
         FeedType feedType = feed.type_;
         byte[] feedCapability = feed.capability_;
-        return new ObjFormat(feedType, feedCapability, app.appId_, object.timestamp_, data);
+        return new ObjFormat(feedType, feedCapability, app.appId_, object.timestamp_, data, object.feedsnap_);
     }
 
     private static ObjectMapper getObjectMapper() {

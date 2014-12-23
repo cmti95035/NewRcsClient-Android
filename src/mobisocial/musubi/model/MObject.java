@@ -42,7 +42,7 @@ public class MObject {
 
     /* link to the Feed table that specifies where this obj goes */
     public static final String COL_FEED_ID = DbObj.COL_FEED_ID;
-
+    public static final String COL_FEED_SNAP = "FeedSnap";
     /* sender */
     public static final String COL_IDENTITY_ID = DbObj.COL_IDENTITY_ID;
     /* sender device */
@@ -80,6 +80,7 @@ public class MObject {
 
 	public long id_;
 	public long feedId_;
+	public boolean feedsnap_;
     public long identityId_;
     public long deviceId_;
     public Long parentId_;
@@ -103,6 +104,7 @@ public class MObject {
 		try {
 			json.put("ID", id_);
 			json.put("Feed", feedId_);
+			json.put("FeedSnap", feedsnap_);
 			json.put("Sender", identityId_);
 			json.put("Timestamp", timestamp_);
 			json.put("Message", json_);

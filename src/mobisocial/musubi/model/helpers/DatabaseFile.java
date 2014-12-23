@@ -502,6 +502,7 @@ public class DatabaseFile extends SQLiteOpenHelper {
         createTable(db, MObject.TABLE,
                 MObject.COL_ID, "INTEGER PRIMARY KEY",
                 MObject.COL_FEED_ID, "INTEGER NOT NULL",
+                MObject.COL_FEED_SNAP, "INTEGER DEFAULT 0",
                 MObject.COL_IDENTITY_ID, "INTEGER NOT NULL",
                 MObject.COL_DEVICE_ID, "INTEGER NOT NULL",
                 MObject.COL_PARENT_ID, "INTEGER",

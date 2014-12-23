@@ -6,49 +6,19 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-  <RelativeLayout
+    <RelativeLayout
     android:id="@+id/input_bar"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:padding="2dp">
-
-      <Button
-      android:id="@+id/send_text"
-      android:text="@string/send"
-      android:padding="6dp"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
-      android:layout_centerVertical="true"
-      android:focusable="true"/>
-      
-      <ImageButton
-      android:id="@+id/pick_app"
-      android:src="@drawable/ic_action_pin"
-      android:padding="10dp"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentLeft="true"
-      android:layout_centerVertical="true"
-      android:focusable="true"/>
-      	
-    <EditText
-    android:id="@+id/status_text"
-    android:layout_width="fill_parent"
-	android:layout_height="50dip"
-	android:layout_toLeftOf="@id/send_text"
-	android:layout_toRightOf="@id/pick_app"
-	android:maxLines="3"
-	android:hint="What's up?"
-	android:inputType="textShortMessage|textAutoCorrect|textCapSentences|textMultiLine"
-	android:imeOptions="actionSend|flagNoEnterAction"
-	android:autoText="true"
-	android:capitalize="sentences"
-	/>
+    android:padding="2dp">       
+     <Button android:textColor="#ffffffff" android:id="@+id/send_text" android:background="#ff2eacd4" android:focusable="true" android:layout_width="44.0dip" android:layout_height="34.0dip" android:layout_marginRight="2.0dip" android:text="@string/send" android:layout_alignTop="@id/status_text" android:layout_alignParentRight="true" android:radius="17.0dip" />
+            <ImageButton android:id="@+id/pick_app" android:background="@drawable/ic_action_pin" android:focusable="true" android:layout_width="34.0dip" android:layout_height="34.0dip" android:layout_marginLeft="5.0dip" android:layout_alignTop="@id/status_text" android:layout_alignParentLeft="true" />
+            <ImageButton android:id="@+id/snap_pic" android:background="@drawable/snap" android:focusable="true" android:layout_width="34.0dip" android:layout_height="34.0dip" android:layout_marginLeft="5.0dip" android:layout_toRightOf="@id/pick_app" android:layout_alignTop="@id/status_text" />
+            <EditText android:id="@+id/status_text"  android:padding="5.0dip" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="0.0dip" android:hint="What's up?" android:scrollHorizontally="false" android:capitalize="sentences" android:autoText="true" android:layout_toLeftOf="@id/send_text" android:layout_toRightOf="@id/snap_pic" android:inputType="textCapSentences|textAutoCorrect|textMultiLine" android:imeOptions="actionSend|flagNoEnterAction" />
+            <TextView android:textSize="24.0dip" android:gravity="center" android:id="@+id/drawer_title" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/apps" android:layout_toRightOf="@id/pick_app" android:layout_alignParentLeft="true" />
+     </RelativeLayout>
     
-  </RelativeLayout>
-
   <View
 		android:layout_width="fill_parent"
 		android:layout_height="1dp"

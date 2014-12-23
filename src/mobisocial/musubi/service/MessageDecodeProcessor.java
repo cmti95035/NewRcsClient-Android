@@ -533,6 +533,7 @@ public class MessageDecodeProcessor extends ContentObserver {
 
                 object.id_ = -1;
                 object.feedId_ = feed.id_;
+                object.feedsnap_ = obj.feedsnap;
                 object.identityId_ = device.identityId_;
                 object.deviceId_ = device.id_;
                 object.parentId_ = null;

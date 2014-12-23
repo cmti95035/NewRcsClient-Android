@@ -91,5 +91,11 @@ public class VideoGalleryAction extends FeedAction {
             gallery.setType("video/*");
             return Intent.createChooser(gallery, null);
         }
-    };
+    }
+
+	@Override
+	public void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap) {
+		// TODO Auto-generated method stub
+		
+	};
 }

@@ -94,6 +94,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -122,12 +123,15 @@ public class FeedViewFragment extends ListFragment implements OnScrollListener,
 	private Uri mFeedUri;
     private EditText mStatusText;
     private Button mSendTextButton;
+    private ImageButton mSnapPicButton;
 	private long loaderStartTime;
 	private Musubi mMusubi;
 	private Activity mActivity;
 	private int mTotal = BATCH_SIZE;
 	int mPreviousTotal = -1;
 	int mResumeToPosition = -1;
+	
+	static Boolean mIsFeedSnap = false; 
 
 	@Override
     public void onAttach(SupportActivity activity) {
@@ -163,7 +167,9 @@ public class FeedViewFragment extends ListFragment implements OnScrollListener,
         mStatusText.addTextChangedListener(FeedViewFragment.this);
 
         view.findViewById(R.id.pick_app).setOnClickListener(mPickApp);
-
+        mSnapPicButton = (ImageButton)view.findViewById(R.id.snap_pic);
+        mSnapPicButton.setOnClickListener(mSnapPic);
+        
         mInputBar = (View)view.findViewById(R.id.input_bar);
         mInputBar.setBackgroundColor(Color.WHITE);
 
@@ -284,7 +290,20 @@ public class FeedViewFragment extends ListFragment implements OnScrollListener,
         @Override
         public void onClick(View v) {
             ((InstrumentedActivity)mActivity)
-                .showDialog(AppSelectDialog.newInstance(false, mFeedUri));
+                .showDialog(AppSelectDialog.newInstance(false, mFeedUri,mIsFeedSnap));
+        }
+    };
+    
+    final View.OnClickListener mSnapPic = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        		if(mIsFeedSnap){
+        			mIsFeedSnap = false;
+        			mSnapPicButton.setBackgroundResource(R.drawable.snap);
+        		}else{
+        			mIsFeedSnap = true;
+        			mSnapPicButton.setBackgroundResource(R.drawable.snap1);
+        		}
         }
     };
 
@@ -310,7 +329,7 @@ public class FeedViewFragment extends ListFragment implements OnScrollListener,
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (DBG) Log.d(TAG, "Query took " + (System.currentTimeMillis() - loaderStartTime) + "ms");
+        if (DBG) Log.d(TAG, "Query here took " + (System.currentTimeMillis() - loaderStartTime) + "ms");
     	//the mObjects field is accessed by the ui thread as well
         int previousTotal = -1;
         if (mObjects == null) {

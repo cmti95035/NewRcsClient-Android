@@ -34,9 +34,10 @@ public class ObjFormat {
     public byte[] raw;
     public Integer intKey;
     public String stringKey;
+    public boolean feedsnap;
 
     public ObjFormat(FeedType feedType, byte[] feedCapability, String appId,
-            long timestamp, Obj data) {
+            long timestamp, Obj data,boolean feedsnap) {
         this.appId = appId;
         this.feedType = feedType;
         this.feedCapability = feedCapability;
@@ -48,6 +49,9 @@ public class ObjFormat {
         this.raw = data.getRaw();
         this.intKey = data.getIntKey();
         this.stringKey = data.getStringKey();
+        
+        this.feedsnap = feedsnap;
+        
     }
 
     public ObjFormat() {

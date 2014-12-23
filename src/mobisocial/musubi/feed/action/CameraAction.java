@@ -541,4 +541,10 @@ public class CameraAction extends FeedAction {
            return editors;
         }
     }
+
+	@Override
+	public void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap) {
+		// TODO Auto-generated method stub
+		
+	}
 }

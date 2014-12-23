@@ -436,14 +436,18 @@ public class MusubiContentProvider extends ContentProvider {
     /**
      * Validates the content values and returns a row for insertion.
      */
-    private MObject rowForContentValues(String realAppId, ContentValues values) throws DbInsertionError {
+    private MObject rowForContentValues(String realAppId, ContentValues values ) throws DbInsertionError {
         long timestamp = new Date().getTime();
 
         Long feedId = values.getAsLong(DbObj.COL_FEED_ID);
         if (feedId == null) {
             throw new DbInsertionError("Feed id required");
         }
-
+        
+        boolean feedsnap = false;
+        if(values.containsKey("FeedSnap"))
+        	feedsnap = values.getAsBoolean("FeedSnap");
+        
         if (!appAllowedForFeed(realAppId, feedId)) {
             throw new DbInsertionError("App not allowed in feed");
         }
@@ -566,6 +570,8 @@ public class MusubiContentProvider extends ContentProvider {
         MApp app = getDatabaseManager().getAppManager().ensureApp(appId);
         MObject o = new MObject();
         o.feedId_ = feedId;
+        o.feedsnap_ = feedsnap;
+        
         o.identityId_ = identityId;
         o.deviceId_ = device.id_;
         o.parentId_ = parentId;
@@ -579,11 +585,29 @@ public class MusubiContentProvider extends ContentProvider {
         o.lastModifiedTimestamp_ = timestamp;
         o.processed_ = false;
         o.renderable_ = renderable;
+        
+        Log.e(TAG, feedsnap +" "+ device.id_);
+        
         return o;
     }
 
     public static void insertInBackground(Obj obj, Uri feedUri, String assumedAppId) {
     	final ContentValues values = DbObj.toContentValues(feedUri, null, obj);
+        if (assumedAppId != null) {
+            values.put(ObjHelpers.CALLER_APP_ID, assumedAppId);
+        }
+        values.put("FeedSnap", false);
+        
+        Handler insertHandler = getInstance().getDbInsertionThread().getHandler();
+        Message msg = insertHandler.obtainMessage();
+        msg.what = DbInsertionThread.INSERT;
+        msg.obj = values;
+        insertHandler.sendMessage(msg);
+    }
+    
+    public static void insertInBackground(Obj obj, Uri feedUri, String assumedAppId,boolean IsFeedSnap) {
+    	final ContentValues values = DbObj.toContentValues(feedUri, null, obj);
+    	values.put("FeedSnap", IsFeedSnap);
         if (assumedAppId != null) {
             values.put(ObjHelpers.CALLER_APP_ID, assumedAppId);
         }
@@ -594,6 +618,7 @@ public class MusubiContentProvider extends ContentProvider {
         msg.obj = values;
         insertHandler.sendMessage(msg);
     }
+    
 
     private byte[] handleDownscalePicture(byte[] raw, JSONObject json) {
     	
@@ -734,6 +759,7 @@ public class MusubiContentProvider extends ContentProvider {
     	MObject object;
         try {
             prepareObjRelations(getDatabaseManager().getDatabase(), values);
+            
             object = rowForContentValues(parentAppId, values);
         } catch (DbInsertionError e) {
             if (DBG) Log.e(TAG, "DbInsertionError", e);

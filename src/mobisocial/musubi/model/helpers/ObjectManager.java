@@ -48,6 +48,7 @@ public class ObjectManager extends ManagerBase {
     static String[] STANDARD_FIELDS = new String[] {
         MObject.COL_ID,
         MObject.COL_FEED_ID,
+        MObject.COL_FEED_SNAP,
         MObject.COL_IDENTITY_ID,
         MObject.COL_DEVICE_ID,
         MObject.COL_PARENT_ID,
@@ -69,23 +70,24 @@ public class ObjectManager extends ManagerBase {
 
     final int _id = 0;
     final int feedId = 1;
-    final int identityId = 2;
-    final int deviceId = 3;
-    final int parentId = 4;
-    final int appId = 5;
-    final int timestamp = 6;
-    final int universalHash = 7;
-    final int shortHash = 8;
-    final int type = 9;
-    final int json = 10;
-    final int raw = 11;
-    final int intKey = 12;
-    final int stringKey = 13;
-    final int lastModified = 14;
-    final int encodedId = 15;
-    final int deleted = 16;
-    final int renderable = 17;
-    final int processed = 18;
+    final int feedsnap = 2;
+    final int identityId = 3;
+    final int deviceId = 4;
+    final int parentId = 5;
+    final int appId = 6;
+    final int timestamp = 7;
+    final int universalHash = 8;
+    final int shortHash = 9;
+    final int type = 10;
+    final int json = 11;
+    final int raw = 12;
+    final int intKey = 13;
+    final int stringKey = 14;
+    final int lastModified = 15;
+    final int encodedId = 16;
+    final int deleted = 17;
+    final int renderable = 18;
+    final int processed = 19;
 
 
     public ObjectManager(SQLiteOpenHelper databaseSource) {
@@ -93,7 +95,7 @@ public class ObjectManager extends ManagerBase {
     }
 
     public void insertObject(MObject obj) {
-    	Log.e("insertObject",obj.json_);
+    	Log.e("insertObject",obj.json_+" "+obj.deviceId_+" "+obj.feedsnap_);
         SQLiteDatabase db = initializeDatabase();
         if (mSqlInsertObj == null) {
             synchronized (this) {
@@ -101,6 +103,7 @@ public class ObjectManager extends ManagerBase {
                     String sql = new StringBuilder()
                         .append("INSERT INTO ").append(MObject.TABLE).append("(")
                         .append(MObject.COL_FEED_ID).append(",")
+                        .append(MObject.COL_FEED_SNAP).append(",")
                         .append(MObject.COL_IDENTITY_ID).append(",")
                         .append(MObject.COL_DEVICE_ID).append(",")
                         .append(MObject.COL_PARENT_ID).append(",")
@@ -118,14 +121,17 @@ public class ObjectManager extends ManagerBase {
                         .append(MObject.COL_DELETED).append(",")
                         .append(MObject.COL_RENDERABLE).append(",")
                         .append(MObject.COL_PROCESSED)
-                        .append(") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)").toString();
+                        .append(") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)").toString();
                     mSqlInsertObj = db.compileStatement(sql);
+                    
+                    
                 }
             }
         }
                 
         synchronized (mSqlInsertObj) {
             bindStandardFields(mSqlInsertObj, obj);
+           
             obj.id_ = mSqlInsertObj.executeInsert();
         }
     }
@@ -139,6 +145,7 @@ public class ObjectManager extends ManagerBase {
                     String sql = new StringBuilder()
                         .append("UPDATE ").append(MObject.TABLE).append(" SET ")
                         .append(MObject.COL_FEED_ID).append("=?,")
+                        .append(MObject.COL_FEED_SNAP).append("=?,")
                         .append(MObject.COL_IDENTITY_ID).append("=?,")
                         .append(MObject.COL_DEVICE_ID).append("=?,")
                         .append(MObject.COL_PARENT_ID).append("=?,")
@@ -360,6 +367,7 @@ public class ObjectManager extends ManagerBase {
         MObject obj = new MObject();
         obj.id_ = c.getLong(_id);
         obj.feedId_ = c.getLong(feedId);
+        obj.feedsnap_ = c.getInt(feedsnap) == 1;
         obj.identityId_ = c.getLong(identityId);
         obj.deviceId_ = c.getLong(deviceId);
         obj.parentId_ = c.isNull(parentId) ? null : c.getLong(parentId);
@@ -384,6 +392,7 @@ public class ObjectManager extends ManagerBase {
         assert(obj.type_ != null);
 
         statement.bindLong(feedId, obj.feedId_);
+        statement.bindLong(feedsnap, obj.feedsnap_ ? 1 : 0);
         statement.bindLong(identityId, obj.identityId_);
         statement.bindLong(deviceId, obj.deviceId_);
         if (obj.parentId_ == null) statement.bindNull(parentId);

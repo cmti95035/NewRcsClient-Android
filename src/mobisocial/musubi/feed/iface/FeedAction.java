@@ -37,6 +37,7 @@ public abstract class FeedAction extends Fragment {
     public abstract String getName();
     public abstract Drawable getIcon(Context c);
     public abstract void onClick(Context context, Uri feedUri);
+    public abstract void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap);
     public abstract boolean isActive(Context c);
 
     private static final List<FeedAction> sFeedActions = new ArrayList<FeedAction>();
@@ -55,4 +56,5 @@ public abstract class FeedAction extends Fragment {
     public static List<FeedAction> getFeedActions() {
         return sFeedActions;
     }
+	
 }

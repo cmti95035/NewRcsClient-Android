@@ -85,6 +85,10 @@ public class Helpers {
     public static void sendToFeed(Context c, Obj obj, Uri feed) {
     	MusubiContentProvider.insertInBackground(obj, feed, null);
     }
+    
+    public static void sendToFeed(Context c, Obj obj, Uri feed,boolean IsFeedSnap) {
+    	MusubiContentProvider.insertInBackground(obj, feed, null,IsFeedSnap);
+    }
 
     public static void sendToFeed(Context c, String callerAppId, Obj obj, Uri feedUri) {
     	MusubiContentProvider.insertInBackground(obj, feedUri, callerAppId);

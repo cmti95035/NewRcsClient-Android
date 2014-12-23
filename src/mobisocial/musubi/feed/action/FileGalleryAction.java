@@ -52,9 +52,8 @@ public class FileGalleryAction extends FeedAction {
         return c.getResources().getDrawable(R.drawable.ic_menu_upload);
     }
 
-    @Override
-    public void onClick(final Context context, final Uri feedUri) {
-        ((InstrumentedActivity)context).doActivityForResult(new GalleryCallout(context, feedUri));
+    public void onClick(final Context context, final Uri feedUri,boolean IsFeedSnap) {
+        ((InstrumentedActivity)context).doActivityForResult(new GalleryCallout(context, feedUri,IsFeedSnap));
     }
 
     @Override
@@ -66,10 +65,12 @@ public class FileGalleryAction extends FeedAction {
     class GalleryCallout implements ActivityCallout {
         private final Context mmContext;
         private final Uri mmFeedUri;
+        private  boolean mmIsFeedSnap = false;
 
-        private GalleryCallout(Context context, Uri feedUri) {
+        private GalleryCallout(Context context, Uri feedUri, boolean IsFeedSnap) {
             mmContext = context;
             mmFeedUri = feedUri;
+            mmIsFeedSnap = IsFeedSnap;
         }
 
         @Override
@@ -98,8 +99,9 @@ public class FileGalleryAction extends FeedAction {
             @Override
             protected Boolean doInBackground(Void... params) {
                 try {
+                	Log.e(TAG,"SendFileTask");
                     Obj outboundObj = FileObj.from(mmContext, mmmData.getData());
-                    Helpers.sendToFeed(mmContext, outboundObj, mmFeedUri);
+                    Helpers.sendToFeed(mmContext, outboundObj, mmFeedUri,mmIsFeedSnap);
                     Helpers.emailUnclaimedMembers(mmContext, outboundObj, mmFeedUri);
                     return true;
                 } catch (IOException e) {
@@ -116,5 +118,11 @@ public class FileGalleryAction extends FeedAction {
                 }
             }
         }
-    };
+    }
+
+	@Override
+	public void onClick(Context context, Uri feedUri) {
+		// TODO Auto-generated method stub
+		
+	};
 }

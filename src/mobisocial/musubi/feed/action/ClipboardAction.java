@@ -50,4 +50,10 @@ public class ClipboardAction extends FeedAction {
         return App.clipboardObject != null;
     }
 
+	@Override
+	public void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
