@@ -41,6 +41,7 @@ import mobisocial.musubi.model.PresenceAwareNotify;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.model.helpers.MyAccountManager;
 import mobisocial.musubi.model.helpers.PendingIdentityManager;
+import mobisocial.musubi.service.TwilioService;
 import mobisocial.musubi.test.JsonGernerator;
 import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.ui.fragments.AccountLinkDialog;
@@ -325,9 +326,9 @@ public class AphidIdentityProvider implements IdentityProvider {
         	String pToken = null;
         	String phoneAccount = account.accountName_;
         	if (phoneAccount != null) {
-        	    
+//        	    
         	    pToken = phoneAccount+"helloworld";
-        	    
+//        	    TwilioService.sendSMS(phoneAccount, pToken);
         		Log.d(TAG, "phone account:" + phoneAccount);
         	}
         	if (pToken != null) {
