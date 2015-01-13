@@ -19,6 +19,7 @@ package mobisocial.musubi.feed.iface;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobisocial.musubi.feed.action.BaiduLocationAction;
 import mobisocial.musubi.feed.action.CamcorderAction;
 import mobisocial.musubi.feed.action.CameraAction;
 import mobisocial.musubi.feed.action.ClipboardAction;
@@ -50,6 +51,7 @@ public abstract class FeedAction extends Fragment {
         sFeedActions.add(new FileGalleryAction());
         sFeedActions.add(new VoiceAction());
         sFeedActions.add(new ClipboardAction());
+        sFeedActions.add(new BaiduLocationAction());
         //sFeedActions.add(new LaunchApplicationAction());
     }
 

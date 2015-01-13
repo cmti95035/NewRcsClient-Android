@@ -57,6 +57,6 @@ public class VoiceAction extends FeedAction { // TODO: Move to VoiceObj implemen
 	@Override
 	public void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap) {
 		// TODO Auto-generated method stub
-		
+		onClick(context, mFeedUri);
 	}
 }

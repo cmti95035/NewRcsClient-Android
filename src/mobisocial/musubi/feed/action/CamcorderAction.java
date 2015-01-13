@@ -170,6 +170,6 @@ public class CamcorderAction extends FeedAction {
 	@Override
 	public void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap) {
 		// TODO Auto-generated method stub
-		
+		onClick(context, mFeedUri);
 	}
 }

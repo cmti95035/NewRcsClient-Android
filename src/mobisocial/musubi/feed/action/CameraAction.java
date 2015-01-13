@@ -112,6 +112,8 @@ public class CameraAction extends FeedAction {
 
     @Override
     public void onClick(final Context context, final Uri feedUri) {
+    	Log.i(TAG,"come to camera");
+    	
         mFeedUri = feedUri;
         mImageUri = Uri.fromFile(PhotoTaker.getTempFile(getActivity()));
         mType = "image/jpeg";
@@ -545,6 +547,6 @@ public class CameraAction extends FeedAction {
 	@Override
 	public void onClick(Context context, Uri mFeedUri, boolean mIsFeedSnap) {
 		// TODO Auto-generated method stub
-		
+		onClick(context, mFeedUri);
 	}
 }
