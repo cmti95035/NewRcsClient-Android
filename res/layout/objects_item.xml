@@ -53,7 +53,7 @@
 	  <TextView android:id="@+id/error_text"
 	      android:layout_width="fill_parent"
 	      android:layout_height="wrap_content"
-	      android:text="Error rendering this content"
+	      android:text="This content is expired"
 	      android:textStyle="italic"
 	      android:visibility="gone" />
       <LinearLayout android:id="@+id/object_content"
