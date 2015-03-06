@@ -116,6 +116,16 @@
             android:label="Encode Barcode"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity
+            android:name="com.adsdk.sdk.banner.InAppWebView"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.adsdk.sdk.video.RichMediaActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:hardwareAccelerated="false" />
+        <activity
+            android:name="com.adsdk.sdk.mraid.MraidActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
         <service android:name=".service.MusubiService" />
         <service android:name=".service.MusubiIntentService" />

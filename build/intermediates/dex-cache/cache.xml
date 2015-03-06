@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/bson4jackson-1.3.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="461da1d34694b7fbd8f0c04177f4059dda5c270c">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/bson4jackson-1.3.0-705c05b16c72a4a7e1b3bc8abb35297df02de8e4.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/socialkit-0.3.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="553f86216c84496129e884b2e5b66774cb0855a1">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/socialkit-0.3.0-695a60a4b9ef9a7874039215a7c513d5472e2fa8.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/javatuples-1.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="507312ac4b601204a72a83380badbca82683dd36">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/javatuples-1.2-b95d6aa552ba9783ce95318b000260f598d0c357.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/rabbitmq-client.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="bc85c1d935fc6bcbca1f4899fc903b57596e0715">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/rabbitmq-client-6e23fc24a75f9ee7e1de40c909bfee457f099b7e.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/Baidu_OAuth_SDK_Android_G-2.0.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3adf3f60d5df4f51f7d89727a9ae196e7124c36c">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/Baidu_OAuth_SDK_Android_G-2.0.0.0-988601e6e622426678d28483971b1b485f1c4c6f.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/twilio-java-sdk-3.4.6.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="af470ad4741e2afc16e2823ae28b8306113ca4d8">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/twilio-java-sdk-3.4.6-0e4b2a73bc78df1784b1709553ff233276e9ef56.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/core.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="93a58f05fcdceedbcb18875404ff0d82492a5d63">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/core-cbda9c70a5b466d545a5064aee4d3696fdd1eb54.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/Baidu_PCS_SDK_Android-2.0.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6c5d76d762f3da37f48a930c751504eeef22a3db">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/Baidu_PCS_SDK_Android-2.0.0.0-23e99e5fdb5d172b67479685a1c7f6cf0b2e2ac7.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/AdSdk_4.1.6.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="256d352b8ff0ab6cd3946fde6b5d1a9680ae918c">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/AdSdk_4.1.6-e24014d7145f247ac5b0c48983702a5627242d7d.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/jackson-all-1.9.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="bd33d9a33708316e793581e9e6f6f2c6d2b98c6f">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/jackson-all-1.9.4-6b438733eedc710e3a70fccbc8d387ef5c17d93b.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/httpmime-4.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6acbb2ba813e406f946d33dc14150e24c00b2c57">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/httpmime-4.2-b7b34de4230c47491dbe4440c80ee2acf065f10d.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/commons-lang3-3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="905075e6c80f206bbe6cf1e809d2caa69f420c76">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/commons-lang3-3.1-03cb793076a20be49a190f1925877fe6829cafb3.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/trove-3.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="50f382a35fe37d6700627a6490887b4bf8c97c3b">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/trove-3.0.2-541747dd69a4d0f8d536fac3e1662b049b692b5e.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/commons-io-1.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0ad6ae511ca4608a18317fcb19850fd113bb2ae8">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/commons-io-1.2-f3a33613538d568f6f6350eb75ea2e11138c7a27.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9c6ef172e8de35fd8d4d8783e4821e57cdef7445">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/guava-17.0-7e3dadc9f1019f31b563477d949001d0a965adde.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/dropbox-sync-sdk-android.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="27c6a602b8af65c4bd4741af2be12686d561d02c">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/dropbox-sync-sdk-android-503258f8f84924ff4c5779c1e33ed893dae6bce5.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/commons-httpclient-3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="964cd74171f427720480efdec40a7c7f6e58426a">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/commons-httpclient-3.1-4ab24199568f4e2bb6447b8f83edb34f0bcb98aa.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/locSDK_5.01.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8854f80a1a63f6348276dd5c8e96b9096784a513">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/locSDK_5.01-eae009bf4cf987993333e9081cc12cca82d0e1f9.jar" />
+    </item>
+    <item
+        jar="/Users/charlie/NewRcs/app/libs/easynfc-0.3.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="115f4a2af140c49086a72391f0e4de187b5a41d2">
+        <dex dex="/Users/charlie/NewRcs/app/build/intermediates/pre-dexed/debug/easynfc-0.3.3-cd59e8561f88368c714811c604aa1d3d6ae550fc.jar" />
+    </item>
+
+</items>

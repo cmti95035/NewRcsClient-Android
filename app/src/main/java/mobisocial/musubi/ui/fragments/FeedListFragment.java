@@ -67,6 +67,11 @@ import mobisocial.musubi.util.IdentityCache.CachedIdentity;
 import mobisocial.musubi.util.RelativeDate;
 import mobisocial.socialkit.Obj;
 
+import com.adsdk.sdk.Ad;
+import com.adsdk.sdk.AdListener;
+import com.adsdk.sdk.AdManager;
+import com.adsdk.sdk.banner.AdView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mobisocial.corral.ContentCorral;
@@ -116,9 +121,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.telephony.TelephonyManager;
 
 import com.android.contacts.widget.SingleTopPinnedHeaderListAdapter;
 
@@ -126,7 +134,8 @@ import com.android.contacts.widget.SingleTopPinnedHeaderListAdapter;
  * Displays a list of all user-accessible threads (feeds).
  *
  */
-public class FeedListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class FeedListFragment extends ListFragment
+        implements LoaderManager.LoaderCallbacks<Cursor>, AdListener {
     private static final String TAG = "FeedListFragment";
     private static final boolean DBG = MusubiBaseActivity.DBG;
 	private static final int REQUEST_ADD_CONTACT = 1;
@@ -142,6 +151,15 @@ public class FeedListFragment extends ListFragment implements LoaderManager.Load
 	private Activity mActivity;
 	public static final int DAYS_TO_SHOW = 7;
 	public static int ONE_DAY = 1000*60*60*24;
+
+    private RelativeLayout mAdLayout;
+    private AdView mAdView;
+    private AdManager mManager;
+    private String mPhoneNumber;
+    private Button mAdsButton;
+    private static final String REQUEST_URL_BANNER = "http://192.168.1.100/cmtiads/md.request.php";
+    private static final String REQUEST_URL_FULL = "http://192.168.1.100/cmtiads/md.request.php";
+    private static final String CONNECTOR = "+";
 
     static final String sFeedSortOrder = MFeed.COL_LATEST_RENDERABLE_OBJ_TIME + " desc";
 	
@@ -173,6 +191,21 @@ public class FeedListFragment extends ListFragment implements LoaderManager.Load
         		initLoaders(true);
         	}
 		};
+
+        mPhoneNumber = getPhoneNumber();
+    }
+
+    private String getPhoneNumber() {
+        String number=null;
+
+        try {
+            number = ( (TelephonyManager) mActivity.getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+        } finally {
+            if ( number == null) {
+                number = "00000000000";
+            }
+        }
+        return number;
     }
 
     @Override
@@ -190,7 +223,52 @@ public class FeedListFragment extends ListFragment implements LoaderManager.Load
         Bundle args = getArguments();
         if(args != null && args.containsKey("no_nearby") && args.getBoolean("no_nearby"))
         	v.findViewById(R.id.nearby).setVisibility(View.GONE);
+        mAdLayout = (RelativeLayout) v.findViewById(R.id.adsdkContent);
+        setAdsManager();
+        mAdsButton = (Button) v.findViewById(R.id.show_banner);
+        mAdsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b" + CONNECTOR + mPhoneNumber;
+                if (mAdView != null) {
+                    removeBanner();
+                }
+                mAdView = new AdView(mActivity, REQUEST_URL_BANNER,
+                        PUBLISHER_ID_BANNER, true, true);
+                mAdView.setAdListener(FeedListFragment.this);
+                mAdLayout.addView(mAdView);
+
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mAdView.getLayoutParams();
+                params.addRule(RelativeLayout.RIGHT_OF, R.id.show_banner);
+                mAdView.setLayoutParams(params);
+            }
+        });
         return v;
+    }
+
+    private void setAdsManager() {
+        final String PUBLISHER_ID_FULL = "b1b47070b4fec8545c56e358bf9194da" + CONNECTOR + mPhoneNumber;
+        mManager = new AdManager(mActivity, REQUEST_URL_FULL ,
+                PUBLISHER_ID_FULL, true);
+        mManager.setListener(this);
+    }
+
+    public void onClickShowBanner(View v) {
+        final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b" + CONNECTOR + mPhoneNumber;
+        if (mAdView != null) {
+            removeBanner();
+        }
+        mAdView = new AdView(mActivity, REQUEST_URL_BANNER,
+                PUBLISHER_ID_BANNER, true, true);
+        mAdView.setAdListener(this);
+        mAdLayout.addView(mAdView);
+    }
+
+    private void removeBanner(){
+        if(mAdView!=null){
+            mAdLayout.removeView(mAdView);
+            mAdView = null;
+        }
     }
 
 	@Override
@@ -295,6 +373,32 @@ public class FeedListFragment extends ListFragment implements LoaderManager.Load
         }
     };
 
+    public void adClicked() {
+    }
+
+    public void adClosed(Ad arg0, boolean arg1) {
+    }
+
+    public void adLoadSucceeded(Ad arg0) {
+        if (mManager != null && mManager.isAdLoaded())
+            mManager.showAd();
+    }
+
+    public void adShown(Ad arg0, boolean arg1) {
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mManager.release();
+        if(mAdView!=null)
+            mAdView.release();
+    }
+
+    public void noAdFound() {
+        Toast.makeText(mActivity, "No ad found!", Toast.LENGTH_LONG)
+                .show();
+    }
 
     static class ViewHolder {
     	PeopleDetails peopleDetails;
