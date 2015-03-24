@@ -422,7 +422,9 @@ public class FeedListFragment extends ListFragment
     }
 
     public void noAdFound() {
-        Toast.makeText(mActivity, "No ad found!", Toast.LENGTH_LONG)
+        Toast.makeText(mActivity,
+                getResources().getString(R.string.no_ad_found),
+                Toast.LENGTH_LONG)
                 .show();
     }
 

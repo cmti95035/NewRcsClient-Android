@@ -117,4 +117,6 @@
     <string name="cloud_storage_description">connect to the cloud storage, messages will be allowed to storage more than 2 weeks, and more.</string>
     <string name="wrong_ip">The IP address entered is NOT well formed. Please try again!</string>
     <string name="no_ads_server">Please set ads server IP address first!</string>
+    <string name="show_ads">Show Ads</string>
+    <string name="no_ad_found">No ad found!</string>
 </resources>
