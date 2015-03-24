@@ -261,6 +261,14 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/settings_item_server_ip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="Set Server IP Address"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <Button
             android:id="@+id/set_devmode"
             android:layout_width="match_parent"

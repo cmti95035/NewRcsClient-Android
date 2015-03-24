@@ -85,6 +85,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 16 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="commons-validator-1.4.1" level="project" />
     <orderEntry type="library" exported="" name="Baidu_PCS_SDK_Android-2.0.0.0" level="project" />
     <orderEntry type="library" exported="" name="twilio-java-sdk-3.4.6" level="project" />
     <orderEntry type="library" exported="" name="dropbox-sync-sdk-android" level="project" />

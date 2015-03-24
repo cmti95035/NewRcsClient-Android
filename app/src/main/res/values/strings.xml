@@ -105,6 +105,9 @@
     <string name="eula_title">EULA</string>
     <string name="eula_loading">Loading EULA..</string>
     <string name="stat_ok">OK</string>
+    <string name="stat_cancel">Cancel</string>
+    <string name="set_server_ip">Set Ad Server Address</string>
+    <string name="input_text">Enter new IP: </string>
     <string name="delete_feed">Delete Feed?</string>
     <string name="delete_feed_message">All messages and pictures in this feed will be deleted permanently from your device.  They will not be deleted from other devices. You may delete a specific item from all device within the feed by long pressing it and choosing delete.</string>
     <string name="qr_directions">Give your contact info to a friend by letting them scan this QR code.</string>
@@ -112,6 +115,6 @@
     <string name="title_claim_key">Verify Account</string>
     <string name="country_code">+</string>
     <string name="cloud_storage_description">connect to the cloud storage, messages will be allowed to storage more than 2 weeks, and more.</string>
-    
-    
+    <string name="wrong_ip">The IP address entered is NOT well formed. Please try again!</string>
+    <string name="no_ads_server">Please set ads server IP address first!</string>
 </resources>

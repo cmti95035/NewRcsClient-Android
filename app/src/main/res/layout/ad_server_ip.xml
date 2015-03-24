@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="32dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:id="@+id/input_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/input_text"
+        android:padding="6dp"
+        android:textSize="18dp"
+        />
+    <EditText
+        android:id="@+id/ads_server_ip"
+        android:layout_width="fill_parent"
+        android:padding="6dp"
+        android:layout_height="fill_parent"
+        android:textSize="16dp"
+        android:layout_gravity="bottom"
+        />
+</LinearLayout>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    >
+    <Button
+        android:id="@+id/stat_cancel"
+        android:text="@+string/stat_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+
+        android:id="@+id/stat_ok"
+        android:text="@+string/stat_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft = "12dp"
+        />
+</LinearLayout>
+</LinearLayout>

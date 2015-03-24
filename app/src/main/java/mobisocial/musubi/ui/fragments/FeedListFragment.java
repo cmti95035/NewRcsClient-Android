@@ -54,6 +54,7 @@ import mobisocial.musubi.ui.FeedDetailsActivity;
 import mobisocial.musubi.ui.FeedListActivity;
 import mobisocial.musubi.ui.MusubiBaseActivity;
 import mobisocial.musubi.ui.NearbyActivity;
+import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.ui.util.EmojiSpannableFactory;
 import mobisocial.musubi.ui.util.FeedHTML;
 import mobisocial.musubi.ui.util.UiUtil;
@@ -83,6 +84,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -157,8 +159,9 @@ public class FeedListFragment extends ListFragment
     private AdManager mManager;
     private String mPhoneNumber;
     private Button mAdsButton;
-    private static final String REQUEST_URL_BANNER = "http://192.168.1.100/cmtiads/md.request.php";
-    private static final String REQUEST_URL_FULL = "http://192.168.1.100/cmtiads/md.request.php";
+    private String mAdsUrl;
+    private static final String REQUEST_URL_HEAD = "http://";
+    private static final String REQUEST_URL_TAIL = "/cmtiads/md.request.php";
     private static final String CONNECTOR = "+";
 
     static final String sFeedSortOrder = MFeed.COL_LATEST_RENDERABLE_OBJ_TIME + " desc";
@@ -193,6 +196,25 @@ public class FeedListFragment extends ListFragment
 		};
 
         mPhoneNumber = getPhoneNumber();
+        mAdsUrl = getAdsServerURL();
+    }
+
+    private String getAdsServerURL() {
+        SharedPreferences pref = getActivity().getSharedPreferences(
+                SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        String ip = pref.getString(IpSetDialog.ADS_SERVER_IP, "192.168.1.100");
+        if (ip==null || ip.isEmpty()) {
+            showNoServerMsg();
+            return null;
+        }
+        return REQUEST_URL_HEAD + ip + REQUEST_URL_TAIL;
+    }
+
+    private void showNoServerMsg() {
+        String msg = getResources().getString(R.string.no_ads_server);
+        Toast toast = Toast.makeText(getActivity(), msg,
+                Toast.LENGTH_LONG);
+        toast.show();
     }
 
     private String getPhoneNumber() {
@@ -229,11 +251,15 @@ public class FeedListFragment extends ListFragment
         mAdsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mAdsUrl == null || mAdsUrl.isEmpty()) {
+                    mAdsUrl = getAdsServerURL();
+                }
+
                 final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b" + CONNECTOR + mPhoneNumber;
                 if (mAdView != null) {
                     removeBanner();
                 }
-                mAdView = new AdView(mActivity, REQUEST_URL_BANNER,
+                mAdView = new AdView(mActivity, mAdsUrl,
                         PUBLISHER_ID_BANNER, true, true);
                 mAdView.setAdListener(FeedListFragment.this);
                 mAdLayout.addView(mAdView);
@@ -248,7 +274,7 @@ public class FeedListFragment extends ListFragment
 
     private void setAdsManager() {
         final String PUBLISHER_ID_FULL = "b1b47070b4fec8545c56e358bf9194da" + CONNECTOR + mPhoneNumber;
-        mManager = new AdManager(mActivity, REQUEST_URL_FULL ,
+        mManager = new AdManager(mActivity, mAdsUrl ,
                 PUBLISHER_ID_FULL, true);
         mManager.setListener(this);
     }
@@ -258,7 +284,7 @@ public class FeedListFragment extends ListFragment
         if (mAdView != null) {
             removeBanner();
         }
-        mAdView = new AdView(mActivity, REQUEST_URL_BANNER,
+        mAdView = new AdView(mActivity, mAdsUrl,
                 PUBLISHER_ID_BANNER, true, true);
         mAdView.setAdListener(this);
         mAdLayout.addView(mAdView);

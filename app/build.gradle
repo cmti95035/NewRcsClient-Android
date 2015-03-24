@@ -46,4 +46,5 @@ dependencies {
     compile files('libs/trove-3.0.2.jar')
     compile files('libs/twilio-java-sdk-3.4.6.jar')
     compile files('libs/AdSdk_4.1.6.jar')
+    compile files('libs/commons-validator-1.4.1.jar')
 }

@@ -481,6 +481,15 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        // set server ip
+        v.findViewById(R.id.settings_item_server_ip).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment sample = IpSetDialog.newInstance();
+                ((InstrumentedActivity)getActivity()).showDialog(sample);
+            }
+        });
+
 		// privacy protection
 		v.findViewById(R.id.settings_item_feedback).setOnClickListener(new OnClickListener() {
             @Override
