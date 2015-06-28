@@ -74,81 +74,89 @@ import de.undercouch.bson4jackson.BsonFactory;
 //properties we want but not the security properties.
 public class AMQPService extends Service {
 	public static boolean DBG = false;
-    public static final String TAG = AMQPService.class.getName();
-    static final String AMQP_QUEUE_GLOBAL_PREFIX = "msb";
-    static final String AMQP_SERVICE = "115.28.221.74";
+	public static final String TAG = AMQPService.class.getName();
+	static final String AMQP_QUEUE_GLOBAL_PREFIX = "msb";
+	private static final String AMQP_HOST = "52.26.121.86"; //aws
+	//ali yun adderss "115.28.221.74" no longer working
 
-    ConnectionFactory mConnectionFactory;
-    Connection mConnection;
-    Channel mIncomingChannel;
-    Channel mOutgoingChannel;
-    Channel mGroupProbeChannel;
-    //we need to do operations on the connection object in background thread
-    //because some of them are blocking.
-    HandlerThread mThread;
-    IdentitiesManager mIdentitiesManager;
-    DeviceManager mDeviceManager;
-    EncodedMessageManager mEncodedMessageManager;
-    SQLiteOpenHelper mDatabaseSource;
-    //always run the message sender when the service first boots
-    TLongHashSet mMessageWaitingForAck;
-    TLongLongHashMap mMessageWaitingForAckByTag;
-    Long mNeedAMessageBy;
-    Handler mAMQPHandler;
-    ObjectMapper mMapper;
-    
-    HashSet<String> mDeclaredGroups; 
-    boolean mConnectionReady = false;
-    final static long MIN_DELAY = 10 * 1000;
-    final static long MAX_DELAY = 30 * 60 * 1000;
-    long mFailureDelay = MIN_DELAY;
-    enum FailedOperationType {
-    	FailedNone,
-    	FailedConnect,
-    	FailedPublish,
-    	FailedReceive,
-    }
-    FailedOperationType mFailedOperation = FailedOperationType.FailedConnect;
-   
-    
-    public AMQPService() { 
-    	super(); 
-    }
-    //we create one directly that
-    AMQPService(SQLiteOpenHelper databaseSource) {
-    	mDatabaseSource = databaseSource;
-    	initializeAMQP();
-    }
-    
-    public boolean isConnected() {
-    	return mConnectionReady;
-    }
-    
-    class SendableMessageAvailableHandler extends ContentObserver {
-    	final Handler mHandler;
-    	public SendableMessageAvailableHandler(Handler h) {
+	private static final int AMQP_PORT = 5672;
+	private static final String AMQP_VHOST = "chat";
+	private static final String AMQP_USERNAME = "amqpclient";
+	private static final String AMQP_PASSWORD = "amqpclient";
+	private static final int CONN_TIMEOUT = 60 * 1000; // 60 seconds
+	private static final int REQ_HEARTBEAT = 30;
+
+	ConnectionFactory mConnectionFactory;
+	Connection mConnection;
+	Channel mIncomingChannel;
+	Channel mOutgoingChannel;
+	Channel mGroupProbeChannel;
+	//we need to do operations on the connection object in background thread
+	//because some of them are blocking.
+	HandlerThread mThread;
+	IdentitiesManager mIdentitiesManager;
+	DeviceManager mDeviceManager;
+	EncodedMessageManager mEncodedMessageManager;
+	SQLiteOpenHelper mDatabaseSource;
+	//always run the message sender when the service first boots
+	TLongHashSet mMessageWaitingForAck;
+	TLongLongHashMap mMessageWaitingForAckByTag;
+	Long mNeedAMessageBy;
+	Handler mAMQPHandler;
+	ObjectMapper mMapper;
+
+	HashSet<String> mDeclaredGroups;
+	boolean mConnectionReady = false;
+	final static long MIN_DELAY = 10 * 1000;
+	final static long MAX_DELAY = 30 * 60 * 1000;
+	long mFailureDelay = MIN_DELAY;
+	enum FailedOperationType {
+		FailedNone,
+		FailedConnect,
+		FailedPublish,
+		FailedReceive,
+	}
+	FailedOperationType mFailedOperation = FailedOperationType.FailedConnect;
+
+
+	public AMQPService() {
+		super();
+	}
+	//we create one directly that
+	AMQPService(SQLiteOpenHelper databaseSource) {
+		mDatabaseSource = databaseSource;
+		initializeAMQP();
+	}
+
+	public boolean isConnected() {
+		return mConnectionReady;
+	}
+
+	class SendableMessageAvailableHandler extends ContentObserver {
+		final Handler mHandler;
+		public SendableMessageAvailableHandler(Handler h) {
 			super(h);
 			mHandler = h;
 		}
-    	@Override
-    	public void onChange(boolean selfChange) {
+		@Override
+		public void onChange(boolean selfChange) {
 			sendMessages();
-    	}
-    }
-    class DropConnectionAndReconnectHandler extends ContentObserver {
-    	final Handler mHandler;
-    	public DropConnectionAndReconnectHandler(Handler handler) {
+		}
+	}
+	class DropConnectionAndReconnectHandler extends ContentObserver {
+		final Handler mHandler;
+		public DropConnectionAndReconnectHandler(Handler handler) {
 			super(handler);
 			mHandler = handler;
 		}
-    	@Override
-    	public void onChange(boolean selfChange) {
-    		closeConnection(FailedOperationType.FailedNone);
+		@Override
+		public void onChange(boolean selfChange) {
+			closeConnection(FailedOperationType.FailedNone);
 			initiateConnection();
-    	}
-    }
+		}
+	}
 	class ResetBackOffAndReconnectIfNotConnected extends ContentObserver {
-    	final Handler mHandler;
+		final Handler mHandler;
 		public ResetBackOffAndReconnectIfNotConnected(Handler handler) {
 			super(handler);
 			mHandler = handler;
@@ -162,44 +170,45 @@ public class AMQPService extends Service {
 		}
 	}
 
-    @Override
-    public void onCreate() {
+	@Override
+	public void onCreate() {
 		mDatabaseSource = App.getDatabaseSource(this);
 
 		initializeAMQP();
-		
-		ContentResolver resolver = getContentResolver();
-        resolver.registerContentObserver(MusubiService.PREPARED_ENCODED, false, 
-        		new SendableMessageAvailableHandler(mAMQPHandler));
-        resolver.registerContentObserver(MusubiService.OWNED_IDENTITY_AVAILABLE, false, 
-        		new DropConnectionAndReconnectHandler(mAMQPHandler));
-        resolver.registerContentObserver(MusubiService.NETWORK_CHANGED, false, 
-        		new ResetBackOffAndReconnectIfNotConnected(mAMQPHandler));
-        resolver.registerContentObserver(MusubiService.USER_ACTIVITY_RESUME, false, 
-        		new ResetBackOffAndReconnectIfNotConnected(mAMQPHandler));
 
-        Log.w(TAG, "service is now running");
-    }
+		ContentResolver resolver = getContentResolver();
+		resolver.registerContentObserver(MusubiService.PREPARED_ENCODED, false,
+				new SendableMessageAvailableHandler(mAMQPHandler));
+		resolver.registerContentObserver(MusubiService.OWNED_IDENTITY_AVAILABLE, false,
+				new DropConnectionAndReconnectHandler(mAMQPHandler));
+		resolver.registerContentObserver(MusubiService.NETWORK_CHANGED, false,
+				new ResetBackOffAndReconnectIfNotConnected(mAMQPHandler));
+		resolver.registerContentObserver(MusubiService.USER_ACTIVITY_RESUME, false,
+				new ResetBackOffAndReconnectIfNotConnected(mAMQPHandler));
+
+		Log.w(TAG, "service is now running");
+	}
 	private void initializeAMQP() {
 		mIdentitiesManager = new IdentitiesManager(mDatabaseSource);
 		mDeviceManager = new DeviceManager(mDatabaseSource);
-    	mEncodedMessageManager = new EncodedMessageManager(mDatabaseSource);
-    	
+		mEncodedMessageManager = new EncodedMessageManager(mDatabaseSource);
+
 		mConnectionFactory = new ConnectionFactory();
-		mConnectionFactory.setHost(AMQP_SERVICE);
-		mConnectionFactory.setPort(5672);
-		mConnectionFactory.setUsername("haoyuheng");
-		mConnectionFactory.setPassword("haoyuheng");
-		mConnectionFactory.setConnectionTimeout(30 * 1000);
-		mConnectionFactory.setRequestedHeartbeat(30);
+		mConnectionFactory.setHost(AMQP_HOST);
+		mConnectionFactory.setPort(AMQP_PORT);
+		mConnectionFactory.setVirtualHost(AMQP_VHOST);
+		mConnectionFactory.setUsername(AMQP_USERNAME);
+		mConnectionFactory.setPassword(AMQP_PASSWORD);
+		mConnectionFactory.setConnectionTimeout(CONN_TIMEOUT);
+		mConnectionFactory.setRequestedHeartbeat(REQ_HEARTBEAT);
 
 		mThread = new HandlerThread("AMQP");
 		mThread.setPriority(Thread.MIN_PRIORITY);
 		mThread.start();
-		
+
 		mAMQPHandler = new Handler(mThread.getLooper());
 
-        //start the connection
+		//start the connection
 		mAMQPHandler.post(new Runnable() {
 			@Override
 			public void run() {
@@ -207,7 +216,7 @@ public class AMQPService extends Service {
 			}
 		});
 	}
-	
+
 	String encodeAMQPname(String prefix, byte[] key) {
 		if (AMQP_QUEUE_GLOBAL_PREFIX != null) {
 			return new StringBuilder().append(AMQP_QUEUE_GLOBAL_PREFIX)
@@ -217,9 +226,9 @@ public class AMQPService extends Service {
 		return prefix + Base64.encodeToString(key, Base64.URL_SAFE);
 	}
 
-    void closeConnection(FailedOperationType failure) {
-    	assert(mThread.getThreadId() == Process.myTid());
-    	if(mConnection != null) {
+	void closeConnection(FailedOperationType failure) {
+		assert(mThread.getThreadId() == Process.myTid());
+		if(mConnection != null) {
 			Log.i(TAG, "closing connection");
 			mConnectionReady = false;
 			mMessageWaitingForAck = null;
@@ -235,27 +244,27 @@ public class AMQPService extends Service {
 			mGroupProbeChannel = null;
 			mConnection = null;
 		}
-    	if(failure != FailedOperationType.FailedNone) {
-    		mFailedOperation = failure;
+		if(failure != FailedOperationType.FailedNone) {
+			mFailedOperation = failure;
 			mFailureDelay = Math.min(mFailureDelay * 2, MAX_DELAY);
-    		Log.i(TAG, mFailedOperation.toString() + " retry delay now " + mFailureDelay + "ms");
-    		mAMQPHandler.postDelayed(new Runnable() {
+			Log.i(TAG, mFailedOperation.toString() + " retry delay now " + mFailureDelay + "ms");
+			mAMQPHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
 					initiateConnection();
 				}
 			}, mFailureDelay);
-    	}
-    }
-    void sendMessages() {
-    	if(!mConnectionReady) {
-    		//we should always be trying to reconnect already
-    		//so that we can receive new messages
-    		return;
-    	}
-    	TLongLinkedList potentiallUnsent = mEncodedMessageManager.getUnsentOutboundIdsNotPending();
+		}
+	}
+	void sendMessages() {
+		if(!mConnectionReady) {
+			//we should always be trying to reconnect already
+			//so that we can receive new messages
+			return;
+		}
+		TLongLinkedList potentiallUnsent = mEncodedMessageManager.getUnsentOutboundIdsNotPending();
 
-    	potentiallUnsent.forEach(new TLongProcedure() {
+		potentiallUnsent.forEach(new TLongProcedure() {
 			@Override
 			public boolean execute(long id) {
 				if(mMessageWaitingForAck.contains(id))
@@ -264,33 +273,33 @@ public class AMQPService extends Service {
 				try {
 					byte[] encodedBytes = mEncodedMessageManager.lookupEncodedDataById(id);
 
-			        byte[] group_exchange_name_bytes;
-			        //TODO: load this from an in memory cache of recently encoded messages
-			        //TODO: major performance gain on sending
-			        IBHashedIdentity[] hid_for_queue;
+					byte[] group_exchange_name_bytes;
+					//TODO: load this from an in memory cache of recently encoded messages
+					//TODO: major performance gain on sending
+					IBHashedIdentity[] hid_for_queue;
 					try {
-					    Message m = getObjectMapper().readValue(encodedBytes, Message.class);
-					    MIdentity[] ids = new MIdentity[m.r.length];
-					    hid_for_queue = new IBHashedIdentity[m.r.length];
-					    for(int i = 0; i < ids.length; ++i) {
-					    	hid_for_queue[i] = new IBHashedIdentity(m.r[i].i).at(0);
-					    	ids[i] = new MIdentity();
-					    	ids[i].principalHash_ = hid_for_queue[i].hashed_;
-					    	ids[i].type_ = Authority.values()[hid_for_queue[i].authority_.ordinal()];
-					    }
-					    group_exchange_name_bytes = FeedManager.computeFixedIdentifier(ids);
+						Message m = getObjectMapper().readValue(encodedBytes, Message.class);
+						MIdentity[] ids = new MIdentity[m.r.length];
+						hid_for_queue = new IBHashedIdentity[m.r.length];
+						for(int i = 0; i < ids.length; ++i) {
+							hid_for_queue[i] = new IBHashedIdentity(m.r[i].i).at(0);
+							ids[i] = new MIdentity();
+							ids[i].principalHash_ = hid_for_queue[i].hashed_;
+							ids[i].type_ = Authority.values()[hid_for_queue[i].authority_.ordinal()];
+						}
+						group_exchange_name_bytes = FeedManager.computeFixedIdentifier(ids);
 					} catch (IOException e) {
 						Log.e(TAG, "failed to compute group exchange name");
 						return true;
 					}
-					
+
 					String group_exchange_name = encodeAMQPname("ibetgroup-", group_exchange_name_bytes);
 					if(!mDeclaredGroups.contains(group_exchange_name)) {
 						if(DBG) Log.v(TAG, "exchangeDeclare " + group_exchange_name);
 						mOutgoingChannel.exchangeDeclare(group_exchange_name, "fanout", false);
-			            for (IBHashedIdentity recipient : hid_for_queue){
-			                String dest = encodeAMQPname("ibeidentity-", recipient.identity_);
-			                if(DBG) Log.v(TAG, "exchangeDeclarePassive " + dest);
+						for (IBHashedIdentity recipient : hid_for_queue){
+							String dest = encodeAMQPname("ibeidentity-", recipient.identity_);
+							if(DBG) Log.v(TAG, "exchangeDeclarePassive " + dest);
 							try {
 								if(mGroupProbeChannel == null)
 									mGroupProbeChannel = mConnection.createChannel();
@@ -303,18 +312,18 @@ public class AMQPService extends Service {
 								//into a specific well known queue, because we don't know what the name
 								//of their device key is
 								if(DBG) Log.v(TAG, "queueDeclare " + "initial-" + dest);
-								mOutgoingChannel.queueDeclare("initial-" + dest, true, false, false, null);                        
+								mOutgoingChannel.queueDeclare("initial-" + dest, true, false, false, null);
 								if(DBG) Log.v(TAG, "exchangeDeclare " + dest);
-				                mOutgoingChannel.exchangeDeclare(dest, "fanout", true);
-				                if(DBG) Log.v(TAG, "queueBind " + "initial-" + dest + " " + dest);
-				                mOutgoingChannel.queueBind("initial-" + dest, dest, "");
+								mOutgoingChannel.exchangeDeclare(dest, "fanout", true);
+								if(DBG) Log.v(TAG, "queueBind " + "initial-" + dest + " " + dest);
+								mOutgoingChannel.queueBind("initial-" + dest, dest, "");
 							}
 							if(DBG) Log.v(TAG, "exchangeBind " + dest + " " + group_exchange_name);
-			                mOutgoingChannel.exchangeBind(dest, group_exchange_name, "");
-			            }
-			            mDeclaredGroups.add(group_exchange_name);
+							mOutgoingChannel.exchangeBind(dest, group_exchange_name, "");
+						}
+						mDeclaredGroups.add(group_exchange_name);
 					}
-	
+
 					if(DBG) Log.v(TAG, "basicPublish => " + group_exchange_name);
 					long delivery_tag = mOutgoingChannel.getNextPublishSeqNo();
 					mOutgoingChannel.basicPublish(group_exchange_name, "", true, false, null, encodedBytes);
@@ -332,14 +341,14 @@ public class AMQPService extends Service {
 				}
 			}
 		});
-    }
-    void attachToQueues() throws IOException {
+	}
+	void attachToQueues() throws IOException {
 		Log.i(TAG, "Setting up identity exchange and device queue");
 
 		DefaultConsumer consumer = new DefaultConsumer(mIncomingChannel) {
 			@Override
 			public void handleDelivery(final String consumerTag, final Envelope envelope,
-					final BasicProperties properties, final byte[] body) throws IOException 
+									   final BasicProperties properties, final byte[] body) throws IOException
 			{
 				if(DBG) Log.i(TAG, "recevied message: " + envelope.getExchange());
 				assert(body != null);
@@ -349,17 +358,17 @@ public class AMQPService extends Service {
 				MEncodedMessage encoded = new MEncodedMessage();
 				encoded.encoded_ = body;
 				mEncodedMessageManager.insertEncoded(encoded);
-                getContentResolver().notifyChange(MusubiService.ENCODED_RECEIVED, null);
+				getContentResolver().notifyChange(MusubiService.ENCODED_RECEIVED, null);
 
-                //we have to do this in our AMQP thread, or add synchronization logic
+				//we have to do this in our AMQP thread, or add synchronization logic
 				//for all of the AMQP related fields.
-                mAMQPHandler.post(new Runnable() {
+				mAMQPHandler.post(new Runnable() {
 					public void run() {
-	                	if(mIncomingChannel == null) {
-	                		//it can close in this time window
-	                		return;
-	                	}
-		                try {
+						if(mIncomingChannel == null) {
+							//it can close in this time window
+							return;
+						}
+						try {
 							mIncomingChannel.basicAck(envelope.getDeliveryTag(), false);
 							if(mFailedOperation == FailedOperationType.FailedReceive) {
 								mFailureDelay = MIN_DELAY;
@@ -370,7 +379,7 @@ public class AMQPService extends Service {
 							//next connection that receives a packet wins
 							closeConnection(FailedOperationType.FailedReceive);
 						}
-		                
+
 					}
 				});
 			}
@@ -380,7 +389,7 @@ public class AMQPService extends Service {
 		String device_queue_name = encodeAMQPname("ibedevice-", device_name);
 		//leaving these since they mark the beginning of the connection and shouldn't be too frequent (once per drop)
 		Log.v(TAG, "queueDeclare " + device_queue_name);
-		mIncomingChannel.queueDeclare(device_queue_name, true, false, false, null);                        
+		mIncomingChannel.queueDeclare(device_queue_name, true, false, false, null);
 		//TODO: device_queue_name needs to involve the identities some how? or be a larger byte array
 		List<MIdentity> mine = mIdentitiesManager.getOwnedIdentities();
 		for(MIdentity me : mine) {
@@ -408,16 +417,16 @@ public class AMQPService extends Service {
 				//IF we deleted it: we already claimed our identity, so we ate this queue up
 			}
 		}
-		
+
 		Log.v(TAG, "basicConsume " + device_queue_name);
 		mIncomingChannel.basicConsume(device_queue_name, false, "", true, true, null, consumer);
-    }
-    void initiateConnection() {
-    	if(mConnection != null) {
-    		//just for information sake, this is a legitimate event
-    		Log.i(TAG, "Already connected when triggered to initiate connection");
-    		return;
-    	}
+	}
+	void initiateConnection() {
+		if(mConnection != null) {
+			//just for information sake, this is a legitimate event
+			Log.i(TAG, "Already connected when triggered to initiate connection");
+			return;
+		}
 		Log.i(TAG, "Network is up connection is being attempted");
 		try {
 			mConnection = mConnectionFactory.newConnection();
@@ -425,7 +434,7 @@ public class AMQPService extends Service {
 				@Override
 				public void shutdownCompleted(ShutdownSignalException cause) {
 					if(!cause.isInitiatedByApplication()) {
-				        //start the connection
+						//start the connection
 						mAMQPHandler.post(new Runnable() {
 							@Override
 							public void run() {
@@ -443,7 +452,7 @@ public class AMQPService extends Service {
 			mIncomingChannel = mConnection.createChannel();
 			mIncomingChannel.basicQos(10);
 			attachToQueues();
-			
+
 			mOutgoingChannel = mConnection.createChannel();
 			//TODO: these callbacks run in another thread, so this is not correct
 			//we need some synchronized or a customized ExecutorService that
@@ -458,19 +467,19 @@ public class AMQPService extends Service {
 					mMessageWaitingForAckByTag.remove(deliveryTag);
 					mMessageWaitingForAck.remove(encoded_id);
 				}
-				
+
 				@Override
 				public void handleAck(long deliveryTag, boolean multiple) throws IOException {
-                    //delivered!
+					//delivered!
 					long encoded_id = mMessageWaitingForAckByTag.get(deliveryTag);
-					
+
 					//mark the db entry as processed
 					MEncodedMessage encoded = mEncodedMessageManager.lookupMetadataById(encoded_id);
 					assert(encoded.outbound_);
 					encoded.processed_ = true;
 					encoded.processedTime_ = new Date().getTime();
 					mEncodedMessageManager.updateEncodedMetadata(encoded);
-					
+
 					mMessageWaitingForAckByTag.remove(deliveryTag);
 					mMessageWaitingForAck.remove(encoded_id);
 
@@ -483,7 +492,7 @@ public class AMQPService extends Service {
 			});
 			mOutgoingChannel.confirmSelect();
 			mConnectionReady = true;
-			
+
 			//once we have successfully done our work, we can
 			//reset the failure delay, FYI, internal exceptions in the
 			//message sender will cause backoff to MAX_DELAY
@@ -500,51 +509,51 @@ public class AMQPService extends Service {
 		sendMessages();
 	}
 
-    private ObjectMapper getObjectMapper() {
-        if (mMapper == null) {
-            mMapper = new ObjectMapper(new BsonFactory());
-        }
-        return mMapper;
-    }
-    
-    public boolean isConnectionReady() {
-    	return mConnectionReady;
-    }
-    
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "Received start id " + startId + ": " + intent);
-        return START_STICKY;
-    }
+	private ObjectMapper getObjectMapper() {
+		if (mMapper == null) {
+			mMapper = new ObjectMapper(new BsonFactory());
+		}
+		return mMapper;
+	}
+
+	public boolean isConnectionReady() {
+		return mConnectionReady;
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.i(TAG, "Received start id " + startId + ": " + intent);
+		return START_STICKY;
+	}
 
 
-    @Override
-    public void onDestroy() {
-    	//kick the background thread into shutdown mode
-    	mAMQPHandler.post(new Runnable() {
+	@Override
+	public void onDestroy() {
+		//kick the background thread into shutdown mode
+		mAMQPHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				closeConnection(FailedOperationType.FailedNone);
 				//give it half a second to close down
-		    	mAMQPHandler.postDelayed(new Runnable() {
-		    		public void run() {
-		    			mThread.getLooper().quit();
-		    		}
-		    	}, 500);	
+				mAMQPHandler.postDelayed(new Runnable() {
+					public void run() {
+						mThread.getLooper().quit();
+					}
+				}, 500);
 			}
 		});
-    	//wait for it to clean up
-    	try {
+		//wait for it to clean up
+		try {
 			mAMQPHandler.getLooper().getThread().join();
 		} catch (InterruptedException e) {}
-    }
-	
-    public class AMQPServiceBinder extends Binder {
-    	public AMQPService getService() {
-            return AMQPService.this;
-        }
-    }
-    private final IBinder mBinder = new AMQPServiceBinder();
+	}
+
+	public class AMQPServiceBinder extends Binder {
+		public AMQPService getService() {
+			return AMQPService.this;
+		}
+	}
+	private final IBinder mBinder = new AMQPServiceBinder();
 	@Override
 	public IBinder onBind(Intent intent) {
 		return mBinder;
