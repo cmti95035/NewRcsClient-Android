@@ -76,8 +76,9 @@ public class AMQPService extends Service {
 	public static boolean DBG = false;
 	public static final String TAG = AMQPService.class.getName();
 	static final String AMQP_QUEUE_GLOBAL_PREFIX = "msb";
-	private static final String AMQP_HOST = "52.26.121.86"; //aws
-	//ali yun adderss "115.28.221.74" no longer working
+    //AWS RibbitMQ Server
+	private static final String AMQP_HOST = "52.10.209.5";
+
 
 	private static final int AMQP_PORT = 5672;
 	private static final String AMQP_VHOST = "chat";
@@ -409,12 +410,14 @@ public class AMQPService extends Service {
 					incoming_initial.queueUnbind("initial-" + identity_exchange_name, identity_exchange_name, "");
 					//but also drain it
 				} catch(IOException e) {
+                    Log.e(TAG, e.toString());
 				}
 				Log.v(TAG, "basicConsume " + "initial-" + identity_exchange_name);
 				mIncomingChannel.basicConsume("initial-" + identity_exchange_name, consumer);
 			} catch(IOException e) {
 				//no one sent up messages before we joined
 				//IF we deleted it: we already claimed our identity, so we ate this queue up
+                Log.e(TAG, e.toString());
 			}
 		}
 
@@ -545,7 +548,9 @@ public class AMQPService extends Service {
 		//wait for it to clean up
 		try {
 			mAMQPHandler.getLooper().getThread().join();
-		} catch (InterruptedException e) {}
+		} catch (InterruptedException e) {
+            Log.e(TAG, e.toString());
+        }
 	}
 
 	public class AMQPServiceBinder extends Binder {
