@@ -417,7 +417,7 @@ public class AMQPService extends Service {
 			} catch(IOException e) {
 				//no one sent up messages before we joined
 				//IF we deleted it: we already claimed our identity, so we ate this queue up
-                Log.e(TAG, e.toString());
+                    Log.e(TAG, e.toString());
 			}
 		}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">StickyPOMI</string>
+    <string name="app_name">CMCC Messaging</string>
     <string name="pick_feed">Pick a Feed</string>
     <string name="app_store_name">App Corral</string>
     <string name="profile">Profile</string>
@@ -114,7 +114,7 @@
     <string name="qr_scan_friend">Scan a Friend</string>
     <string name="title_claim_key">Verify Account</string>
     <string name="country_code">+</string>
-    <string name="cloud_storage_description">connect to the cloud storage, messages will be allowed to storage more than 2 weeks, and more.</string>
+    <string name="cloud_storage_description">connect to the cloud storage, messages will be allowed to storage more than 2 weeks.</string>
     <string name="wrong_ip">The IP address entered is NOT well formed. Please try again!</string>
     <string name="no_ads_server">Please set ads server IP address first!</string>
     <string name="show_ads">Show Ads</string>

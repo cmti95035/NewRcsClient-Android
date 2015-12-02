@@ -127,10 +127,7 @@ public class Baidu implements CloudStorage{
 	@Override
 	public boolean hasLinkedAccount(Context mContext) {
 		// TODO Auto-generated method stub
-		if(AccessTokenManager.isSessionVaild(mContext)){
-			return true;
-		}
-		return false;
+		return AccessTokenManager.isSessionVaild(mContext);
 	}
 
 	
@@ -145,7 +142,7 @@ public class Baidu implements CloudStorage{
 	           raf.close();
 	      } catch (Exception e) {
 	           Log.e("TestFile", "Error on write File."+e.getMessage());
-	          }
+          }
 	 }
 	 
 	 public String UriToFilePath(String myImageUrl, Context context){
@@ -189,8 +186,8 @@ public class Baidu implements CloudStorage{
 					
 		    		BaiduPCSClient api = new BaiduPCSClient();
 		    		api.setAccessToken(mbOauth);
-		    		String path = "/";
-		    		path = "/"+object.feedId_+"/"+object.timestamp_+".json";
+		    		String path = "/"+object.feedId_+"/"+object.timestamp_+"" +
+							".json";
 					
 		    		
 		    		final BaiduPCSActionInfo.PCSFileInfoResponse response = api.uploadFile(file.getAbsolutePath(), mbRootPath + path, new BaiduPCSStatusListener(){
@@ -198,12 +195,9 @@ public class Baidu implements CloudStorage{
 						@Override
 						public void onProgress(long bytes, long total) {
 							// TODO Auto-generated method stub
-							
-							
-							final long bs = bytes;
-							final long tl = total;
 
-				    		Log.e("BAodu", "total: " + tl + "    sent:" + bs);
+				    		Log.e("BAodu", "total: " + total + "    sent:" +
+									bytes);
 				    		file.delete();					
 						}
 						
@@ -232,12 +226,8 @@ public class Baidu implements CloudStorage{
 								@Override
 								public void onProgress(long bytes, long total) {
 									// TODO Auto-generated method stub
-									
-									
-									final long bs = bytes;
-									final long tl = total;
-
-						    		Log.e("BAodu", "total: " + tl + "    sent:" + bs);
+						    		Log.e("BAodu", "total: " + total + "    " +
+											"sent:" + bytes);
 						    							
 								}
 								
@@ -271,7 +261,7 @@ public class Baidu implements CloudStorage{
 	@Override
 	public void SaveMeseages(MObject object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void SaveImages(MObject object, String absolutePath) {

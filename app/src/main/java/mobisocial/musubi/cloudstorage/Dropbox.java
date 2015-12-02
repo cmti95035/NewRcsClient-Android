@@ -19,8 +19,6 @@ import com.dropbox.sync.android.DbxPath;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 public class Dropbox implements CloudStorage {

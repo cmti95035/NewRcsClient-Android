@@ -39,7 +39,7 @@ public class CloudStorageActivity extends Activity {
     public static String baiduAccessToken = null;
     
     
-	public  enum CloudStorage {NONE,DROPBOX,BAIDU,BOX};
+	public  enum CloudStorage {NONE,DROPBOX,BAIDU};
 	public static CloudStorage CurrentCloudStorage = CloudStorage.NONE;
 	ListView cloud_storage_list ;
 	static MyAdapter adapter ;
@@ -80,7 +80,6 @@ public class CloudStorageActivity extends Activity {
 						ConnectToBaidu();
 						break;
 					case 2:
-						ConnectTobox();
 						break;
 					}
 				}
@@ -102,7 +101,7 @@ public class CloudStorageActivity extends Activity {
 		
 	}
 
-	
+
 	@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.e("dd",requestCode+" "+resultCode );
@@ -123,7 +122,8 @@ public class CloudStorageActivity extends Activity {
 				}
             	
             } else {
-                Toast.makeText(this, "Link to Dropbox failed or was cancelled.", 1000);
+                Toast.makeText(this, "Link to Dropbox failed or was cancelled" +
+                        ".", Toast.LENGTH_LONG);
                 Log.e("ddd","Link to Dropbox failed or was cancelled.");
             }
         } else {
@@ -138,10 +138,6 @@ public class CloudStorageActivity extends Activity {
 		baidu.Login(this, 1);		
 	}
 
-	protected void ConnectTobox() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private static List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -159,12 +155,6 @@ public class CloudStorageActivity extends Activity {
         if(CurrentCloudStorage == CloudStorage.NONE || CurrentCloudStorage == CloudStorage.BAIDU)
         	list.add(map);
  
-        map = new HashMap<String, Object>();
-        map.put("cloud_storage_name", "Box");
-        map.put("cloud_storage_icon", R.drawable.box);
-        if(CurrentCloudStorage == CloudStorage.NONE || CurrentCloudStorage == CloudStorage.BOX)
-        	list.add(map);
-         
         return list;
 	}
 	
