@@ -16,6 +16,24 @@
 
 package org.mobisocial.corral;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothServerSocket;
+import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.UriMatcher;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Environment;
+import android.util.Log;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -34,7 +52,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 import java.util.Date;
@@ -58,28 +75,8 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.ui.util.UiUtil;
 import mobisocial.musubi.util.Util;
-import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.musubi.DbFeed;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.http.entity.ContentProducer;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothServerSocket;
-import android.bluetooth.BluetoothSocket;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 
 /**
  * Stores and retrieves large content associated with objs.

@@ -16,6 +16,15 @@
 
 package mobisocial.musubi.feed.action;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.io.IOException;
 
 import mobisocial.musubi.Helpers;
@@ -25,14 +34,6 @@ import mobisocial.musubi.objects.FileObj;
 import mobisocial.musubi.util.ActivityCallout;
 import mobisocial.musubi.util.InstrumentedActivity;
 import mobisocial.socialkit.Obj;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Adds a FileObj to a feed from an external Android application

@@ -16,10 +16,11 @@
 
 package mobisocial.musubi.model.helpers;
 
-import mobisocial.musubi.App;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import mobisocial.musubi.App;
 
 /**
  * Access a collection of database access managers. All managers are

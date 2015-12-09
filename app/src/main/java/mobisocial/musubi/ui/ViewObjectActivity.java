@@ -16,6 +16,12 @@
 
 package mobisocial.musubi.ui;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.feed.iface.Activator;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
@@ -23,11 +29,6 @@ import mobisocial.musubi.obj.ObjHelpers;
 import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.socialkit.musubi.DbObj;
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.widget.Toast;
 
 public class ViewObjectActivity extends Activity {
 

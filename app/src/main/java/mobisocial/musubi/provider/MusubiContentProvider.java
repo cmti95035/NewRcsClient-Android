@@ -16,6 +16,28 @@
 
 package mobisocial.musubi.provider;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.UriMatcher;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Process;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.ContentCorral;
+import org.mobisocial.corral.CorralDownloadClient;
+
 import java.util.Date;
 import java.util.List;
 
@@ -44,28 +66,6 @@ import mobisocial.musubi.service.MusubiService;
 import mobisocial.musubi.util.UriImage;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.ContentCorral;
-import org.mobisocial.corral.CorralDownloadClient;
-
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.ContentProvider;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Binder;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Process;
-import android.util.Log;
 
 /**
  * Manages Musubi's social database, providing access to third-party

@@ -16,20 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.syncadapter.MusubiProfile;
-import mobisocial.musubi.ui.fragments.ConversationsFragment;
-import mobisocial.musubi.ui.fragments.ViewProfileFragment;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
@@ -46,6 +32,21 @@ import android.support.v4.view.ViewPager;
 
 import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitleProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mobisocial.metrics.UsageMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.syncadapter.MusubiProfile;
+import mobisocial.musubi.ui.fragments.ConversationsFragment;
+import mobisocial.musubi.ui.fragments.ViewProfileFragment;
 
 public class ViewProfileActivity extends MusubiBaseActivity implements
 		ConversationsFragment.OnFeedSelectedListener  {

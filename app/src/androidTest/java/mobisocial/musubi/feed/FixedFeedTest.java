@@ -1,5 +1,7 @@
 package mobisocial.musubi.feed;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -17,7 +19,6 @@ import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.model.helpers.MessageTransportManager;
 import mobisocial.musubi.util.Util;
 import mobisocial.test.TestBase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class FixedFeedTest extends TestBase {
     final String PRINCIPLE_PRINCIPAL = "bjdodson@cs.stanford.edu";

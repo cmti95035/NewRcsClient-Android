@@ -16,12 +16,6 @@
 
 package mobisocial.musubi.feed.presence;
 
-import java.io.IOException;
-
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.objects.VideoObj;
-import mobisocial.socialkit.Obj;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -30,6 +24,13 @@ import android.os.Handler;
 import android.provider.MediaStore.Video;
 import android.provider.MediaStore.Video.VideoColumns;
 import android.widget.Toast;
+
+import java.io.IOException;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.VideoObj;
+import mobisocial.socialkit.Obj;
 
 public class VideosPresence extends FeedPresence {
     private static final String TAG = "livevideos";

@@ -16,7 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import mobisocial.musubi.R;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -25,6 +24,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import mobisocial.musubi.R;
 
 public class PrivacyProtectionDialog extends DialogFragment {
 

@@ -16,15 +16,16 @@
 
 package mobisocial.musubi.feed.presence;
 
+import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
+
 import mobisocial.musubi.feed.iface.Activator;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.feed.iface.FeedPresence;
 import mobisocial.musubi.obj.handler.IObjHandler;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 
 /**
  * Automatically launches all openable content.

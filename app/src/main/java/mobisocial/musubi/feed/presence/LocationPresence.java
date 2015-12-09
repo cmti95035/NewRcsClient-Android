@@ -16,9 +16,6 @@
 
 package mobisocial.musubi.feed.presence;
 
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.objects.LocationObj;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -26,6 +23,10 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.LocationObj;
 
 public class LocationPresence extends FeedPresence {
     private static final String TAG = "locationPresence";

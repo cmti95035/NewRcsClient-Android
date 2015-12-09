@@ -16,9 +16,6 @@
 
 package mobisocial.musubi.syncadapter;
 
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.ui.util.UiUtil;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,6 +28,10 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.ui.util.UiUtil;
 
 /**
  * Helper class for storing data in the platform content providers.

@@ -1,33 +1,30 @@
 package mobisocial.musubi.cloudstorage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import mobisocial.musubi.R;
-
-import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import mobisocial.musubi.R;
 
 public class CloudStorageActivity extends Activity {
 
@@ -92,11 +89,11 @@ public class CloudStorageActivity extends Activity {
 	
 	protected void ConnectToDropbox() {
 		// TODO Auto-generated method stub
-		dp.SetAccount(getApplicationContext());
+		dp.setAccount(getApplicationContext());
 		if (dp.hasLinkedAccount()) {
 			setIsCloudStorageConnected(CloudStorage.DROPBOX);  
 		}else{
-			dp.Login(this,REQUEST_LINK_TO_DBX);
+			dp.login(this, REQUEST_LINK_TO_DBX);
 		}
 		
 	}
@@ -115,7 +112,7 @@ public class CloudStorageActivity extends Activity {
             	JSONObject json = new JSONObject();
             	try {
 					json.put("test", "fdsafdsafsd");
-					dp.SaveMeseages(json);
+					dp.saveMessages(json);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -134,8 +131,8 @@ public class CloudStorageActivity extends Activity {
 
 	protected void ConnectToBaidu() {
 		// TODO Auto-generated method stub		
-		baidu.SetAccount(this);
-		baidu.Login(this, 1);		
+		baidu.setAccount(this);
+		baidu.login(this, 1);
 	}
 
 
@@ -233,7 +230,7 @@ public class CloudStorageActivity extends Activity {
 
 	private CloudStorage getIsCloudStorageConnected() {
 		// TODO Auto-generated method stub
-		dp.SetAccount(getApplicationContext());		
+		dp.setAccount(getApplicationContext());
 		if (dp.hasLinkedAccount()) {
 			return CloudStorage.DROPBOX;
 		}
@@ -248,15 +245,15 @@ public class CloudStorageActivity extends Activity {
 		// TODO Auto-generated method stub
 		
 		if(CurrentCloudStorage == CloudStorage.DROPBOX && storage == CloudStorage.NONE){
-			dp.SetAccount(getApplicationContext());		
+			dp.setAccount(getApplicationContext());
 			if (dp.hasLinkedAccount()) {
-				dp.Logout(this);
+				dp.logout(this);
 			}
 		}
 		
 		if(CurrentCloudStorage == CloudStorage.BAIDU && storage == CloudStorage.NONE){
 			if(baidu.hasLinkedAccount(this))
-				baidu.Logout(this);
+				baidu.logout(this);
 		}
 		CurrentCloudStorage = storage;
 		mData = getData();

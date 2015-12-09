@@ -16,10 +16,11 @@
 
 package mobisocial.musubi;
 
-import mobisocial.musubi.service.MusubiService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import mobisocial.musubi.service.MusubiService;
 
 /**
  * Receiver to start the DungBeetle service on boot of phone.

@@ -17,9 +17,10 @@
 
 package mobisocial.musubi.obj.iface;
 
+import android.content.Context;
+
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
 
 public abstract class ObjAction {
     public abstract String getLabel(Context context);

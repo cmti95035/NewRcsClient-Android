@@ -16,6 +16,10 @@
 
 package mobisocial.musubi.encoding;
 
+import android.util.Base64;
+
+import org.codehaus.jackson.map.ObjectMapper;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
@@ -28,6 +32,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import de.undercouch.bson4jackson.BsonFactory;
+import de.undercouch.bson4jackson.BsonParser.Feature;
 import mobisocial.crypto.CorruptIdentity;
 import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity;
@@ -45,12 +51,6 @@ import mobisocial.musubi.protocol.Recipient;
 import mobisocial.musubi.protocol.Secret;
 import mobisocial.musubi.protocol.Sender;
 import mobisocial.musubi.util.Util;
-
-import org.codehaus.jackson.map.ObjectMapper;
-
-import android.util.Base64;
-import de.undercouch.bson4jackson.BsonFactory;
-import de.undercouch.bson4jackson.BsonParser.Feature;
 
 public class MessageDecoder {
 	final IBEncryptionScheme mEncryptionScheme;

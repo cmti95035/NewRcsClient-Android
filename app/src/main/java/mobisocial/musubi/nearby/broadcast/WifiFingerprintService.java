@@ -16,6 +16,18 @@
 
 package mobisocial.musubi.nearby.broadcast;
 
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
+import android.os.Binder;
+import android.os.IBinder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -28,20 +40,6 @@ import mobisocial.musubi.model.DbContactAttributes;
 import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.musubi.Musubi;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Service;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
-import android.os.Binder;
-import android.os.IBinder;
-import android.util.Log;
 
 /**
  * A persistent service for managing Musubi's long-lived tasks such

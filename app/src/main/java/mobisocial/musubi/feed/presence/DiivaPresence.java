@@ -16,16 +16,17 @@
 
 package mobisocial.musubi.feed.presence;
 
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.objects.StoryObj;
-import mobisocial.socialkit.obj.MemObj;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.widget.Toast;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.StoryObj;
+import mobisocial.socialkit.obj.MemObj;
 
 public class DiivaPresence extends FeedPresence {
     private boolean mShareDiiva = false;

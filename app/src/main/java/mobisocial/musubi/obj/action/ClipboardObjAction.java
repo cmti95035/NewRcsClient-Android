@@ -17,6 +17,11 @@
 
 package mobisocial.musubi.obj.action;
 
+import android.app.Activity;
+import android.content.Context;
+
+import org.json.JSONObject;
+
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.obj.iface.ObjAction;
 import mobisocial.musubi.objects.PictureObj;
@@ -25,11 +30,6 @@ import mobisocial.musubi.objects.StoryObj;
 import mobisocial.musubi.objects.VoiceObj;
 import mobisocial.musubi.ui.fragments.ClipboardKeeper;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.json.JSONObject;
-
-import android.app.Activity;
-import android.content.Context;
 
 public class ClipboardObjAction extends ObjAction {
     @Override

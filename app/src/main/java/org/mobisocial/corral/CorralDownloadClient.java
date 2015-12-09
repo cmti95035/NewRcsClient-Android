@@ -16,6 +16,30 @@
 
 package org.mobisocial.corral;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.util.Base64;
+import android.util.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+        .DownloadChannel;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+        .DownloadState;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -36,28 +60,6 @@ import mobisocial.musubi.objects.VideoObj;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbIdentity;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadChannel;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadState;
-
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
-import android.content.Context;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.util.Base64;
-import android.util.Log;
 
 public class CorralDownloadClient {
     private static final String TAG = "corral";

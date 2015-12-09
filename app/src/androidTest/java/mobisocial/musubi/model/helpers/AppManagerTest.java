@@ -1,8 +1,9 @@
 package mobisocial.musubi.model.helpers;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.musubi.model.MApp;
 import mobisocial.test.TestBase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class AppManagerTest extends TestBase {
     private SQLiteOpenHelper mDbh;

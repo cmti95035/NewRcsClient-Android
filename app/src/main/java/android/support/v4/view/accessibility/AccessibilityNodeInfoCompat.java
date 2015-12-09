@@ -17,12 +17,13 @@
 package android.support.v4.view.accessibility;
 
 import android.graphics.Rect;
-//import android.os.Build;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+//import android.os.Build;
 
 /**
  * Helper for accessing {@link android.view.accessibility.AccessibilityNodeInfo}

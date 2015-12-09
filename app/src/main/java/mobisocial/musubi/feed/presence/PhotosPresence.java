@@ -16,12 +16,6 @@
 
 package mobisocial.musubi.feed.presence;
 
-import java.io.IOException;
-
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.socialkit.obj.MemObj;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -30,6 +24,13 @@ import android.os.Handler;
 import android.provider.MediaStore.Images;
 import android.provider.MediaStore.Images.ImageColumns;
 import android.widget.Toast;
+
+import java.io.IOException;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.PictureObj;
+import mobisocial.socialkit.obj.MemObj;
 
 /**
  * Automatically share photos that have been captured with the default camera.

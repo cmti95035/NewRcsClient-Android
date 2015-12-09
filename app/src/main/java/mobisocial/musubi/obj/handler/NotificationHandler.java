@@ -16,6 +16,18 @@
 
 package mobisocial.musubi.obj.handler;
 
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.feed.iface.FeedRenderer;
@@ -29,17 +41,6 @@ import mobisocial.musubi.objects.StatusObj;
 import mobisocial.musubi.objects.VoiceObj;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.musubi.Musubi;
-import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 
 /**
  * Handles notifications associated with a received obj.

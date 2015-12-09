@@ -1,6 +1,7 @@
 package mobisocial.musubi.model.helpers;
 
 import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.test.TestBase;
 
 public class ContactDataVersionManagerTest extends TestBase {

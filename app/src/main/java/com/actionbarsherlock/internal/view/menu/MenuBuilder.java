@@ -17,12 +17,6 @@
 package com.actionbarsherlock.internal.view.menu;
 
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +35,12 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Implementation of the {@link android.view.Menu} interface for creating a

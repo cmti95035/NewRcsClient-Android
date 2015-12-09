@@ -16,28 +16,6 @@
 
 package mobisocial.musubi.objects;
 
-import java.util.List;
-
-import mobisocial.musubi.BJDNotImplementedException;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.Activator;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.model.DbObjCache;
-import mobisocial.musubi.obj.ObjHelpers;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.musubi.webapp.WebAppActivity;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-import mobisocial.socialkit.musubi.multiplayer.Multiplayer;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +33,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+import mobisocial.musubi.BJDNotImplementedException;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.Activator;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.model.DbObjCache;
+import mobisocial.musubi.obj.ObjHelpers;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.musubi.webapp.WebAppActivity;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.musubi.Musubi;
+import mobisocial.socialkit.musubi.multiplayer.Multiplayer;
+import mobisocial.socialkit.obj.MemObj;
 
 /**
  * Entry point for application sessions. Typically, an AppObj is created by

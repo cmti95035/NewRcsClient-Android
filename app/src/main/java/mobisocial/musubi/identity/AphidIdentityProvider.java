@@ -16,6 +16,27 @@
 
 package mobisocial.musubi.identity;
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Base64;
+import android.util.Log;
+import android.util.Pair;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,33 +62,10 @@ import mobisocial.musubi.model.PresenceAwareNotify;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.model.helpers.MyAccountManager;
 import mobisocial.musubi.model.helpers.PendingIdentityManager;
-import mobisocial.musubi.service.TwilioService;
 import mobisocial.musubi.test.JsonGernerator;
 import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.ui.fragments.AccountLinkDialog;
 import mobisocial.musubi.util.CertifiedHttpClient;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Base64;
-import android.util.Log;
-import android.util.Pair;
 
 public class AphidIdentityProvider implements IdentityProvider {
 	public static final String TAG = "AphidIdentityProvider";

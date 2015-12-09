@@ -16,9 +16,6 @@
 
 package com.actionbarsherlock.internal.view.menu;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -34,6 +31,9 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.internal.view.View_HasStateListenerSupport;
 import com.actionbarsherlock.internal.view.View_OnAttachStateChangeListener;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import mobisocial.musubi.R;
 

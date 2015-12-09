@@ -16,10 +16,31 @@
 
 package mobisocial.musubi.feed.action;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import org.mobisocial.corral.ContentCorral;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,59 +51,18 @@ import mobisocial.musubi.App;
 import mobisocial.musubi.Helpers;
 import mobisocial.musubi.R;
 import mobisocial.musubi.feed.iface.FeedAction;
-import mobisocial.musubi.model.DbRelation;
 import mobisocial.musubi.model.MApp;
 import mobisocial.musubi.model.helpers.AppManager;
-import mobisocial.musubi.obj.ObjHelpers;
-import mobisocial.musubi.obj.action.EditPhotoAction.EditCallout;
-import mobisocial.musubi.objects.AppObj;
 import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.objects.VideoObj;
 import mobisocial.musubi.service.WizardStepHandler;
 import mobisocial.musubi.ui.fragments.AppSelectDialog;
 import mobisocial.musubi.ui.fragments.AppSelectDialog.MusubiWebApp;
 import mobisocial.musubi.ui.util.IntentProxyActivity;
 import mobisocial.musubi.util.ActivityCallout;
-import mobisocial.musubi.util.InstrumentedActivity;
 import mobisocial.musubi.util.PhotoTaker;
 import mobisocial.musubi.util.UriImage;
 import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.musubi.Musubi;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.ContentCorral;
-import org.mobisocial.corral.CorralDownloadClient;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.LabeledIntent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
  * Captures an image to share with a feed.

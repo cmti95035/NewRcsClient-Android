@@ -16,18 +16,17 @@
 
 package org.mobisocial.corral;
 
-import mobisocial.musubi.R;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.socialkit.musubi.DbObj;
-
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 
 public class DownloadProgressNotificationCallback implements DownloadProgressCallback {
     final Context mContext;

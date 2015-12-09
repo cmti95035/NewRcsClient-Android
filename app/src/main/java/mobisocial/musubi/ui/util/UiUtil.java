@@ -16,6 +16,18 @@
 
 package mobisocial.musubi.ui.util;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,17 +50,6 @@ import mobisocial.musubi.ui.widget.MultiIdentitySelector;
 import mobisocial.musubi.util.IdentityCache;
 import mobisocial.musubi.util.IdentityCache.CachedIdentity;
 import mobisocial.musubi.util.Util;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
-import android.util.Log;
 
 public class UiUtil {
 	/**

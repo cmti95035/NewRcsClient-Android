@@ -1,5 +1,12 @@
 package mobisocial.test;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,13 +30,6 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class TestDatabase extends DatabaseManager {
     final Random random;

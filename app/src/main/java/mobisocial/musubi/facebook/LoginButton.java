@@ -16,12 +16,6 @@
 
 package mobisocial.musubi.facebook;
 
-import com.facebook.android.*;
-import com.facebook.android.Facebook.DialogListener;
-import mobisocial.musubi.R;
-import mobisocial.musubi.facebook.SessionEvents.AuthListener;
-import mobisocial.musubi.facebook.SessionEvents.LogoutListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -30,6 +24,16 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.facebook.android.AsyncFacebookRunner;
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.facebook.SessionEvents.AuthListener;
+import mobisocial.musubi.facebook.SessionEvents.LogoutListener;
 
 public class LoginButton extends ImageButton {
     

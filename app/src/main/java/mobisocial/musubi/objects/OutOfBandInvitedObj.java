@@ -15,6 +15,16 @@
  */
 
 package mobisocial.musubi.objects;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Base64;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Iterator;
 
 import mobisocial.crypto.IBHashedIdentity;
@@ -26,15 +36,6 @@ import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MObject;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Base64;
-import android.util.Log;
 
 /**
  * An object that provides minimal information about introduced participants to a group.

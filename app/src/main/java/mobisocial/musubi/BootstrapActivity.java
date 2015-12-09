@@ -16,29 +16,6 @@
 
 package mobisocial.musubi;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.model.helpers.DatabaseFile;
-import mobisocial.musubi.model.helpers.EncodedMessageManager;
-import mobisocial.musubi.service.AddressBookUpdateHandler;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.SettingsActivity;
-import mobisocial.musubi.ui.fragments.EulaFragment;
-import mobisocial.musubi.util.CertifiedHttpClient;
-import mobisocial.socialkit.musubi.Musubi;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -49,7 +26,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -62,6 +38,28 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import mobisocial.metrics.UsageMetrics;
+import mobisocial.musubi.model.helpers.DatabaseFile;
+import mobisocial.musubi.model.helpers.EncodedMessageManager;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.EulaFragment;
+import mobisocial.musubi.util.CertifiedHttpClient;
+import mobisocial.socialkit.musubi.Musubi;
 
 public class BootstrapActivity extends FragmentActivity {
     static final String TAG = BootstrapActivity.class.getSimpleName();

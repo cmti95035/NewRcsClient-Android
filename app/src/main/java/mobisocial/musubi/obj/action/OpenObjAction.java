@@ -17,11 +17,12 @@
 
 package mobisocial.musubi.obj.action;
 
+import android.content.Context;
+
 import mobisocial.musubi.feed.iface.Activator;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.obj.iface.ObjAction;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
 
 /**
  * Opens the given Obj using its {@link Activator}.

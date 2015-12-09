@@ -16,6 +16,13 @@
 
 package mobisocial.musubi.service;
 
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -37,12 +44,6 @@ import mobisocial.musubi.model.MSignatureUserKey;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.model.helpers.PendingIdentityManager;
 import mobisocial.musubi.model.helpers.UserKeyManager;
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.util.Log;
 
 public class KeyUpdateHandler extends ContentObserver {
 	public static final String TAG = "KeyUpdateHandler";

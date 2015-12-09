@@ -16,13 +16,13 @@
 
 package mobisocial.musubi.util;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.media.AudioManager;
 import android.util.Log;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class RemoteControlRegistrar {
     private static final String TAG = "msb-rcr";

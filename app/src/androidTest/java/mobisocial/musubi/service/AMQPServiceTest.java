@@ -1,5 +1,10 @@
 package mobisocial.musubi.service;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.IBinder;
+import android.test.ServiceTestCase;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,10 +24,6 @@ import mobisocial.musubi.model.helpers.MessageTransportManager;
 import mobisocial.musubi.model.helpers.UserKeyManager;
 import mobisocial.musubi.util.Util;
 import mobisocial.test.MockMusubiAppContext;
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.IBinder;
-import android.test.ServiceTestCase;
 
 public class AMQPServiceTest extends ServiceTestCase<AMQPService> {
 	UnverifiedIdentityProvider mIdp = new UnverifiedIdentityProvider();

@@ -2,6 +2,7 @@ package mobisocial.musubi.model.helpers;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.musubi.model.MApp;
 import mobisocial.musubi.model.MFact;
 import mobisocial.musubi.model.MFactType;

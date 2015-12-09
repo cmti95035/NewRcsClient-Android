@@ -16,8 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.io.File;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -30,6 +28,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+
+import java.io.File;
 
 public class PhotoEditorActivity extends FragmentActivity {
 

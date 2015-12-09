@@ -16,6 +16,20 @@
 
 package org.mobisocial.corral;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Environment;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+		.DownloadChannel;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+		.DownloadState;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -40,18 +54,6 @@ import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.socialkit.musubi.DbIdentity;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadChannel;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadState;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 
 public class CorralHelper {
 

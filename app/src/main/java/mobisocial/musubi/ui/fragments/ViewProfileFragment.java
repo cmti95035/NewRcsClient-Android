@@ -16,25 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import java.io.IOException;
-
-import mobisocial.crypto.IBHashedIdentity;
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.service.WizardStepHandler;
-import mobisocial.musubi.ui.EmailInviteActivity;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.ViewProfileActivity;
-import mobisocial.musubi.ui.util.AddToWhitelistListener;
-import mobisocial.musubi.ui.util.EmojiSpannableFactory;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.UriImage;
-import mobisocial.socialkit.Obj;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -65,6 +46,26 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+
+import mobisocial.crypto.IBHashedIdentity;
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.objects.PictureObj;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.service.WizardStepHandler;
+import mobisocial.musubi.ui.EmailInviteActivity;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.ViewProfileActivity;
+import mobisocial.musubi.ui.util.AddToWhitelistListener;
+import mobisocial.musubi.ui.util.EmojiSpannableFactory;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.UriImage;
+import mobisocial.socialkit.Obj;
 
 public class ViewProfileFragment extends Fragment {
     private ImageView mThumbnail;

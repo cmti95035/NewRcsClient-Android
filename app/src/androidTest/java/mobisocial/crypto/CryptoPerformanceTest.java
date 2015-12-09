@@ -1,9 +1,9 @@
 package mobisocial.crypto;
 
+import junit.framework.TestCase;
+
 import java.security.SecureRandom;
 import java.util.Date;
-
-import junit.framework.TestCase;
 
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.crypto.IBSignatureScheme.UserKey;

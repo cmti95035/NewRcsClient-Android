@@ -1,12 +1,5 @@
 package mobisocial.musubi.encoding;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.crypto.IBIdentity;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteCursorDriver;
@@ -15,6 +8,14 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteQuery;
 import android.test.AndroidTestCase;
 import android.util.Log;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
+
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.crypto.IBIdentity;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
 
 public abstract class TestBase extends AndroidTestCase {
 	protected Random r = new Random();

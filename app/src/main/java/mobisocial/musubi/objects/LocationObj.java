@@ -15,19 +15,6 @@
  */
 
 package mobisocial.musubi.objects;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
-import mobisocial.musubi.feed.iface.Activator;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +26,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+import mobisocial.musubi.feed.iface.Activator;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.obj.MemObj;
 
 public class LocationObj extends DbEntryHandler implements FeedRenderer, Activator {
     public static final String TYPE = "loc";

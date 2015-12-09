@@ -16,6 +16,10 @@
 
 package mobisocial.musubi.feed.presence;
 
+import android.content.Context;
+import android.net.Uri;
+import android.widget.Toast;
+
 import mobisocial.musubi.BJDNotImplementedException;
 import mobisocial.musubi.Helpers;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
@@ -25,9 +29,6 @@ import mobisocial.musubi.objects.StatusObj;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.obj.MemObj;
-import android.content.Context;
-import android.net.Uri;
-import android.widget.Toast;
 
 /**
  * Drop messages. Good for canning spam.

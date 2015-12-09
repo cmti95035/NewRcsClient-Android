@@ -16,32 +16,6 @@
 
 package mobisocial.musubi.service;
 
-import gnu.trove.list.linked.TLongLinkedList;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.procedure.TLongProcedure;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.crypto.IBIdentity;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyAccount;
-import mobisocial.musubi.model.PresenceAwareNotify;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.social.FacebookFriendFetcher;
-import mobisocial.musubi.ui.SettingsActivity;
-import mobisocial.musubi.ui.fragments.AccountLinkDialog;
-import mobisocial.musubi.util.Util;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.accounts.Account;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
@@ -58,6 +32,31 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.facebook.android.Facebook;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import gnu.trove.list.linked.TLongLinkedList;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.procedure.TLongProcedure;
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.crypto.IBIdentity;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyAccount;
+import mobisocial.musubi.model.PresenceAwareNotify;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.social.FacebookFriendFetcher;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.AccountLinkDialog;
+import mobisocial.musubi.util.Util;
 
 public class FacebookUpdateHandler extends ContentObserver {
     public static final String ACCOUNT_TYPE_FACEBOOK = "com.facebook.auth.login";

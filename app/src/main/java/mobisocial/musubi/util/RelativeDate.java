@@ -17,7 +17,6 @@
 package mobisocial.musubi.util;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 // This class due to Kurtis Chiappone. No license was provided, so we really need to

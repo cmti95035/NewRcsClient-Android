@@ -1,18 +1,17 @@
 package mobisocial.musubi.cloudstorage;
 
-import mobisocial.musubi.model.MObject;
+import android.content.Context;
 
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.content.Context;
+import mobisocial.musubi.model.MObject;
 
 public interface CloudStorage {
-	public void SetAccount(Context context);
-	public void SaveMeseages(JSONObject object);
-	void Login(Context context, int resultcode);
-	void Logout(Context context);
+	void setAccount(Context context);
+	void saveMessages(JSONObject object);
+	void login(Context context, int resultcode);
+	void logout(Context context);
 	boolean hasLinkedAccount(Context mContext);
-	void SaveMeseages(MObject object, Context context);
-	void SaveMeseages(MObject object);
+	void saveMessages(MObject object, Context context);
+	void saveMessages(MObject object);
 }

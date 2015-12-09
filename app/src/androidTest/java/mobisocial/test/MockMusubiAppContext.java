@@ -1,23 +1,5 @@
 package mobisocial.test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import mobisocial.musubi.identity.IdentityProvider;
-import mobisocial.musubi.identity.UnverifiedIdentityProvider;
-import mobisocial.musubi.model.helpers.DatabaseFile;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.provider.DBProvider;
-import mobisocial.musubi.provider.MusubiProvider;
-import mobisocial.musubi.provider.TestSettingsProvider;
-import mobisocial.musubi.provider.UICacheProvider;
-import mobisocial.musubi.service.AMQPService;
-import mobisocial.musubi.util.IdentityCache;
-import mobisocial.socialkit.musubi.Musubi;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -42,6 +24,25 @@ import android.os.Handler;
 import android.os.Looper;
 import android.test.mock.MockApplication;
 import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import mobisocial.musubi.identity.IdentityProvider;
+import mobisocial.musubi.identity.UnverifiedIdentityProvider;
+import mobisocial.musubi.model.helpers.DatabaseFile;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.provider.DBProvider;
+import mobisocial.musubi.provider.MusubiProvider;
+import mobisocial.musubi.provider.TestSettingsProvider;
+import mobisocial.musubi.provider.UICacheProvider;
+import mobisocial.musubi.service.AMQPService;
+import mobisocial.musubi.util.IdentityCache;
+import mobisocial.socialkit.musubi.Musubi;
 
 public class MockMusubiAppContext extends MockApplication implements DBProvider, MusubiProvider, UICacheProvider, TestSettingsProvider {
 	private Context mContext;

@@ -16,19 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.util.ArrayList;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.fragments.FeedViewFragment;
-import mobisocial.musubi.ui.util.EmojiSpannableFactory;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.LessSpammyContentObserver;
-import mobisocial.nfc.Nfc;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +34,20 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.fragments.FeedViewFragment;
+import mobisocial.musubi.ui.util.EmojiSpannableFactory;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.LessSpammyContentObserver;
+import mobisocial.nfc.Nfc;
 
 /**
  * A view of a single feed, which can be panned left/right to see other feeds

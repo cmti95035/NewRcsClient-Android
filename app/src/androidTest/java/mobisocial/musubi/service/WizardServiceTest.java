@@ -1,12 +1,13 @@
 package mobisocial.musubi.service;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.test.MockMusubiAppContext;
 import mobisocial.test.TestBase;
 import mobisocial.test.TestDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class WizardServiceTest extends TestBase {
     SQLiteOpenHelper dbh;

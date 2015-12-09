@@ -1,7 +1,8 @@
 package mobisocial.musubi.facebook;
 
-import com.facebook.android.*;
+import com.facebook.android.DialogError;
 import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
 
 
 /**

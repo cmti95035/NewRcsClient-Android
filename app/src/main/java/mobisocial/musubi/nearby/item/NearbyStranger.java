@@ -16,17 +16,18 @@
 
 package mobisocial.musubi.nearby.item;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.widget.Toast;
+
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.musubi.App;
 import mobisocial.musubi.R;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.ui.NearbyActivity;
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.widget.Toast;
 
 public class NearbyStranger extends NearbyItem {
         final Activity mContext;

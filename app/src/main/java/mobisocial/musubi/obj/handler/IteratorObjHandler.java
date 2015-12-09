@@ -16,14 +16,14 @@
 
 package mobisocial.musubi.obj.handler;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
-import android.util.Log;
 
 public class IteratorObjHandler extends ObjHandler {
     private final List<IObjHandler> mHandlers = new ArrayList<IObjHandler>();

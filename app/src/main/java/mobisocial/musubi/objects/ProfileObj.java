@@ -16,6 +16,13 @@
 
 package mobisocial.musubi.objects;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.ContentCorral;
+
 import java.util.UUID;
 
 import mobisocial.musubi.App;
@@ -27,13 +34,6 @@ import mobisocial.musubi.model.MObject;
 import mobisocial.musubi.service.MessageDecodeProcessor;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.ContentCorral;
-
-import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
 
 /**
  * Obj to update user profiles. Globally defined user attributes

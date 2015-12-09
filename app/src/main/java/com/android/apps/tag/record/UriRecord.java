@@ -19,18 +19,17 @@
 
 package com.android.apps.tag.record;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.nfc.NdefRecord;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.primitives.Bytes;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.nfc.NdefRecord;
-
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**

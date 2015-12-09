@@ -15,6 +15,16 @@
  */
 
 package mobisocial.musubi.objects;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Base64;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -36,15 +46,6 @@ import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Base64;
-import android.util.Log;
 
 //TODO: this an absymally lame copy-file, override needed methods, delete unchange methods implementation
 //this needs hella cleanup

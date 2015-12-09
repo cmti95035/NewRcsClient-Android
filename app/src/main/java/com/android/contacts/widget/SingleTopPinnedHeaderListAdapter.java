@@ -17,10 +17,8 @@ package com.android.contacts.widget;
 
 //import com.android.common.widget.CompositeCursorAdapter;
 
-import mobisocial.socialkit.SocialKit.VERSIONS;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 

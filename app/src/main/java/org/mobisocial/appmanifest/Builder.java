@@ -16,9 +16,9 @@
 
 package org.mobisocial.appmanifest;
 
-import java.util.LinkedList;
-
 import org.mobisocial.appmanifest.platforms.PlatformReference;
+
+import java.util.LinkedList;
 
 public class Builder {
 		ApplicationManifest mApplicationManifest;

@@ -8,4 +8,5 @@
     <string name="no_ads_server">请先设置广告服务器地址!</string>
     <string name="show_ads">显示广告</string>
     <string name="no_ad_found">没有找到广告！</string>
+    <string name="cloud_storage_description">请选择云存储供应商。</string>
 </resources>

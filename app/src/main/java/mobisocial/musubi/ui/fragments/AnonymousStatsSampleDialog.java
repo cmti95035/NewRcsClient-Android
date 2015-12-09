@@ -16,8 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import mobisocial.musubi.R;
-import mobisocial.musubi.ui.SettingsActivity;
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +25,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.ui.SettingsActivity;
 
 public class AnonymousStatsSampleDialog extends DialogFragment {
 

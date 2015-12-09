@@ -17,9 +17,6 @@
 
 package com.actionbarsherlock.internal.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -36,6 +33,9 @@ import com.actionbarsherlock.internal.view.menu.MenuBuilder;
 import com.actionbarsherlock.internal.view.menu.MenuPresenter;
 import com.actionbarsherlock.internal.widget.ActionBarContainer;
 import com.actionbarsherlock.internal.widget.ActionBarView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mobisocial.musubi.R;
 

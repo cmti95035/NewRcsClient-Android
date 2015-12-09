@@ -16,14 +16,6 @@
 
 package mobisocial.musubi.model;
 
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.presence.Push2TalkPresence;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.SettingsActivity;
-import mobisocial.musubi.ui.fragments.SettingsFragment;
-import android.app.KeyguardManager.KeyguardLock;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -31,6 +23,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.PowerManager;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.presence.Push2TalkPresence;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.SettingsFragment;
 
 public class PresenceAwareNotify {
     private static final String TAG = "PresenceAwareNotify";

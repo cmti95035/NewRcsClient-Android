@@ -15,13 +15,15 @@
  */
 
 package mobisocial.musubi.util;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.util.LruCache;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.ui.util.UiUtil;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
 
 //TODO: Old one supported a default that wouldn't count against the cache size
 //TODO: is background loading it even helpful?

@@ -16,11 +16,12 @@
 
 package mobisocial.musubi.util;
 
-import mobisocial.musubi.service.MusubiService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+
+import mobisocial.musubi.service.MusubiService;
 
 public class ConnectionMonitor extends BroadcastReceiver {
     @Override

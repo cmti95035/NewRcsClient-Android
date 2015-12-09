@@ -1,5 +1,12 @@
 package mobisocial.musubi.service;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Message;
+import android.test.ServiceTestCase;
+
+import org.json.JSONObject;
+
 import mobisocial.musubi.encoding.ObjEncoder;
 import mobisocial.musubi.model.MApp;
 import mobisocial.musubi.model.MDevice;
@@ -15,13 +22,6 @@ import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
 import mobisocial.test.MockMusubiAppContext;
 import mobisocial.test.TestDatabase;
-
-import org.json.JSONObject;
-
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Message;
-import android.test.ServiceTestCase;
 
 public class EncodeDecodeTest extends ServiceTestCase<MusubiService> {
     static final String TAG = "EncodeDecodeTest";

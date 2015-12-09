@@ -20,14 +20,6 @@
 
 package mobisocial.musubi.ui;
 
-import mobisocial.musubi.App;
-import mobisocial.musubi.BootstrapActivity;
-import mobisocial.musubi.RemoteControlReceiver;
-import mobisocial.musubi.model.PresenceAwareNotify;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.util.ActivityCallout;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.RemoteControlRegistrar;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +33,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItem;
 import android.view.KeyEvent;
 import android.widget.Toast;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.BootstrapActivity;
+import mobisocial.musubi.RemoteControlReceiver;
+import mobisocial.musubi.model.PresenceAwareNotify;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.util.ActivityCallout;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.RemoteControlRegistrar;
 
 /**
  * This is the base class for activities in the dashboard application. It

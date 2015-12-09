@@ -16,6 +16,12 @@
 
 package mobisocial.musubi.nearby;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -30,11 +36,6 @@ import mobisocial.musubi.nearby.item.NearbyItem;
 import mobisocial.musubi.nearby.scanner.GpsScannerTask;
 import mobisocial.musubi.nearby.scanner.NearbyScannerTask;
 import mobisocial.musubi.ui.MusubiBaseActivity;
-import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
-import android.net.wifi.WifiManager;
-import android.util.Log;
 
 /**
  * An AsyncTask for discovering nearby users and feeds.

@@ -16,7 +16,6 @@
 
 package mobisocial.musubi.syncadapter;
 
-import mobisocial.musubi.R;
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
@@ -27,6 +26,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+
+import mobisocial.musubi.R;
 
 public class AccountAuthenticator extends AbstractAccountAuthenticator {
 	private static final String TAG = "AccountAuthenticator";

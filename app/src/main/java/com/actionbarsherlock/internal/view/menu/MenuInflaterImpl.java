@@ -17,9 +17,6 @@
 package com.actionbarsherlock.internal.view.menu;
 
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.support.v4.view.Menu;
@@ -30,6 +27,9 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.InflateException;
 import android.view.View;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;

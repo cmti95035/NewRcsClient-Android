@@ -1,5 +1,12 @@
 package mobisocial.test;
 
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.IBinder;
+import android.util.Log;
+
 import java.util.Date;
 
 import mobisocial.crypto.IBHashedIdentity.Authority;
@@ -22,12 +29,6 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.service.MusubiService;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
-import android.app.Service;
-import android.content.Context;
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.IBinder;
-import android.util.Log;
 
 public abstract class NMusubisTestBase extends NServicesTestCase {
 	protected MockMusubiAppContext[] mContexts;

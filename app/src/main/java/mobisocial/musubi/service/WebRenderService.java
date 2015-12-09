@@ -16,16 +16,6 @@
 
 package mobisocial.musubi.service;
 
-import gnu.trove.list.array.TByteArrayList;
-
-import java.lang.ref.SoftReference;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
-
-import mobisocial.musubi.R;
-import mobisocial.musubi.objects.AppStateObj;
-import mobisocial.musubi.util.Util;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -45,6 +35,15 @@ import android.webkit.WebView.PictureListener;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import java.lang.ref.SoftReference;
+import java.util.LinkedList;
+import java.util.Random;
+
+import gnu.trove.list.array.TByteArrayList;
+import mobisocial.musubi.R;
+import mobisocial.musubi.objects.AppStateObj;
+import mobisocial.musubi.util.Util;
 
 //TODO: use this to measure
 public class WebRenderService extends Service {

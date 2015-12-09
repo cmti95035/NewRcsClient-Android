@@ -16,14 +16,29 @@
 
 package mobisocial.musubi.service;
 
-import gnu.trove.procedure.TLongProcedure;
-import gnu.trove.set.hash.TLongHashSet;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import gnu.trove.procedure.TLongProcedure;
+import gnu.trove.set.hash.TLongHashSet;
 import mobisocial.metrics.UsageMetrics;
 import mobisocial.musubi.App;
 import mobisocial.musubi.cloudstorage.Baidu;
@@ -47,23 +62,6 @@ import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.musubi.Musubi;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Scans for messages that should be sent over the network.
@@ -105,7 +103,7 @@ class ObjPipelineProcessor extends ContentObserver {
         
 
         dp = new Dropbox();
-        dp.SetAccount(mContext.getApplicationContext());        
+        dp.setAccount(mContext.getApplicationContext());
         baidu = new Baidu();
     }
 
@@ -263,7 +261,7 @@ class ObjPipelineProcessor extends ContentObserver {
 	            
 	            if(!object.feedsnap_){
 	            	//save im cloud
-	            	SaveMessages(object);
+	            	saveMessages(object);
 	            }
 	            
 	            
@@ -322,13 +320,13 @@ class ObjPipelineProcessor extends ContentObserver {
 	}
 
 	
-	private void SaveMessages(MObject object) {
+	private void saveMessages(MObject object) {
 		// TODO Auto-generated method stub
 		if (dp.hasLinkedAccount()) {
 			Log.e(TAG,"dropbox linked");
- 			dp.SaveMeseages(object);
+ 			dp.saveMessages(object);
  		}else if(baidu.hasLinkedAccount(mContext)){
- 			baidu.SaveMeseages(object,mContext);     			//
+ 			baidu.saveMessages(object,mContext);     			//
  		}else{
  			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
  		}

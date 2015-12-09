@@ -16,29 +16,6 @@
 
 package mobisocial.musubi;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.ObjectManager;
-import mobisocial.musubi.obj.action.EditPhotoAction;
-import mobisocial.musubi.obj.action.SharePhotoAction;
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.PhotoTaker;
-import mobisocial.musubi.util.SimpleCursorLoader;
-import mobisocial.musubi.util.SlowGallery;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.CorralDownloadClient;
-import org.mobisocial.corral.CorralDownloadHandler;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -69,6 +46,27 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CursorAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+
+import org.mobisocial.corral.CorralDownloadClient;
+import org.mobisocial.corral.CorralDownloadHandler;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.ObjectManager;
+import mobisocial.musubi.obj.action.EditPhotoAction;
+import mobisocial.musubi.obj.action.SharePhotoAction;
+import mobisocial.musubi.objects.PictureObj;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.PhotoTaker;
+import mobisocial.musubi.util.SimpleCursorLoader;
+import mobisocial.musubi.util.SlowGallery;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.musubi.Musubi;
 
 /**
  * A gallery for viewing all photos in a feed.

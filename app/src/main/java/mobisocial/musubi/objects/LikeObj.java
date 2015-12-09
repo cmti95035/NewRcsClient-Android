@@ -16,6 +16,16 @@
 
 package mobisocial.musubi.objects;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.model.DbLikeCache;
@@ -28,16 +38,6 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.util.Log;
 
 public class LikeObj extends DbEntryHandler {
     private static final String TAG = "musubi";

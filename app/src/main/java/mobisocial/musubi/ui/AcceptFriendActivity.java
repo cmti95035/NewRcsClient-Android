@@ -15,24 +15,7 @@
  */
 
 package mobisocial.musubi.ui;
-import gnu.trove.list.array.TLongArrayList;
 
-import java.util.Iterator;
-import java.util.List;
-
-import mobisocial.crypto.IBHashedIdentity;
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.crypto.IBIdentity;
-import mobisocial.musubi.App;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyAccount;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.util.Util;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -46,6 +29,24 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.Iterator;
+import java.util.List;
+
+import gnu.trove.list.array.TLongArrayList;
+import mobisocial.crypto.IBHashedIdentity;
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.crypto.IBIdentity;
+import mobisocial.musubi.App;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyAccount;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.util.Util;
 
 /**
  * Accepts a friend represented by the given data uri.

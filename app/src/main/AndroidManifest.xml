@@ -372,13 +372,22 @@
             android:name="mobisocial.musubi.cloudstorage.CloudStorageActivity"
             android:label="@string/app_name" >
         </activity>
-        
-        
-        
+
+        <activity
+            android:name="mobisocial.musubi.cloudstorage.CloudBackupActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name="mobisocial.musubi.cloudstorage.CloudRestoreActivity"
+            android:label="@string/app_name" >
+        </activity>
+
         <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
 		<activity
 			android:name="com.dropbox.client2.android.AuthActivity"
-		  	android:launchMode="singleTask" >
+		  	android:launchMode="singleTask"
+            android:configChanges="orientation|keyboard">
 		  	<intent-filter>
 		    	<data android:scheme="db-3bduqwpgg381rlj" />
 		    	<action android:name="android.intent.action.VIEW" />
@@ -386,6 +395,7 @@
 		    	<category android:name="android.intent.category.DEFAULT" />
 		  	</intent-filter>
 		</activity>
+
 		<service
 		  	android:name="com.dropbox.sync.android.DbxSyncService"
 		  	android:enabled="true"

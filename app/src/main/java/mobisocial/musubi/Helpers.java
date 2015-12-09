@@ -16,14 +16,20 @@
 
 package mobisocial.musubi;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.FeedManager;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
@@ -32,12 +38,6 @@ import mobisocial.musubi.ui.EmailUnclaimedMembersActivity;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.obj.MemObj;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 
 /**
  * A grab bag of utility methods. Avoid adding new code here.

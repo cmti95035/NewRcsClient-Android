@@ -16,25 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.FeedAction;
-import mobisocial.musubi.model.MApp;
-import mobisocial.musubi.model.helpers.AppManager;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.objects.WebAppObj;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.webapp.AppCorralActivity;
-import mobisocial.musubi.webapp.WebAppActivity;
-import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.Musubi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -77,6 +58,26 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.FeedAction;
+import mobisocial.musubi.model.MApp;
+import mobisocial.musubi.model.helpers.AppManager;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.objects.WebAppObj;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.webapp.AppCorralActivity;
+import mobisocial.musubi.webapp.WebAppActivity;
+import mobisocial.socialkit.Obj;
+import mobisocial.socialkit.musubi.Musubi;
 
 public class AppSelectDialog extends DialogFragment implements LoaderCallbacks<List<AppSelectDialog.IMusubiApp>> {
     private static final String TAG = "LaunchAppDialog";

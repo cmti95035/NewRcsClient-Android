@@ -16,11 +16,6 @@
 
 package com.actionbarsherlock.internal.app;
 
-import java.util.HashMap;
-
-import com.actionbarsherlock.internal.view.menu.MenuInflaterImpl;
-import com.actionbarsherlock.internal.view.menu.MenuItemWrapper;
-import com.actionbarsherlock.internal.view.menu.MenuWrapper;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -29,6 +24,12 @@ import android.support.v4.view.ActionMode;
 import android.support.v4.view.Menu;
 import android.view.View;
 import android.widget.SpinnerAdapter;
+
+import com.actionbarsherlock.internal.view.menu.MenuInflaterImpl;
+import com.actionbarsherlock.internal.view.menu.MenuItemWrapper;
+import com.actionbarsherlock.internal.view.menu.MenuWrapper;
+
+import java.util.HashMap;
 
 public final class ActionBarWrapper {
     //No instances

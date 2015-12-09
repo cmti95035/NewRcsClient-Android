@@ -16,41 +16,6 @@
 
 package mobisocial.musubi.service;
 
-import gnu.trove.iterator.TLongIterator;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.procedure.TLongProcedure;
-import gnu.trove.set.hash.TLongHashSet;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Pattern;
-
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.crypto.IBIdentity;
-import mobisocial.musubi.App;
-import mobisocial.musubi.BootstrapActivity;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyAccount;
-import mobisocial.musubi.model.helpers.ContactDataVersionManager;
-import mobisocial.musubi.model.helpers.DatabaseManager;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.model.helpers.SQLClauseHelper;
-import mobisocial.musubi.util.IdentityCache;
-import mobisocial.musubi.util.Util;
-
-import org.apache.commons.io.IOUtils;
-import org.javatuples.Pair;
-
 import android.accounts.Account;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -71,6 +36,40 @@ import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.util.Log;
+
+import org.apache.commons.io.IOUtils;
+import org.javatuples.Pair;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
+
+import gnu.trove.iterator.TLongIterator;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.procedure.TLongProcedure;
+import gnu.trove.set.hash.TLongHashSet;
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.crypto.IBIdentity;
+import mobisocial.musubi.App;
+import mobisocial.musubi.BootstrapActivity;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyAccount;
+import mobisocial.musubi.model.helpers.ContactDataVersionManager;
+import mobisocial.musubi.model.helpers.DatabaseManager;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.model.helpers.SQLClauseHelper;
+import mobisocial.musubi.util.IdentityCache;
+import mobisocial.musubi.util.Util;
 
 public class AddressBookUpdateHandler extends ContentObserver {
     private static final int BATCH_SIZE = 50;

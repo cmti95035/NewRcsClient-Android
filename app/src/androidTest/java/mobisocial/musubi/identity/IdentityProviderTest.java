@@ -6,9 +6,6 @@ import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.crypto.IBIdentity;
 import mobisocial.crypto.IBSignatureScheme;
-import mobisocial.musubi.identity.AphidIdentityProvider;
-import mobisocial.musubi.identity.IdentityProvider;
-import mobisocial.musubi.identity.UnverifiedIdentityProvider;
 import mobisocial.test.TestBase;
 
 public class IdentityProviderTest extends TestBase {

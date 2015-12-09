@@ -16,11 +16,16 @@
 
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.map.hash.TLongLongHashMap;
-import gnu.trove.procedure.TLongLongProcedure;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.os.Build;
 
 import java.util.Arrays;
 
+import gnu.trove.map.hash.TLongLongHashMap;
+import gnu.trove.procedure.TLongLongProcedure;
 import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBSignatureScheme;
@@ -35,11 +40,6 @@ import mobisocial.musubi.model.MMissingMessage;
 import mobisocial.musubi.model.MOutgoingSecret;
 import mobisocial.musubi.model.MSequenceNumber;
 import mobisocial.musubi.util.Util;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.os.Build;
 
 /**
  * This class provides the database binding for the api that allows

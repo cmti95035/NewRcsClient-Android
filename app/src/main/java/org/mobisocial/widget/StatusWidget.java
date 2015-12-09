@@ -16,7 +16,6 @@
 
 package org.mobisocial.widget;
 
-import mobisocial.socialkit.musubi.DbObj;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -30,12 +29,14 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.widget.RemoteViews;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.R;
 import mobisocial.musubi.model.helpers.FeedManager;
 import mobisocial.musubi.objects.StatusObj;
 import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.socialkit.musubi.DbObj;
 
 public class StatusWidget extends AppWidgetProvider {
     static final String TAG = "musubi-widget";

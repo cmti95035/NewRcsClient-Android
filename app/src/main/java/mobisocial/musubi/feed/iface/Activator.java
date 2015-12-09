@@ -16,8 +16,9 @@
 
 package mobisocial.musubi.feed.iface;
 
-import mobisocial.socialkit.musubi.DbObj;
 import android.content.Context;
+
+import mobisocial.socialkit.musubi.DbObj;
 
 /**
  * Interface for {@see DbEntryHandler} objects which can be clicked

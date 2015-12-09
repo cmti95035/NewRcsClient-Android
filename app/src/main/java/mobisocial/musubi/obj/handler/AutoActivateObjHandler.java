@@ -16,6 +16,8 @@
 
 package mobisocial.musubi.obj.handler;
 
+import android.content.Context;
+
 import mobisocial.musubi.feed.iface.Activator;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.objects.AppStateObj;
@@ -23,7 +25,6 @@ import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.ui.fragments.SettingsFragment;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
 
 /**
  * Automatically launches some received objects.

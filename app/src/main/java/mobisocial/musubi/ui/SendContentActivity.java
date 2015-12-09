@@ -16,34 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import gnu.trove.list.array.TLongArrayList;
-
-import java.util.Set;
-import java.util.regex.Pattern;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MFeedMember;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.objects.IntroductionObj;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.fragments.ClipboardKeeper;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector.OnIdentitiesUpdatedListener;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector.OnRequestAddIdentityListener;
-import mobisocial.musubi.ui.widget.ObjView;
-import mobisocial.musubi.util.ObjFactory;
-import mobisocial.musubi.util.SimpleCursorLoader;
-import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.DbFeed;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -62,6 +34,36 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import gnu.trove.list.array.TLongArrayList;
+import mobisocial.musubi.App;
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MFeedMember;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.objects.IntroductionObj;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.fragments.ClipboardKeeper;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector
+        .OnIdentitiesUpdatedListener;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector
+        .OnRequestAddIdentityListener;
+import mobisocial.musubi.ui.widget.ObjView;
+import mobisocial.musubi.util.ObjFactory;
+import mobisocial.musubi.util.SimpleCursorLoader;
+import mobisocial.socialkit.Obj;
+import mobisocial.socialkit.musubi.DbFeed;
 
 public class SendContentActivity extends MusubiBaseActivity {
     static final int LOAD_FEEDS = 0;

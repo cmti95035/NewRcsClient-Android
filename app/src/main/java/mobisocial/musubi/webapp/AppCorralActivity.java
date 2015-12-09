@@ -16,6 +16,20 @@
 
 package mobisocial.musubi.webapp;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.BJDNotImplementedException;
 import mobisocial.musubi.Helpers;
@@ -30,20 +44,6 @@ import mobisocial.socialkit.musubi.DbFeed;
 import mobisocial.socialkit.musubi.Musubi;
 import mobisocial.socialkit.musubi.multiplayer.Multiplayer;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 /**
  * A web-based 'app store' for finding new Musubi apps. Also

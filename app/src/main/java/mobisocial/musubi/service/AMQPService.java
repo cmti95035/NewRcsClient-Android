@@ -17,32 +17,6 @@
 package mobisocial.musubi.service;
 
 
-import gnu.trove.list.linked.TLongLinkedList;
-import gnu.trove.map.hash.TLongLongHashMap;
-import gnu.trove.procedure.TLongProcedure;
-import gnu.trove.set.hash.TLongHashSet;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-
-import mobisocial.crypto.IBHashedIdentity;
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.musubi.App;
-import mobisocial.musubi.model.MEncodedMessage;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.DeviceManager;
-import mobisocial.musubi.model.helpers.EncodedMessageManager;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.protocol.Message;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-
-import org.codehaus.jackson.map.ObjectMapper;
-
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -67,7 +41,31 @@ import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownListener;
 import com.rabbitmq.client.ShutdownSignalException;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+
 import de.undercouch.bson4jackson.BsonFactory;
+import gnu.trove.list.linked.TLongLinkedList;
+import gnu.trove.map.hash.TLongLongHashMap;
+import gnu.trove.procedure.TLongProcedure;
+import gnu.trove.set.hash.TLongHashSet;
+import mobisocial.crypto.IBHashedIdentity;
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.musubi.App;
+import mobisocial.musubi.model.MEncodedMessage;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.DeviceManager;
+import mobisocial.musubi.model.helpers.EncodedMessageManager;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.protocol.Message;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 
 //TODO:XXX
 //amqp is not quite perfect so this implementation delivers the routing

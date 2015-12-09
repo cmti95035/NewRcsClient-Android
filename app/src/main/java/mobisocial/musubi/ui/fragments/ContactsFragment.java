@@ -15,20 +15,7 @@
  */
 
 package mobisocial.musubi.ui.fragments;
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyAccount;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.EmailInviteActivity;
-import mobisocial.musubi.ui.ViewProfileActivity;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.LessSpammyContentObserver;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -58,6 +45,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyAccount;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.EmailInviteActivity;
+import mobisocial.musubi.ui.ViewProfileActivity;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.LessSpammyContentObserver;
 
 /**
  * Displays a list of contacts. If the intent used to create

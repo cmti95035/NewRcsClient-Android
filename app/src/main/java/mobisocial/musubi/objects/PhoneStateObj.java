@@ -16,16 +16,6 @@
 
 package mobisocial.musubi.objects;
 
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.telephony.TelephonyManager;
@@ -34,6 +24,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.obj.MemObj;
 
 public class PhoneStateObj extends DbEntryHandler implements FeedRenderer {
 

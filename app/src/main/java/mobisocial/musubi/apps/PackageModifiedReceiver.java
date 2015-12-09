@@ -16,16 +16,6 @@
 
 package mobisocial.musubi.apps;
 
-import java.io.ByteArrayOutputStream;
-import java.util.List;
-
-import mobisocial.musubi.objects.AppStateObj;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.SettingsActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +28,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.util.List;
+
+import mobisocial.musubi.objects.AppStateObj;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.SettingsActivity;
 
 public class PackageModifiedReceiver extends BroadcastReceiver {
     final String TAG = getClass().getSimpleName();

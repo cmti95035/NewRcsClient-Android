@@ -16,10 +16,10 @@
 
 package mobisocial.musubi.feed.iface;
 
-import java.util.LinkedHashSet;
-
 import android.content.Context;
 import android.net.Uri;
+
+import java.util.LinkedHashSet;
 
 /**
  * Base class for long-lasting activities associated with a feed.

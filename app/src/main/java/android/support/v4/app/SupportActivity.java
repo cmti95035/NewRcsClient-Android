@@ -1,16 +1,5 @@
 package android.support.v4.app;
 
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-
-import com.actionbarsherlock.internal.app.SherlockActivity;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.PendingIntent;
@@ -52,6 +41,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+
+import com.actionbarsherlock.internal.app.SherlockActivity;
+
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 
 /**
  * <p>Instances of this interface represent an activity provided by the support

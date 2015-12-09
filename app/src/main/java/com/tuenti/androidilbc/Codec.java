@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 package com.tuenti.androidilbc;
-import android.util.Log;
 
 public class Codec {
 	public static final short MODE_20_MS = 20;

@@ -15,30 +15,6 @@
  */
 
 package mobisocial.musubi.objects;
-import java.io.ByteArrayOutputStream;
-import java.io.FileDescriptor;
-import java.io.IOException;
-
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.Activator;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.musubi.util.Base64;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.BackgroundableDownloadDialogFragment;
-import org.mobisocial.corral.CorralDownloadClient;
-import org.mobisocial.corral.CorralDownloadHandler;
-import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -63,6 +39,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.BackgroundableDownloadDialogFragment;
+import org.mobisocial.corral.CorralDownloadClient;
+import org.mobisocial.corral.CorralDownloadHandler;
+import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.IOException;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.Activator;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.musubi.util.Base64;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.socialkit.Obj;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.obj.MemObj;
 
 public class VideoObj extends DbEntryHandler implements FeedRenderer, Activator {
     public static final String TAG = "VideoObj";

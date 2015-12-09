@@ -16,6 +16,16 @@
 
 package mobisocial.musubi.ui.util;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Intents.Insert;
+import android.util.Log;
+import android.view.View;
+
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.musubi.App;
@@ -27,15 +37,6 @@ import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.model.helpers.MyAccountManager;
 import mobisocial.musubi.obj.ObjHelpers;
 import mobisocial.musubi.service.MusubiService;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.Intents.Insert;
-import android.util.Log;
-import android.view.View;
 
 public class AddToWhitelistListener implements View.OnClickListener {
     final Context context;

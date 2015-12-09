@@ -1,5 +1,9 @@
 package mobisocial.test;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +25,6 @@ import mobisocial.musubi.model.helpers.MyAccountManager;
 import mobisocial.musubi.model.helpers.ObjectManager;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 class DatabaseManager {
     private Context ctx;

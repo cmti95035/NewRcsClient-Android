@@ -17,27 +17,21 @@
 package mobisocial.musubi.service;
 
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.model.MApp;
-import mobisocial.musubi.model.helpers.AppManager;
-import mobisocial.musubi.util.Util;
+import android.app.Service;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.ContentObserver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Binder;
+import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -48,20 +42,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.mobisocial.corral.ContentCorral;
 
-import android.app.Service;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.database.ContentObserver;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Binder;
-import android.os.Build;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
-import android.util.Log;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.model.MApp;
+import mobisocial.musubi.model.helpers.AppManager;
 
 public class AppUpdaterService extends Service {
 	public static boolean DBG = false;

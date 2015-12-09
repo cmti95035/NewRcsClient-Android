@@ -15,13 +15,16 @@
  */
 
 package mobisocial.musubi.util;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.InputStream;
+
+import android.os.AsyncTask;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import android.os.AsyncTask;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class HTTPDownloadTextFileTask extends AsyncTask<String, Void, String> {
     @Override

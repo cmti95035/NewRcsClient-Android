@@ -16,6 +16,18 @@
 
 package mobisocial.musubi.webapp;
 
+import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
+import android.util.Base64;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.ContentCorral;
+
 import java.net.URLDecoder;
 
 import mobisocial.musubi.App;
@@ -33,18 +45,6 @@ import mobisocial.socialkit.musubi.DbIdentity;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.musubi.Musubi;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.ContentCorral;
-
-import android.app.Activity;
-import android.database.Cursor;
-import android.net.Uri;
-import android.util.Base64;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Creates bindings in Javascript for the local Musubi database with

@@ -16,53 +16,6 @@
 
 package mobisocial.musubi.feed.action;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.action.CameraAction.CameraCaptureTask;
-import mobisocial.musubi.feed.iface.FeedAction;
-import mobisocial.musubi.model.DbRelation;
-import mobisocial.musubi.model.MApp;
-import mobisocial.musubi.model.helpers.AppManager;
-import mobisocial.musubi.obj.ObjHelpers;
-import mobisocial.musubi.obj.action.EditPhotoAction.EditCallout;
-import mobisocial.musubi.objects.AppObj;
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.objects.VideoObj;
-import mobisocial.musubi.service.WizardStepHandler;
-import mobisocial.musubi.ui.fragments.AppSelectDialog;
-import mobisocial.musubi.ui.fragments.AppSelectDialog.MusubiWebApp;
-import mobisocial.musubi.ui.util.IntentProxyActivity;
-import mobisocial.musubi.util.ActivityCallout;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.ObjFactory;
-import mobisocial.musubi.util.PhotoTaker;
-import mobisocial.musubi.util.UriImage;
-import mobisocial.musubi.util.BaiduLocation.MyLocationListener;
-import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.ContentCorral;
-import org.mobisocial.corral.CorralDownloadClient;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -78,6 +31,12 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.FeedAction;
+import mobisocial.musubi.util.ObjFactory;
+import mobisocial.socialkit.Obj;
 
 
 /**

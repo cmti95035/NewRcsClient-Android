@@ -16,43 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.R;
-import mobisocial.musubi.VoiceRecordActivity;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.model.helpers.AppManager;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.ObjectManager;
-import mobisocial.musubi.obj.ObjActions;
-import mobisocial.musubi.obj.ObjHelpers;
-import mobisocial.musubi.obj.iface.ObjAction;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.service.WizardStepHandler;
-import mobisocial.musubi.ui.FeedDetailsActivity;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.util.EmojiSpannableFactory;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.ObjFactory;
-import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-
-import org.apache.commons.io.IOUtils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -100,6 +63,43 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import mobisocial.metrics.UsageMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.R;
+import mobisocial.musubi.VoiceRecordActivity;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.model.helpers.AppManager;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.ObjectManager;
+import mobisocial.musubi.obj.ObjActions;
+import mobisocial.musubi.obj.ObjHelpers;
+import mobisocial.musubi.obj.iface.ObjAction;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.service.WizardStepHandler;
+import mobisocial.musubi.ui.FeedDetailsActivity;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.util.EmojiSpannableFactory;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.ObjFactory;
+import mobisocial.socialkit.Obj;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.musubi.Musubi;
 
 /**
  * Shows a series of posts from a feed.

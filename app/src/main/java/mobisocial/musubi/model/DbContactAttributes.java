@@ -16,17 +16,18 @@
 
 package mobisocial.musubi.model;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import mobisocial.musubi.App;
 import mobisocial.socialkit.User;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbContactAttributes /* extends DbTable */ {
     public static final String TABLE = "contact_attributes";

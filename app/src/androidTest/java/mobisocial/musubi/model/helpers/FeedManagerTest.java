@@ -1,5 +1,8 @@
 package mobisocial.musubi.model.helpers;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.Arrays;
 import java.util.Date;
 
@@ -10,8 +13,6 @@ import mobisocial.musubi.model.MFeedApp;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.test.TestBase;
 import mobisocial.test.TestDatabase;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class FeedManagerTest extends TestBase {
     private TestDatabase database;

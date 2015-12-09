@@ -22,8 +22,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.MenuItem;
 import android.support.v4.view.SubMenu;
 import android.view.ActionProvider;
-import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View;
 
 /**
  * <p>Interface for direct access to a previously created menu item.</p>

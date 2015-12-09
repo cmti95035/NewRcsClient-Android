@@ -16,21 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.social.QRInviteDialog;
-import mobisocial.musubi.ui.fragments.ContactsFragment;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.LessSpammyContentObserver;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -51,6 +36,22 @@ import android.view.MenuInflater;
 
 import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitleProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.metrics.UsageMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.social.QRInviteDialog;
+import mobisocial.musubi.ui.fragments.ContactsFragment;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.LessSpammyContentObserver;
 
 public class RelationshipsActivity extends MusubiBaseActivity {
     @SuppressWarnings("unused")

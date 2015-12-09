@@ -16,6 +16,15 @@
 
 package mobisocial.musubi.ui;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
@@ -41,15 +50,6 @@ import mobisocial.musubi.service.MusubiService;
 import mobisocial.musubi.ui.fragments.AccountLinkDialog;
 import mobisocial.musubi.util.Base64;
 import mobisocial.musubi.util.Util;
-
-import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 /**
  * Adds user keys for the account verified by the provided uri.

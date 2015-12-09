@@ -16,16 +16,16 @@
 
 package mobisocial.musubi.objects;
 
-import java.security.SecureRandom;
-
-import mobisocial.crypto.IBHashedIdentity;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
+import android.content.Context;
+import android.util.Base64;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.util.Base64;
+import java.security.SecureRandom;
+
+import mobisocial.crypto.IBHashedIdentity;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
 
 public class SharedSecretObj extends DbEntryHandler {
 

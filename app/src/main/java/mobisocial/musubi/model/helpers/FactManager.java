@@ -16,14 +16,15 @@
 
 package mobisocial.musubi.model.helpers;
 
-import mobisocial.musubi.model.MApp;
-import mobisocial.musubi.model.MFact;
-import mobisocial.musubi.model.MFactType;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+
+import mobisocial.musubi.model.MApp;
+import mobisocial.musubi.model.MFact;
+import mobisocial.musubi.model.MFactType;
 
 public class FactManager extends ManagerBase {
     final static int MAX_NUM_FIELDS = 4;

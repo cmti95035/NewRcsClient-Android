@@ -16,10 +16,6 @@
 
 package com.google.zxing.client.android.encode;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Hashtable;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -40,6 +36,10 @@ import com.google.zxing.client.result.AddressBookParsedResult;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ResultParser;
 import com.google.zxing.common.BitMatrix;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Hashtable;
 
 import mobisocial.musubi.R;
 

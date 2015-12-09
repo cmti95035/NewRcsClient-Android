@@ -1,5 +1,7 @@
 package mobisocial.musubi.service;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import gnu.trove.list.linked.TLongLinkedList;
 import mobisocial.crypto.IBIdentity;
 import mobisocial.musubi.model.MFeed;
@@ -8,7 +10,6 @@ import mobisocial.musubi.model.MMyAccount;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 import mobisocial.test.TestBase;
 import mobisocial.test.TestDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class ProfilePushTest extends TestBase {
     TestDatabase database;

@@ -16,6 +16,9 @@
 
 package mobisocial.musubi.obj.action;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.util.List;
 
 import mobisocial.musubi.App;
@@ -26,8 +29,6 @@ import mobisocial.musubi.obj.iface.ObjAction;
 import mobisocial.musubi.objects.PictureObj;
 import mobisocial.musubi.ui.ViewProfileActivity;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
-import android.content.Intent;
 
 public class SetProfileObjAction extends ObjAction {
     public void onAct(Context context, DbEntryHandler objType, DbObj obj) {

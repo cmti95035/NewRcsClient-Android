@@ -16,13 +16,6 @@
 
 package mobisocial.musubi.model.helpers;
 
-import java.io.FileDescriptor;
-
-import mobisocial.musubi.model.DbLikeCache;
-import mobisocial.musubi.model.MDevice;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.util.Util;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
@@ -31,6 +24,14 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
+import java.io.FileDescriptor;
+
+import mobisocial.musubi.model.DbLikeCache;
+import mobisocial.musubi.model.MDevice;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.util.Util;
 
 public class ObjectManager extends ManagerBase {
     private SQLiteStatement mSqlInsertObj;

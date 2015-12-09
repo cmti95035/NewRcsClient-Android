@@ -16,6 +16,24 @@
 
 package mobisocial.musubi.ui.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.SupportActivity;
+import android.support.v4.content.Loader;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -38,23 +56,6 @@ import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummaryLoader;
 import mobisocial.musubi.ui.util.UiUtil;
 import mobisocial.musubi.util.LessSpammyContentObserver;
 import mobisocial.socialkit.Obj;
-import android.app.Activity;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.app.SupportActivity;
-import android.support.v4.content.Loader;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 
 /**
  * Displays a list of all user-accessible threads (feeds).

@@ -16,6 +16,24 @@
 
 package mobisocial.musubi.ui.widget;
 
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CursorAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileDescriptor;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,24 +50,6 @@ import mobisocial.musubi.obj.ObjHelpers;
 import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.socialkit.Obj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class DbObjCursorAdapter extends CursorAdapter {
 	//Map<String, RenderManager> mRenderManagers;

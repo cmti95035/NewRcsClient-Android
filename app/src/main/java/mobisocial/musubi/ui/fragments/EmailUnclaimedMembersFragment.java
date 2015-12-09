@@ -15,14 +15,7 @@
  */
 
 package mobisocial.musubi.ui.fragments;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.ui.ViewProfileActivity;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.SimpleCursorLoader;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +39,15 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.ui.ViewProfileActivity;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.SimpleCursorLoader;
 
 /**
  * Displays a list of contacts. If the intent used to create

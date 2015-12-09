@@ -16,7 +16,6 @@
 
 package mobisocial.musubi.ui.widget;
 
-import mobisocial.musubi.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -36,6 +35,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.actionbarsherlock.internal.widget.ActionBarView;
+
+import mobisocial.musubi.R;
 
 /**
  * @see ActionBarView

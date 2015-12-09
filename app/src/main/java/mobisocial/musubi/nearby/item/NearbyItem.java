@@ -16,9 +16,10 @@
 
 package mobisocial.musubi.nearby.item;
 
-import mobisocial.musubi.ui.NearbyActivity;
 import android.graphics.Bitmap;
 import android.net.Uri;
+
+import mobisocial.musubi.ui.NearbyActivity;
 
 public abstract class NearbyItem {
     public static enum Type { PERSON, FEED, OBJ };

@@ -15,6 +15,15 @@
  */
 
 package mobisocial.musubi.objects;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,14 +41,6 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * An obj requesting the deletion of some other obj.

@@ -16,6 +16,11 @@
 
 package mobisocial.musubi.model.helpers;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,10 +29,6 @@ import java.util.Set;
 
 import mobisocial.musubi.model.MPendingIdentity;
 import mobisocial.musubi.util.Util;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
 
 /**
  * 

@@ -1,8 +1,14 @@
 package mobisocial.musubi.service;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.test.mock.MockContentResolver;
+
 import java.util.Date;
 import java.util.Random;
-
 
 import mobisocial.crypto.IBIdentity;
 import mobisocial.musubi.identity.IdentityProvider;
@@ -15,12 +21,6 @@ import mobisocial.musubi.model.helpers.EncodedMessageManager;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.model.helpers.MessageTransportManager;
 import mobisocial.musubi.model.helpers.UserKeyManager;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.test.mock.MockContentResolver;
 
 public class AMQPListener {
 	IBIdentity mMe;

@@ -17,12 +17,14 @@
 package android.support.v4.view.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-//import android.os.Build;
-//import android.support.v4.view.accessibility.AccessibilityManagerCompatIcs.AccessibilityStateChangeListenerBridge;
 import android.view.accessibility.AccessibilityManager;
 
 import java.util.Collections;
 import java.util.List;
+
+//import android.os.Build;
+//import android.support.v4.view.accessibility.AccessibilityManagerCompatIcs
+// .AccessibilityStateChangeListenerBridge;
 
 /**
  * Helper for accessing features in {@link AccessibilityManager}

@@ -16,17 +16,6 @@
 
 package mobisocial.musubi.service;
 
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.identity.AphidIdentityProvider;
-import mobisocial.musubi.identity.IdentityProvider;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.TestSettingsProvider.Settings;
-import mobisocial.musubi.service.MessageEncodeProcessor.ProcessorThread;
-import mobisocial.musubi.syncadapter.SyncService;
-
-import org.mobisocial.corral.ContentCorral;
-
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -40,9 +29,19 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.widget.Toast;
+
+import org.mobisocial.corral.ContentCorral;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.identity.AphidIdentityProvider;
+import mobisocial.musubi.identity.IdentityProvider;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.TestSettingsProvider.Settings;
+import mobisocial.musubi.service.MessageEncodeProcessor.ProcessorThread;
+import mobisocial.musubi.syncadapter.SyncService;
 
 /**
  * <p>A persistent service for managing Musubi's object processing subsystem.

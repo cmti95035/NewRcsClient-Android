@@ -16,6 +16,20 @@
 
 package mobisocial.musubi.service;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
 import java.util.Timer;
@@ -47,19 +61,6 @@ import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.ui.util.UiUtil;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.widget.Toast;
 
 /**
  * Scans the list of identities for entries that need this user's latest

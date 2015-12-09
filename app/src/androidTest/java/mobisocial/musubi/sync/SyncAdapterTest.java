@@ -1,10 +1,5 @@
 package mobisocial.musubi.sync;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ContentProviderResult;
@@ -14,16 +9,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds;
-import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract.RawContacts;
-import android.util.Log;
 
-import mobisocial.crypto.IBIdentity;
+import java.nio.ByteBuffer;
+import java.util.Date;
+import java.util.List;
+
 import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.crypto.IBIdentity;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 import mobisocial.musubi.model.helpers.IdentitiesManager;

@@ -16,6 +16,16 @@
 
 package com.facebook.android;
 
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -28,16 +38,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 
 /**
  * Utility class supporting the Facebook Object.

@@ -16,6 +16,11 @@
 
 package mobisocial.musubi.feed.iface;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.support.v4.app.Fragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +30,6 @@ import mobisocial.musubi.feed.action.CameraAction;
 import mobisocial.musubi.feed.action.ClipboardAction;
 import mobisocial.musubi.feed.action.FileGalleryAction;
 import mobisocial.musubi.feed.action.VoiceAction;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.v4.app.Fragment;
 
 /**
  * Interface for actions that act over a feed.

@@ -16,45 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import gnu.trove.set.TLongSet;
-import gnu.trove.set.hash.TLongHashSet;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.crypto.IBIdentity;
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.facebook.SessionStore;
-import mobisocial.musubi.model.MDevice;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyAccount;
-import mobisocial.musubi.model.MPendingIdentity;
-import mobisocial.musubi.model.helpers.DeviceManager;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.model.helpers.PendingIdentityManager;
-import mobisocial.musubi.service.AddressBookUpdateHandler;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.service.WizardStepHandler;
-import mobisocial.musubi.social.FacebookFriendFetcher;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.SettingsActivity;
-import mobisocial.musubi.ui.fragments.AccountLinkDialog.AccountLooperThread.Job;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.musubi.util.InstrumentedActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
@@ -99,6 +60,44 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.ServiceListener;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.crypto.IBIdentity;
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.facebook.SessionStore;
+import mobisocial.musubi.model.MDevice;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyAccount;
+import mobisocial.musubi.model.MPendingIdentity;
+import mobisocial.musubi.model.helpers.DeviceManager;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.model.helpers.PendingIdentityManager;
+import mobisocial.musubi.service.AddressBookUpdateHandler;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.service.WizardStepHandler;
+import mobisocial.musubi.social.FacebookFriendFetcher;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.AccountLinkDialog.AccountLooperThread.Job;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.musubi.util.InstrumentedActivity;
 
 public class AccountLinkDialog  extends DialogFragment {
     final static String TAG = "AccountLinkDialog";

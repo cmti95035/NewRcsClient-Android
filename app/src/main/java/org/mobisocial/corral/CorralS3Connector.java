@@ -16,14 +16,9 @@
 
 package org.mobisocial.corral;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.security.GeneralSecurityException;
+import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -39,9 +34,14 @@ import org.mobisocial.corral.CorralHelper.EncRslt;
 import org.mobisocial.corral.CorralHelper.UploadProgressCallback;
 import org.mobisocial.corral.CorralHelper.UploadProgressCallback.UploadState;
 
-import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.security.GeneralSecurityException;
 
 public class CorralS3Connector {
 

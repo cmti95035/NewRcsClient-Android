@@ -15,13 +15,15 @@
  */
 
 package mobisocial.musubi.feed.iface;
+
+import android.content.Context;
+
 import mobisocial.musubi.model.MFeed;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MObject;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
 
 /**
  * Base class for object handlers.

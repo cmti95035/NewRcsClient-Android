@@ -16,25 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import gnu.trove.list.array.TLongArrayList;
-
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Pattern;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector.OnIdentitiesUpdatedListener;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector.OnRequestAddIdentityListener;
-import mobisocial.musubi.util.SimpleCursorLoader;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RecentTaskInfo;
@@ -68,6 +49,27 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import gnu.trove.list.array.TLongArrayList;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector
+        .OnIdentitiesUpdatedListener;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector
+        .OnRequestAddIdentityListener;
+import mobisocial.musubi.util.SimpleCursorLoader;
 
 public class FeedIdentityGrid extends MusubiBaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     static final int LOAD_FEEDS = 0;

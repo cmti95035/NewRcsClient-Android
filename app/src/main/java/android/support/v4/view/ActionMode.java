@@ -16,9 +16,9 @@
 
 package android.support.v4.view;
 
-import com.actionbarsherlock.internal.view.menu.MenuInflaterImpl;
-
 import android.view.View;
+
+import com.actionbarsherlock.internal.view.menu.MenuInflaterImpl;
 
 /**
  * Represents a contextual mode of the user interface. Action modes can be used

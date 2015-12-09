@@ -1,5 +1,10 @@
 package mobisocial.musubi.provider;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+
 import java.util.HashSet;
 import java.util.Random;
 
@@ -17,10 +22,6 @@ import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.obj.MemObj;
 import mobisocial.test.MusubiProviderTestCase;
 import mobisocial.test.TestDatabase;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 
 public class ContentProviderTest extends MusubiProviderTestCase<MusubiContentProvider> {
     private SQLiteOpenHelper mDbHelper;

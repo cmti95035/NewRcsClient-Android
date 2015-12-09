@@ -1,15 +1,15 @@
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.list.linked.TLongLinkedList;
-import gnu.trove.procedure.TLongProcedure;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.test.AndroidTestCase;
 
 import java.util.Arrays;
 import java.util.Random;
 
+import gnu.trove.list.linked.TLongLinkedList;
+import gnu.trove.procedure.TLongProcedure;
 import mobisocial.musubi.model.MEncodedMessage;
 import mobisocial.musubi.util.Util;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.test.AndroidTestCase;
 
 public class EncodedMessageManagerTest extends AndroidTestCase {
 	SQLiteOpenHelper mDbh;

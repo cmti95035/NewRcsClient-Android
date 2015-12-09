@@ -16,14 +16,14 @@
 
 package mobisocial.musubi.model.helpers;
 
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyAccount;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
+
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyAccount;
 
 /**
  * @see MMyAccount

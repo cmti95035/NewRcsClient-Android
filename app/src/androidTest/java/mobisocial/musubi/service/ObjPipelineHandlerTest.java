@@ -1,5 +1,7 @@
 package mobisocial.musubi.service;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.musubi.model.MFeed;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MObject;
@@ -9,7 +11,6 @@ import mobisocial.socialkit.obj.MemObj;
 import mobisocial.test.MockMusubiAppContext;
 import mobisocial.test.TestBase;
 import mobisocial.test.TestDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class ObjPipelineHandlerTest extends TestBase {
     MIdentity me;

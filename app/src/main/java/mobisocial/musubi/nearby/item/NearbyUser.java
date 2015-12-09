@@ -16,15 +16,16 @@
 
 package mobisocial.musubi.nearby.item;
 
-import mobisocial.socialkit.User;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+
 import mobisocial.musubi.R;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.ui.NearbyActivity;
+import mobisocial.socialkit.User;
 
 public class NearbyUser extends NearbyItem {
         final Context mContext;

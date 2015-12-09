@@ -15,6 +15,23 @@
  */
 
 package mobisocial.musubi.objects;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.Spannable;
+import android.text.util.Linkify;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.TextView.BufferType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,23 +43,6 @@ import mobisocial.musubi.ui.util.EmojiSpannableFactory;
 import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.text.Spannable;
-import android.text.util.Linkify;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.TextView.BufferType;
 
 /**
  * A text-based status update.

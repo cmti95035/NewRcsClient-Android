@@ -16,31 +16,6 @@
 
 package mobisocial.musubi.objects;
 
-import java.util.List;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.Activator;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.model.MApp;
-import mobisocial.musubi.model.helpers.AppManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.webapp.WebAppActivity;
-import mobisocial.socialkit.Obj;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -62,6 +37,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.Activator;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.model.MApp;
+import mobisocial.musubi.model.helpers.AppManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.webapp.WebAppActivity;
+import mobisocial.socialkit.Obj;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.musubi.Musubi;
+import mobisocial.socialkit.obj.MemObj;
 
 public class WebAppObj extends DbEntryHandler implements FeedRenderer, Activator {
     static final String TYPE = "webapp";

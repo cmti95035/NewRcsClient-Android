@@ -16,6 +16,12 @@
 
 package mobisocial.musubi.ui.widget;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.feed.iface.FeedRenderer;
 import mobisocial.musubi.model.MObject;
@@ -24,14 +30,6 @@ import mobisocial.musubi.obj.ObjHelpers;
 import mobisocial.musubi.objects.AppStateObj;
 import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
 import mobisocial.socialkit.Obj;
-
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * Renders an Obj as a view.

@@ -16,20 +16,19 @@
 
 package mobisocial.musubi.nearby.scanner;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.util.Log;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import mobisocial.musubi.model.DbContactAttributes;
-import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.nearby.item.NearbyItem;
 import mobisocial.musubi.nearby.item.NearbyUser;
 import mobisocial.socialkit.User;
-
-import android.content.Context;
-import android.net.wifi.WifiManager;
-import android.util.Log;
 
 /**
  * Scans the database for known location identifiers for users.

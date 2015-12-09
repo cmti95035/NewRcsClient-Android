@@ -16,23 +16,6 @@
 
 package mobisocial.musubi.webapp;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.socialkit.musubi.DbFeed;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.mobisocial.corral.ContentCorral;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -42,7 +25,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.ConsoleMessage;
@@ -54,6 +36,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import org.mobisocial.corral.ContentCorral;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.socialkit.musubi.DbFeed;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.musubi.Musubi;
 
 /**
  * Runs a webapp by injecting SocialKit-JS in a webview.

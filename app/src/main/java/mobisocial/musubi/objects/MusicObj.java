@@ -16,19 +16,6 @@
 
 package mobisocial.musubi.objects;
 
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.Activator;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +27,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.Activator;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.obj.MemObj;
 
 public class MusicObj extends DbEntryHandler implements FeedRenderer, Activator {
 

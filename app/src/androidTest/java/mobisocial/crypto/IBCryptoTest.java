@@ -1,8 +1,8 @@
 package mobisocial.crypto;
 
-import java.util.Arrays;
-
 import junit.framework.TestCase;
+
+import java.util.Arrays;
 
 public class IBCryptoTest extends TestCase {
     public void testEncryption() {

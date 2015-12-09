@@ -15,38 +15,6 @@
  */
 
 package mobisocial.musubi.objects;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.ImageGalleryActivity;
-import mobisocial.musubi.R;
-import mobisocial.musubi.cloudstorage.Baidu;
-import mobisocial.musubi.cloudstorage.Dropbox;
-import mobisocial.musubi.feed.iface.Activator;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.model.DbContactAttributes;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.musubi.util.UriImage;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.apache.commons.io.IOUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.ContentCorral;
-import org.mobisocial.corral.CorralDownloadClient;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -66,7 +34,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.ContentCorral;
+import org.mobisocial.corral.CorralDownloadClient;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.ImageGalleryActivity;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.Activator;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.model.DbContactAttributes;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.musubi.util.UriImage;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.obj.MemObj;
 
 public class PictureObj extends DbEntryHandler implements FeedRenderer, Activator {
 	public static final String TAG = "PictureObj";

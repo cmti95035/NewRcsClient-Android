@@ -3,8 +3,6 @@
  */
 package mobisocial.musubi.cloudstorage;
 
-import com.baidu.oauth.BaiduOAuth.BaiduOAuthResponse;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -12,6 +10,8 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.baidu.oauth.BaiduOAuth.BaiduOAuthResponse;
 
 
 

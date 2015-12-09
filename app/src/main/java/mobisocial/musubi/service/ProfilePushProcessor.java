@@ -16,6 +16,22 @@
 
 package mobisocial.musubi.service;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDoneException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.util.Log;
+
+import org.javatuples.Pair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,22 +51,6 @@ import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.javatuples.Pair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDoneException;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.util.Log;
 
 //TODO: this probably doesn't deal with the case where we need to send
 //a profile to an identity twice (since it tracks the sentProfile time and

@@ -16,12 +16,16 @@
 
 package mobisocial.musubi.provider;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import android.content.Context;
+import android.database.CrossProcessCursor;
+import android.database.Cursor;
+import android.database.CursorWindow;
+import android.database.CursorWrapper;
 
 import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import mobisocial.musubi.App;
 import mobisocial.musubi.R;
@@ -29,12 +33,6 @@ import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.SKIdentities;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.ui.util.UiUtil;
-import android.content.Context;
-import android.database.CrossProcessCursor;
-import android.database.Cursor;
-import android.database.CursorWindow;
-import android.database.CursorWrapper;
-import android.graphics.BitmapFactory;
 
 /**
  * Provides "safe" access to certain fields from the identities table.

@@ -16,9 +16,16 @@
 
 package mobisocial.musubi.nearby.item;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.Date;
 
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBHashedIdentity.Authority;
@@ -36,13 +43,6 @@ import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.ui.NearbyActivity;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 
 public class NearbyFeed extends NearbyItem {
         final Context mContext;

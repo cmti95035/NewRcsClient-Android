@@ -16,6 +16,17 @@
 
 package org.mobisocial.corral;
 
+import android.content.Context;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
+
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+        .DownloadChannel;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+        .DownloadState;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,15 +36,6 @@ import java.util.Set;
 import mobisocial.musubi.App;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.musubi.Musubi;
-
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadChannel;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadState;
-
-import android.content.Context;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.HandlerThread;
 
 public class CorralDownloadHandler {
     private static final String TAG = "DownloadProcessor";

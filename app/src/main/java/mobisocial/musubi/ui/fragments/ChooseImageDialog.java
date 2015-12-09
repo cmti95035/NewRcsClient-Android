@@ -16,12 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import org.apache.commons.io.output.ByteArrayOutputStream;
-
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.PhotoTaker;
-import mobisocial.musubi.util.UriImage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,6 +28,13 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.Toast;
+
+import org.apache.commons.io.output.ByteArrayOutputStream;
+
+import mobisocial.musubi.objects.PictureObj;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.PhotoTaker;
+import mobisocial.musubi.util.UriImage;
 
 public class ChooseImageDialog extends DialogFragment {
 	static final int REQUEST_PROFILE_PICTURE = 71;

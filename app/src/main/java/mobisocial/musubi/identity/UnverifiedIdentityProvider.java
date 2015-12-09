@@ -17,6 +17,7 @@
 package mobisocial.musubi.identity;
 
 import android.util.Base64;
+
 import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBIdentity;

@@ -1,10 +1,11 @@
 
 package mobisocial.musubi.model.helpers;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.musubi.model.MMyAccount;
 import mobisocial.test.TestBase;
 import mobisocial.test.TestDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyAccountManagerTest extends TestBase {
     TestDatabase database;

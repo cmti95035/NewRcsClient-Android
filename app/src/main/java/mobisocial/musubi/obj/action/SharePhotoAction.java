@@ -17,21 +17,6 @@
 
 package mobisocial.musubi.obj.action;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.obj.iface.ObjAction;
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.ui.SendContentActivity;
-import mobisocial.socialkit.musubi.DbObj;
-
-import org.mobisocial.corral.CorralDownloadClient;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +30,21 @@ import android.provider.MediaStore.Images.Media;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
+
+import org.mobisocial.corral.CorralDownloadClient;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.obj.iface.ObjAction;
+import mobisocial.musubi.objects.PictureObj;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.ui.SendContentActivity;
+import mobisocial.socialkit.musubi.DbObj;
 
 /**
  * Sends a picture object using the standard Android "SEND" intent.

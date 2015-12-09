@@ -16,6 +16,19 @@
 
 package mobisocial.musubi.feed.action;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.mobisocial.corral.ContentCorral;
+
 import java.io.IOException;
 
 import mobisocial.musubi.Helpers;
@@ -27,19 +40,6 @@ import mobisocial.musubi.service.WizardStepHandler;
 import mobisocial.musubi.ui.MusubiBaseActivity;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.musubi.Musubi;
-
-import org.mobisocial.corral.ContentCorral;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Captures an image to share with a feed.

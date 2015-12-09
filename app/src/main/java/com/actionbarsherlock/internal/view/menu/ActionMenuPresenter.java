@@ -16,11 +16,6 @@
 
 package com.actionbarsherlock.internal.view.menu;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mobisocial.musubi.R;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +28,11 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mobisocial.musubi.R;
 
 /**
  * MenuPresenter for building action menus as seen in the action bar and action modes.

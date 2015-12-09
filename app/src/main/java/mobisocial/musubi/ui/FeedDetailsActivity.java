@@ -16,34 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.regex.Pattern;
-
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.MembersActivity.FeedMembersFragment.FeedMembersCursorLoader;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.DatabaseManager;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.model.helpers.MyAccountManager;
-import mobisocial.musubi.nearby.GpsBroadcastTask;
-import mobisocial.musubi.objects.FeedNameObj;
-import mobisocial.musubi.objects.IntroductionObj;
-import mobisocial.musubi.ui.util.EmojiSpannableFactory;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.ui.widget.ActionBarLite;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector;
-import mobisocial.musubi.ui.widget.MultiIdentitySelector.OnRequestAddIdentityListener;
-import mobisocial.musubi.util.CommonLayouts;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.PhotoTaker;
-import mobisocial.musubi.util.UriImage;
-import mobisocial.socialkit.Obj;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -86,6 +58,37 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.regex.Pattern;
+
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.MembersActivity.FeedMembersFragment
+		.FeedMembersCursorLoader;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.DatabaseManager;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.model.helpers.MyAccountManager;
+import mobisocial.musubi.nearby.GpsBroadcastTask;
+import mobisocial.musubi.objects.FeedNameObj;
+import mobisocial.musubi.objects.IntroductionObj;
+import mobisocial.musubi.ui.util.EmojiSpannableFactory;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.ui.widget.ActionBarLite;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector;
+import mobisocial.musubi.ui.widget.MultiIdentitySelector
+		.OnRequestAddIdentityListener;
+import mobisocial.musubi.util.CommonLayouts;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.PhotoTaker;
+import mobisocial.musubi.util.UriImage;
+import mobisocial.socialkit.Obj;
 
 public class FeedDetailsActivity extends MusubiBaseActivity implements OnItemClickListener,
 LoaderManager.LoaderCallbacks<Cursor> {

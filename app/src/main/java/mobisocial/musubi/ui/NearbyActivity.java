@@ -16,25 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.util.ArrayList;
-
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.BJDNotImplementedException;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.DbContactAttributes;
-import mobisocial.musubi.nearby.NearbyLookup;
-import mobisocial.musubi.nearby.NearbyLookup.NearbyResultListener;
-import mobisocial.musubi.nearby.broadcast.MulticastBroadcastTask;
-import mobisocial.musubi.nearby.item.NearbyItem;
-import mobisocial.musubi.util.ActivityCallout;
-import mobisocial.musubi.util.BluetoothBeacon;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.Util;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -71,6 +52,25 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.metrics.UsageMetrics;
+import mobisocial.musubi.BJDNotImplementedException;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.DbContactAttributes;
+import mobisocial.musubi.nearby.NearbyLookup;
+import mobisocial.musubi.nearby.NearbyLookup.NearbyResultListener;
+import mobisocial.musubi.nearby.broadcast.MulticastBroadcastTask;
+import mobisocial.musubi.nearby.item.NearbyItem;
+import mobisocial.musubi.util.ActivityCallout;
+import mobisocial.musubi.util.BluetoothBeacon;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.Util;
 
 /**
  * Shows groups and users that have been found nearby.

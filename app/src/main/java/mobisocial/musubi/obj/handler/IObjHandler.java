@@ -16,10 +16,11 @@
 
 package mobisocial.musubi.obj.handler;
 
+import android.content.Context;
+
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
 
 public interface IObjHandler {
     public void afterDbInsertion(Context context, DbEntryHandler typeInfo, DbObj obj);

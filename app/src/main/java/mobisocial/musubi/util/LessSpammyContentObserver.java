@@ -16,10 +16,10 @@
 
 package mobisocial.musubi.util;
 
-import java.util.Date;
-
 import android.database.ContentObserver;
 import android.os.Handler;
+
+import java.util.Date;
 
 public class LessSpammyContentObserver extends ContentObserver {
     //at most 4 / minute

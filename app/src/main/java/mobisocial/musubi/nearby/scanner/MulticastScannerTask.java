@@ -16,6 +16,12 @@
 
 package mobisocial.musubi.nearby.scanner;
 
+import android.app.Activity;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.MulticastLock;
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -34,11 +40,6 @@ import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.nearby.item.NearbyItem;
 import mobisocial.musubi.nearby.item.NearbyStranger;
 import mobisocial.musubi.ui.MusubiBaseActivity;
-import android.app.Activity;
-import android.net.Uri;
-import android.net.wifi.WifiManager;
-import android.net.wifi.WifiManager.MulticastLock;
-import android.util.Log;
 
 /**
  * Scans the LAN for nearby content.

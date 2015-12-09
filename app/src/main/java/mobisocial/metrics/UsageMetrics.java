@@ -16,14 +16,10 @@
 
 package mobisocial.metrics;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.socialkit.User;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -35,10 +31,14 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.socialkit.User;
 
 /**
  * Record user events, supporting anonymous and non-anonymous reporting.

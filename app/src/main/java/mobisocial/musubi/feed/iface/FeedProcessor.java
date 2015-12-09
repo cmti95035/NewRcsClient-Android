@@ -16,11 +16,11 @@
 
 package mobisocial.musubi.feed.iface;
 
-import java.util.LinkedHashSet;
-
 import android.content.Context;
 import android.net.Uri;
 import android.widget.ListAdapter;
+
+import java.util.LinkedHashSet;
 
 public abstract class FeedProcessor {
     public final LinkedHashSet<Uri> mActiveFeeds = new LinkedHashSet<Uri>();

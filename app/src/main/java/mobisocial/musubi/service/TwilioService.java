@@ -3,11 +3,13 @@ package mobisocial.musubi.service;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.MessageFactory;
-import com.twilio.sdk.resource.instance.*;
+import com.twilio.sdk.resource.instance.Account;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TwilioService {
 	/** The Constant ACCOUNT_SID. Find it at twilio.com/user/account */

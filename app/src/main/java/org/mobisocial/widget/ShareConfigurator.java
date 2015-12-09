@@ -21,6 +21,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RemoteViews;
+
 import mobisocial.musubi.PickContactsActivity;
 import mobisocial.musubi.R;
 

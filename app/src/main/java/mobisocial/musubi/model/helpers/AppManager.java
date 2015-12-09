@@ -16,19 +16,19 @@
 
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.list.linked.TLongLinkedList;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import mobisocial.musubi.model.MApp;
-import mobisocial.musubi.model.MAppAction;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import gnu.trove.list.linked.TLongLinkedList;
+import mobisocial.musubi.model.MApp;
+import mobisocial.musubi.model.MAppAction;
 
 public class AppManager extends ManagerBase {
     SQLiteStatement mSqlGetId;

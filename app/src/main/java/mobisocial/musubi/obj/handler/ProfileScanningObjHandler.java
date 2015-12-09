@@ -16,6 +16,12 @@
 
 package mobisocial.musubi.obj.handler;
 
+import android.content.Context;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Iterator;
 
 import mobisocial.musubi.feed.iface.DbEntryHandler;
@@ -23,12 +29,6 @@ import mobisocial.musubi.model.DbContactAttributes;
 import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.socialkit.SignedObj;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.util.Log;
 
 /**
  * Scans inbound objs for user information that can can be added as attributes.

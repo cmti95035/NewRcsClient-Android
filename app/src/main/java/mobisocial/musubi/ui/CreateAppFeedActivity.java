@@ -16,6 +16,16 @@
 
 package mobisocial.musubi.ui;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import java.util.LinkedHashSet;
 
 import mobisocial.metrics.MusubiMetrics;
@@ -35,15 +45,6 @@ import mobisocial.musubi.ui.util.UiUtil;
 import mobisocial.musubi.ui.widget.MultiIdentitySelector;
 import mobisocial.musubi.util.ObjFactory;
 import mobisocial.socialkit.Obj;
-import android.app.Activity;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
 public class CreateAppFeedActivity extends Activity {
 

@@ -16,18 +16,19 @@
 
 package mobisocial.musubi.service;
 
-import mobisocial.musubi.App;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.model.helpers.EncodedMessageManager;
-import mobisocial.musubi.ui.SettingsActivity;
-import mobisocial.musubi.ui.fragments.SettingsFragment;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.model.helpers.EncodedMessageManager;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.SettingsFragment;
 
 public class MusubiIntentService extends IntentService {
 	static final String TAG = "MusubiIntentService";

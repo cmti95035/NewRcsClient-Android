@@ -16,17 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.Filterable;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.obj.ObjHelpers;
-import mobisocial.musubi.ui.fragments.AccountLinkDialog;
-import mobisocial.musubi.ui.fragments.SettingsFragment;
-import mobisocial.musubi.ui.fragments.ViewProfileFragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -41,6 +30,18 @@ import android.view.View;
 
 import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitleProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.Filterable;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.obj.ObjHelpers;
+import mobisocial.musubi.ui.fragments.AccountLinkDialog;
+import mobisocial.musubi.ui.fragments.SettingsFragment;
+import mobisocial.musubi.ui.fragments.ViewProfileFragment;
 
 public class SettingsActivity extends MusubiBaseActivity implements Filterable {
     public static final String PREFS_NAME = "MusubiPrefsFile";

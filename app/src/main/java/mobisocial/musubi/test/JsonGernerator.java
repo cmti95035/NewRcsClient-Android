@@ -1,12 +1,11 @@
 package mobisocial.musubi.test;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.util.Base64;
 import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /*
  * by haoyuheng

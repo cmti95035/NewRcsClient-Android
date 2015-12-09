@@ -17,6 +17,7 @@
 package mobisocial.musubi.encoding;
 
 import android.util.Base64;
+
 import mobisocial.musubi.model.MDevice;
 
 public class DiscardMessage extends Exception {

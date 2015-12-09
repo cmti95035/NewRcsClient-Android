@@ -16,7 +16,21 @@
 
 package mobisocial.musubi.nearby;
 
-import gnu.trove.list.array.TByteArrayList;
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Base64;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -33,6 +47,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import gnu.trove.list.array.TByteArrayList;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.MFeed;
@@ -44,22 +59,6 @@ import mobisocial.musubi.ui.MusubiBaseActivity;
 import mobisocial.musubi.ui.util.UiUtil;
 import mobisocial.musubi.util.MyLocation;
 import mobisocial.musubi.util.Util;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.location.Location;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Base64;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Shares a feed encrypted using the GPS server.

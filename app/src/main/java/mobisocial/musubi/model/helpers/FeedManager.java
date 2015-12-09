@@ -16,8 +16,16 @@
 
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.list.linked.TLongLinkedList;
-import gnu.trove.procedure.TLongProcedure;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDoneException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.net.Uri;
+import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
@@ -29,6 +37,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
+import gnu.trove.list.linked.TLongLinkedList;
+import gnu.trove.procedure.TLongProcedure;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.MFeed;
@@ -42,16 +52,6 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.ui.FeedPannerActivity;
 import mobisocial.musubi.util.Util;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDoneException;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.net.Uri;
-import android.util.Log;
 
 /**
  * Manages a feed with access beyond what is allowable in SocialKit.

@@ -15,21 +15,7 @@
  */
 
 package mobisocial.musubi.ui;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.Arrays;
 
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.musubi.App;
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.objects.OutOfBandInvitedObj;
-import mobisocial.musubi.ui.fragments.AccountLinkDialog;
-import mobisocial.musubi.ui.fragments.EmailUnclaimedMembersFragment;
-import mobisocial.socialkit.Obj;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
@@ -47,6 +33,22 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Arrays;
+
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.musubi.App;
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.objects.OutOfBandInvitedObj;
+import mobisocial.musubi.ui.fragments.AccountLinkDialog;
+import mobisocial.musubi.ui.fragments.EmailUnclaimedMembersFragment;
+import mobisocial.socialkit.Obj;
 
 /**
  * Pick contacts and/or groups for various purposes.

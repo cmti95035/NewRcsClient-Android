@@ -16,7 +16,19 @@
 
 package mobisocial.musubi.nearby.scanner;
 
-import gnu.trove.list.array.TByteArrayList;
+import android.content.Context;
+import android.location.Location;
+import android.net.Uri;
+import android.util.Base64;
+import android.util.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.javatuples.Pair;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -33,6 +45,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import gnu.trove.list.array.TByteArrayList;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.musubi.nearby.item.NearbyFeed;
 import mobisocial.musubi.nearby.item.NearbyItem;
@@ -40,20 +53,6 @@ import mobisocial.musubi.nearby.location.GridHandler;
 import mobisocial.musubi.ui.MusubiBaseActivity;
 import mobisocial.musubi.util.MyLocation;
 import mobisocial.musubi.util.Util;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.location.Location;
-import android.net.Uri;
-import android.util.Base64;
-import android.util.Log;
-import org.javatuples.Pair;
 
 /**
  * Pings a server with GPS information to search for nearby items.

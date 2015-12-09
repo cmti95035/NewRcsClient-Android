@@ -17,14 +17,15 @@
 
 package mobisocial.musubi.obj.action;
 
+import android.content.ContentResolver;
+import android.content.Context;
+
 import mobisocial.musubi.App;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.model.helpers.PendingUploadManager;
 import mobisocial.musubi.obj.iface.ObjAction;
 import mobisocial.musubi.service.MusubiService;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.ContentResolver;
-import android.content.Context;
 
 public class RetryUploadAction extends ObjAction {
     @Override

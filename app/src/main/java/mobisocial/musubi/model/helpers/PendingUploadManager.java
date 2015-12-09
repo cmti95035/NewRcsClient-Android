@@ -16,10 +16,11 @@
 
 package mobisocial.musubi.model.helpers;
 
-import mobisocial.musubi.model.MPendingUpload;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import mobisocial.musubi.model.MPendingUpload;
 
 public class PendingUploadManager extends ManagerBase {
 

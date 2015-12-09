@@ -16,16 +16,24 @@
 
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.TLongIntMap;
-import gnu.trove.map.hash.TLongIntHashMap;
-import gnu.trove.procedure.TLongIntProcedure;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDoneException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.net.Uri;
+import android.provider.ContactsContract.Contacts;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.TLongIntMap;
+import gnu.trove.map.hash.TLongIntHashMap;
+import gnu.trove.procedure.TLongIntProcedure;
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.crypto.IBIdentity;
@@ -37,14 +45,6 @@ import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
 import mobisocial.musubi.service.MusubiService;
 import mobisocial.musubi.util.Util;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDoneException;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.net.Uri;
-import android.provider.ContactsContract.Contacts;
 
 public class IdentitiesManager extends ManagerBase {
     public static final String PRE_INSTALL_IDENTITY_PRINCIPAL = "me@nowhere.com";

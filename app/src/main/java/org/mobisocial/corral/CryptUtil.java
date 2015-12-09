@@ -16,6 +16,15 @@
 
 package org.mobisocial.corral;
 
+import android.util.Log;
+
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+        .DownloadChannel;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback
+        .DownloadState;
+import org.mobisocial.corral.CorralHelper.UploadProgressCallback;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -41,14 +50,7 @@ import javax.crypto.ShortBufferException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadChannel;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback.DownloadState;
-import org.mobisocial.corral.CorralHelper.UploadProgressCallback;
-
 import mobisocial.musubi.util.Base64;
-
-import android.util.Log;
 
 public class CryptUtil {
 

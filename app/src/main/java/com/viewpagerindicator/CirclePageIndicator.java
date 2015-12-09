@@ -16,7 +16,6 @@
  */
 package com.viewpagerindicator;
 
-import mobisocial.musubi.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -32,6 +31,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
+import mobisocial.musubi.R;
 
 /**
  * Draws circles (one for each view). The current view position is filled and

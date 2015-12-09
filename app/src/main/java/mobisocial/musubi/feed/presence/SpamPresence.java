@@ -16,14 +16,14 @@
 
 package mobisocial.musubi.feed.presence;
 
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.objects.StatusObj;
-import mobisocial.socialkit.obj.MemObj;
 import android.content.Context;
 import android.net.Uri;
 import android.widget.Toast;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.StatusObj;
+import mobisocial.socialkit.obj.MemObj;
 
 /**
  * Sends messages rapidly. For testing, not annoying friends!

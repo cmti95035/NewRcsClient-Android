@@ -16,11 +16,6 @@
 
 package mobisocial.musubi.feed.presence;
 
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.objects.PhoneStateObj;
-import mobisocial.musubi.objects.StatusObj;
-import mobisocial.musubi.ui.MusubiBaseActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +23,10 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.PhoneStateObj;
 
 /**
  * Sends notice of received/sent phone calls.

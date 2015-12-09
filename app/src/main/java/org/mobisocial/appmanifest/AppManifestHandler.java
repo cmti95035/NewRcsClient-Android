@@ -16,11 +16,6 @@
 
 package org.mobisocial.appmanifest;
 
-import java.io.InputStream;
-import java.util.List;
-
-import org.mobisocial.appmanifest.platforms.PlatformReference;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -33,6 +28,11 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
+
+import org.mobisocial.appmanifest.platforms.PlatformReference;
+
+import java.io.InputStream;
+import java.util.List;
 
 public class AppManifestHandler extends Activity {
 	public static final String EXTRA_APPLICATION_ARGUMENT = "android.intent.extra.APPLICATION_ARGUMENT";

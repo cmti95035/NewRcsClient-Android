@@ -15,8 +15,10 @@
  */
 
 package mobisocial.musubi.feed.iface;
-import mobisocial.socialkit.SignedObj;
+
 import android.content.Context;
+
+import mobisocial.socialkit.SignedObj;
 
 /**
  * Handles objs that came from an unknown sender.

@@ -16,20 +16,6 @@
 
 package mobisocial.musubi.feed.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.FeedAction;
-import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.ui.FeedPannerActivity;
-import mobisocial.musubi.ui.LatestPictureActivity;
-import mobisocial.musubi.util.ActivityCallout;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.socialkit.obj.MemObj;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +27,20 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.FeedAction;
+import mobisocial.musubi.objects.PictureObj;
+import mobisocial.musubi.ui.LatestPictureActivity;
+import mobisocial.musubi.util.ActivityCallout;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.socialkit.obj.MemObj;
 
 /**
  * Adds a PictureObj to a feed from an external Android application

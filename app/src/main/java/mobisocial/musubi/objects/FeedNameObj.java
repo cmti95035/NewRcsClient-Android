@@ -15,22 +15,6 @@
  */
 
 package mobisocial.musubi.objects;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.feed.iface.DbEntryHandler;
-import mobisocial.musubi.feed.iface.FeedRenderer;
-import mobisocial.musubi.model.MFeed;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
-import mobisocial.musubi.ui.util.EmojiSpannableFactory;
-import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -46,6 +30,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.feed.iface.DbEntryHandler;
+import mobisocial.musubi.feed.iface.FeedRenderer;
+import mobisocial.musubi.model.MFeed;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.fragments.FeedListFragment.FeedSummary;
+import mobisocial.musubi.ui.util.EmojiSpannableFactory;
+import mobisocial.musubi.ui.widget.DbObjCursorAdapter.DbObjCursor;
+import mobisocial.socialkit.obj.MemObj;
 
 /**
  * An object that provides minimal information about introduced participants to a group.

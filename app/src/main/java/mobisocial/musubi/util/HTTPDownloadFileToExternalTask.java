@@ -15,15 +15,17 @@
  */
 
 package mobisocial.musubi.util;
-import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.File;
+
+import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.InputStream;
-import android.os.AsyncTask;
-import android.util.Log;
 
 public class HTTPDownloadFileToExternalTask extends AsyncTask<String, Void, String> {
     @Override

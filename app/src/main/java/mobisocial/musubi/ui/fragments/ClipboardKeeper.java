@@ -16,10 +16,11 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import mobisocial.musubi.App;
-import mobisocial.socialkit.Obj;
 import android.app.Activity;
 import android.widget.Toast;
+
+import mobisocial.musubi.App;
+import mobisocial.socialkit.Obj;
 
 public class ClipboardKeeper {
     static final String TAG = "ClipboardKeeper"; 

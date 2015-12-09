@@ -15,17 +15,7 @@
  */
 
 package mobisocial.musubi;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.FeedManager;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.musubi.ui.ViewProfileActivity;
-import mobisocial.musubi.ui.fragments.FeedViewFragment;
-import mobisocial.musubi.ui.util.UiUtil;
-import mobisocial.musubi.util.LessSpammyContentObserver;
-import mobisocial.musubi.util.SimpleCursorLoader;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +41,18 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.FeedManager;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.musubi.ui.ViewProfileActivity;
+import mobisocial.musubi.ui.fragments.FeedViewFragment;
+import mobisocial.musubi.ui.util.UiUtil;
+import mobisocial.musubi.util.LessSpammyContentObserver;
+import mobisocial.musubi.util.SimpleCursorLoader;
 
 /**
  * Pick contacts and/or groups for various purposes.

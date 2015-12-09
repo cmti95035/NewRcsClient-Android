@@ -16,24 +16,6 @@
 
 package mobisocial.musubi.ui;
 
-import java.util.BitSet;
-import java.util.List;
-
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.objects.AppObj;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.service.WizardStepHandler;
-import mobisocial.musubi.ui.fragments.FeedListFragment;
-import mobisocial.musubi.ui.fragments.FeedViewFragment;
-import mobisocial.musubi.util.LessSpammyContentObserver;
-import mobisocial.nfc.NdefFactory;
-import mobisocial.nfc.NdefHandler;
-import mobisocial.nfc.Nfc;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -64,6 +46,25 @@ import android.support.v4.view.MenuItem;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.widget.Toast;
+
+import java.util.BitSet;
+import java.util.List;
+
+import mobisocial.crypto.IBHashedIdentity.Authority;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.objects.AppObj;
+import mobisocial.musubi.provider.MusubiContentProvider;
+import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.service.WizardStepHandler;
+import mobisocial.musubi.ui.fragments.FeedListFragment;
+import mobisocial.musubi.ui.fragments.FeedViewFragment;
+import mobisocial.musubi.util.LessSpammyContentObserver;
+import mobisocial.nfc.NdefFactory;
+import mobisocial.nfc.NdefHandler;
+import mobisocial.nfc.Nfc;
 
 /**
  * Displays a list of all user-accessible threads (feeds).

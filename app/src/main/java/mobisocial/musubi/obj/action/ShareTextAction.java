@@ -17,6 +17,10 @@
 
 package mobisocial.musubi.obj.action;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+
 import mobisocial.musubi.R;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.obj.iface.ObjAction;
@@ -24,12 +28,6 @@ import mobisocial.musubi.objects.StatusObj;
 import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.ui.SendContentActivity;
 import mobisocial.socialkit.musubi.DbObj;
-
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 
 /**
  * Sends a picture object using the standard Android "SEND" intent.

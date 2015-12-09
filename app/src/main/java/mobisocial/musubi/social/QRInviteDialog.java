@@ -17,18 +17,6 @@
 
 package mobisocial.musubi.social;
 
-import java.util.List;
-
-import mobisocial.crypto.IBHashedIdentity.Authority;
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.metrics.UsageMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MDevice;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.ui.EmailInviteActivity;
-import mobisocial.musubi.ui.util.UiUtil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -55,6 +43,11 @@ import com.google.zxing.client.android.Intents;
 import com.google.zxing.client.android.encode.QRCodeEncoder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.metrics.UsageMetrics;
+import mobisocial.musubi.R;
+import mobisocial.musubi.ui.EmailInviteActivity;
 
 /**
  * Presents a QR code allowing two devices to perform a key exchange.

@@ -1,6 +1,10 @@
 
 package mobisocial.musubi.encoding;
 
+import android.test.AndroidTestCase;
+
+import org.json.JSONObject;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,10 +15,6 @@ import mobisocial.musubi.model.MFeed.FeedType;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONObject;
-
-import android.test.AndroidTestCase;
 
 public class ObjEncodingTest extends AndroidTestCase {
 

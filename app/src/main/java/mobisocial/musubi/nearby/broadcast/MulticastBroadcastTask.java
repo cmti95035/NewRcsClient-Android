@@ -16,6 +16,10 @@
 
 package mobisocial.musubi.nearby.broadcast;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -24,11 +28,6 @@ import java.nio.ByteBuffer;
 
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.nearby.scanner.MulticastScannerTask;
-
-
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 public class MulticastBroadcastTask extends AsyncTask<Void, Void, Void> {
     private static final String TAG = "MulticastBroadcast";

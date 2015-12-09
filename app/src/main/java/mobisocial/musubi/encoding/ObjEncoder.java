@@ -16,6 +16,11 @@
 
 package mobisocial.musubi.encoding;
 
+import org.codehaus.jackson.map.DeserializationConfig.Feature;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -25,6 +30,8 @@ import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import de.undercouch.bson4jackson.BsonFactory;
+import de.undercouch.bson4jackson.BsonParser;
 import mobisocial.musubi.encoding.DiscardMessage.BadObjFormat;
 import mobisocial.musubi.model.MApp;
 import mobisocial.musubi.model.MDevice;
@@ -34,14 +41,6 @@ import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MObject;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.codehaus.jackson.map.DeserializationConfig.Feature;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import de.undercouch.bson4jackson.BsonParser;
-import de.undercouch.bson4jackson.BsonFactory;
 
 /**
  * <p>Encodes and decodes data available to Musubi for transmission across the network.

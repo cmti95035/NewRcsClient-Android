@@ -16,13 +16,13 @@
 
 package mobisocial.musubi.nearby.scanner;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.util.List;
 
 import mobisocial.musubi.nearby.NearbyLookup.NearbyResultListener;
 import mobisocial.musubi.nearby.item.NearbyItem;
-
-import android.os.AsyncTask;
-import android.util.Log;
 
 public abstract class NearbyScannerTask extends AsyncTask<Void, NearbyItem, List<NearbyItem>> {
     protected static final String TAG = "NearbyTask";

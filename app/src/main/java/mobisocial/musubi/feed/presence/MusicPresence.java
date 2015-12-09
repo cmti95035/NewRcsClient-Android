@@ -16,19 +16,19 @@
 
 package mobisocial.musubi.feed.presence;
 
-import mobisocial.musubi.Helpers;
-import mobisocial.musubi.feed.iface.FeedPresence;
-import mobisocial.musubi.objects.MusicObj;
-import mobisocial.socialkit.obj.MemObj;
-
-import org.json.JSONException;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.widget.Toast;
+
+import org.json.JSONException;
+
+import mobisocial.musubi.Helpers;
+import mobisocial.musubi.feed.iface.FeedPresence;
+import mobisocial.musubi.objects.MusicObj;
+import mobisocial.socialkit.obj.MemObj;
 
 /**
  * Broadcast music playback events to feeds.

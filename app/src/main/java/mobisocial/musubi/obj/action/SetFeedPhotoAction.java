@@ -16,6 +16,9 @@
 
 package mobisocial.musubi.obj.action;
 
+import android.content.Context;
+import android.net.Uri;
+
 import mobisocial.musubi.Helpers;
 import mobisocial.musubi.feed.iface.DbEntryHandler;
 import mobisocial.musubi.model.MFeed;
@@ -23,16 +26,9 @@ import mobisocial.musubi.model.helpers.DatabaseManager;
 import mobisocial.musubi.obj.iface.ObjAction;
 import mobisocial.musubi.objects.FeedNameObj;
 import mobisocial.musubi.objects.PictureObj;
-import mobisocial.musubi.provider.MusubiContentProvider;
-import mobisocial.musubi.provider.MusubiContentProvider.Provided;
-import mobisocial.musubi.ui.FeedDetailsActivity;
 import mobisocial.musubi.ui.util.UiUtil;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.musubi.DbObj;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.view.View;
 
 public class SetFeedPhotoAction extends ObjAction {
     public void onAct(Context context, DbEntryHandler objType, DbObj obj) {

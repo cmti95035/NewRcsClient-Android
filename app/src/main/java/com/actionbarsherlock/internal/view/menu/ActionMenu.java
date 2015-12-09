@@ -16,9 +16,6 @@
 
 package com.actionbarsherlock.internal.view.menu;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +25,9 @@ import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
 import android.support.v4.view.SubMenu;
 import android.view.KeyEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @hide

@@ -1,13 +1,13 @@
 package mobisocial.test;
 
-import java.lang.reflect.Method;
-import java.util.Random;
-
 import android.app.Application;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+
+import java.lang.reflect.Method;
+import java.util.Random;
 
 
 public abstract class NServicesTestCase extends TestBase {

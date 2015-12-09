@@ -16,16 +16,6 @@
 
 package mobisocial.musubi.ui.widget;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-
-import mobisocial.crypto.IBHashedIdentity;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.helpers.DatabaseManager;
-import mobisocial.musubi.ui.util.UiUtil;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.database.Cursor;
@@ -48,6 +38,17 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+
+import mobisocial.crypto.IBHashedIdentity;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.DatabaseManager;
+import mobisocial.musubi.ui.util.UiUtil;
 
 /**
  * Allows the user to type in multiple identities. Get the identities with

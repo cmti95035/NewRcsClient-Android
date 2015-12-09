@@ -1,11 +1,5 @@
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.list.linked.TLongLinkedList;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +9,12 @@ import android.database.sqlite.SQLiteStatement;
 import android.test.AndroidTestCase;
 import android.util.Base64;
 import android.util.Log;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Random;
+
+import gnu.trove.list.linked.TLongLinkedList;
 
 /**
  * This class provides tests that assess the efficiency of various 

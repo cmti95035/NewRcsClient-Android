@@ -1,24 +1,5 @@
 package mobisocial.musubi.cloudstorage;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.objects.PictureObj;
-
-import org.codehaus.jackson.map.ext.JodaDeserializers.DateTimeDeserializer;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.baidu.oauth.BaiduOAuth;
-import com.baidu.oauth.BaiduOAuth.BaiduOAuthResponse;
-import com.baidu.pcs.BaiduPCSActionInfo;
-import com.baidu.pcs.BaiduPCSClient;
-import com.baidu.pcs.BaiduPCSStatusListener;
-
-import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -27,7 +8,23 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Baidu implements CloudStorage{
+import com.baidu.oauth.BaiduOAuth;
+import com.baidu.oauth.BaiduOAuth.BaiduOAuthResponse;
+import com.baidu.pcs.BaiduPCSActionInfo;
+import com.baidu.pcs.BaiduPCSClient;
+import com.baidu.pcs.BaiduPCSStatusListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.objects.PictureObj;
+
+public class Baidu implements CloudStorage, Cloud {
 
 	// the api key
     /*
@@ -44,14 +41,16 @@ public class Baidu implements CloudStorage{
     private String mbOauth = null;
     // the handler
     private Handler mbUiThreadHandler = null;
+
 	@Override
-	public void SetAccount(Context context) {
+	public void setAccount(Context context) {
 		// TODO Auto-generated method stub
 		mbUiThreadHandler = new Handler();
 	}
 
 	@Override
-	public void Login(final Context context, int resultcode) {		// TODO Auto-generated method stub
+	public void login(final Context context, int resultcode) {		// TODO
+	// Auto-generated method stub
 	   
 		BaiduOAuth oauthClient = new BaiduOAuth();		
 		oauthClient.startOAuth(context, mbApiKey, new BaiduOAuth.OAuthListener() {
@@ -81,7 +80,7 @@ public class Baidu implements CloudStorage{
 	
 
 	@Override
-	public void Logout(final Context context) {
+	public void logout(final Context context) {
 		// TODO Auto-generated method stub
 		if(null != mbOauth){    	
     	    /**
@@ -131,7 +130,7 @@ public class Baidu implements CloudStorage{
 	}
 
 	
-	 public  void WriteTxtFile(String strcontent,File file)
+	 public  void writeTxtFile(String strcontent,File file)
 	 {
 	      String strContent=strcontent+"\n";
 	      try {
@@ -145,7 +144,7 @@ public class Baidu implements CloudStorage{
           }
 	 }
 	 
-	 public String UriToFilePath(String myImageUrl, Context context){
+	 public String uriToFilePath(String myImageUrl, Context context){
 	     Uri uri = Uri.parse(myImageUrl);
 	     
 	 
@@ -159,7 +158,7 @@ public class Baidu implements CloudStorage{
 	 }
 	
 	@Override
-	public void SaveMeseages(final MObject object,final Context context) {
+	public void saveMessages(final MObject object,final Context context) {
 		
 		
 		// TODO Auto-generated method stub
@@ -182,7 +181,7 @@ public class Baidu implements CloudStorage{
 		           }
 					//String tmpFile = "/mnt/sdcard/zzzz.jpg";
 				    
-					WriteTxtFile(object.GetCloudJson().toString(),file);
+					writeTxtFile(object.GetCloudJson().toString(), file);
 					
 		    		BaiduPCSClient api = new BaiduPCSClient();
 		    		api.setAccessToken(mbOauth);
@@ -213,7 +212,7 @@ public class Baidu implements CloudStorage{
 		    			try {
 							String imagepath =  new JSONObject(object.json_).getString("AppPath");
 							Log.e("BAIdu",imagepath);
-							//String imagepath = UriToFilePath(uri,context);
+							//String imagepath = uriToFilePath(uri,context);
 							//Log.e("BAIdu",imagepath);
 							File image = new File(imagepath);
 							
@@ -253,21 +252,34 @@ public class Baidu implements CloudStorage{
 	}
 
 	@Override
-	public void SaveMeseages(JSONObject object) {
+	public void saveMessages(JSONObject object) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void SaveMeseages(MObject object) {
+	public void saveMessages(MObject object) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void SaveImages(MObject object, String absolutePath) {
+	public void saveImages(MObject object, String absolutePath) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+    public void backup() {
 
+    }
+
+    @Override
+    public void restore() {
+
+    }
+
+    //@Override
+    public void save() {
+
+    }
 }

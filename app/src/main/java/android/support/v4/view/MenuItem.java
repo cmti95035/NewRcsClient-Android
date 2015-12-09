@@ -17,10 +17,11 @@
 
 package android.support.v4.view;
 
-import com.actionbarsherlock.internal.view.menu.MenuItemWrapper;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+
+import com.actionbarsherlock.internal.view.menu.MenuItemWrapper;
 
 /**
  * <p>Interface for direct access to a previously created menu item.</p>

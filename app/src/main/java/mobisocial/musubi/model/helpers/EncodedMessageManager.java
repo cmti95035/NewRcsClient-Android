@@ -16,16 +16,17 @@
 
 package mobisocial.musubi.model.helpers;
 
-import gnu.trove.list.linked.TLongLinkedList;
-import mobisocial.musubi.model.MEncodedMessage;
-import mobisocial.musubi.model.MObject;
-import mobisocial.musubi.model.MPendingUpload;
-import mobisocial.musubi.util.Util;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+
+import gnu.trove.list.linked.TLongLinkedList;
+import mobisocial.musubi.model.MEncodedMessage;
+import mobisocial.musubi.model.MObject;
+import mobisocial.musubi.model.MPendingUpload;
+import mobisocial.musubi.util.Util;
 
 public class EncodedMessageManager extends ManagerBase {
 	SQLiteStatement sqlInsertEncoded_;

@@ -16,6 +16,18 @@
 
 package mobisocial.musubi;
 
+import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
+
 import mobisocial.metrics.MusubiExceptionHandler;
 import mobisocial.metrics.UsageMetrics;
 import mobisocial.metrics.UsageMetrics.ReportingLevel;
@@ -36,17 +48,6 @@ import mobisocial.musubi.util.IdentityCache;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.User;
 import mobisocial.socialkit.musubi.Musubi;
-import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.util.Log;
 
 public class App extends Application implements DBProvider, MusubiProvider, UICacheProvider {
     /**

@@ -16,9 +16,9 @@
 
 package mobisocial.musubi.feed.iface;
 
-import org.json.JSONObject;
-
 import android.util.Pair;
+
+import org.json.JSONObject;
 
 public interface OutgoingMessageHandler {
     String getType();

@@ -16,6 +16,12 @@
 
 package org.mobisocial.corral;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.os.Build;
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.UUID;
 
@@ -24,11 +30,6 @@ import mobisocial.comm.DuplexSocket;
 import mobisocial.comm.TcpDuplexSocket;
 import mobisocial.musubi.model.DbContactAttributes;
 import mobisocial.socialkit.musubi.DbIdentity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
-import android.os.Build;
-import android.util.Log;
 
 public class ConnectionCorral {
     private static final String TAG = ConnectionCorral.class.getName();

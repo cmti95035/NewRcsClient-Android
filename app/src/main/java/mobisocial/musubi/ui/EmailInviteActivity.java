@@ -15,6 +15,11 @@
  */
 
 package mobisocial.musubi.ui;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
 import java.util.List;
 
 import mobisocial.crypto.IBHashedIdentity.Authority;
@@ -23,11 +28,6 @@ import mobisocial.musubi.R;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.ui.util.UiUtil;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.widget.Toast;
 
 /**
  * Pick contacts and/or groups for various purposes.

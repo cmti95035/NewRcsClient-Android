@@ -1,6 +1,7 @@
 package mobisocial.musubi.encoding;
 
 import android.database.sqlite.SQLiteOpenHelper;
+
 import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.crypto.IBIdentity;

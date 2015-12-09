@@ -1,5 +1,9 @@
 package mobisocial.musubi.model.helpers;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
+import org.json.JSONObject;
+
 import java.util.Arrays;
 
 import mobisocial.musubi.model.MApp;
@@ -12,10 +16,6 @@ import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
 import mobisocial.test.TestBase;
 import mobisocial.test.TestDatabase;
-
-import org.json.JSONObject;
-
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class ObjectManagerTest extends TestBase {
     private ObjectManager mObjectManager;

@@ -16,19 +16,6 @@
 
 package mobisocial.musubi.service;
 
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.model.MPendingUpload;
-import mobisocial.musubi.model.helpers.ObjectManager;
-import mobisocial.musubi.model.helpers.PendingUploadManager;
-import mobisocial.socialkit.musubi.DbObj;
-import mobisocial.socialkit.musubi.Musubi;
-
-import org.json.JSONObject;
-import org.mobisocial.corral.CorralDownloadClient;
-import org.mobisocial.corral.CorralHelper;
-import org.mobisocial.corral.CorralHelper.UploadProgressCallback;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -39,6 +26,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+
+import org.json.JSONObject;
+import org.mobisocial.corral.CorralDownloadClient;
+import org.mobisocial.corral.CorralHelper;
+import org.mobisocial.corral.CorralHelper.UploadProgressCallback;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.model.MPendingUpload;
+import mobisocial.musubi.model.helpers.ObjectManager;
+import mobisocial.musubi.model.helpers.PendingUploadManager;
+import mobisocial.socialkit.musubi.DbObj;
+import mobisocial.socialkit.musubi.Musubi;
 
 /**
  * Monitors the pending_uploads table for files that should be sent

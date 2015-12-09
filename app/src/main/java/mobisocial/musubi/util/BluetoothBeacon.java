@@ -16,11 +16,6 @@
 
 package mobisocial.musubi.util;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.UUID;
-
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -29,6 +24,11 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.UUID;
 
 public class BluetoothBeacon {
     public static final UUID NEAR_GROUPS = UUID.fromString("1aba3c40-c2a5-11e0-962b-0800200c9a66");

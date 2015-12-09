@@ -1,5 +1,14 @@
 package mobisocial.test;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteCursorDriver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteQuery;
+import android.test.AndroidTestCase;
+import android.util.Log;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
@@ -10,14 +19,6 @@ import mobisocial.musubi.encoding.IncomingMessage;
 import mobisocial.musubi.encoding.OutgoingMessage;
 import mobisocial.musubi.model.MObject;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteCursor;
-import android.database.sqlite.SQLiteCursorDriver;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteQuery;
-import android.test.AndroidTestCase;
-import android.util.Log;
 
 public abstract class TestBase extends AndroidTestCase {
     protected String TAG = "MusubiTestBase";

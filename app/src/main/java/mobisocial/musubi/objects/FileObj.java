@@ -16,6 +16,32 @@
 
 package mobisocial.musubi.objects;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.BackgroundableDownloadDialogFragment;
+import org.mobisocial.corral.CorralDownloadClient;
+import org.mobisocial.corral.CorralDownloadHandler;
+import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,32 +60,6 @@ import mobisocial.musubi.util.CommonLayouts;
 import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.musubi.DbObj;
 import mobisocial.socialkit.obj.MemObj;
-
-import org.apache.commons.io.IOUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.BackgroundableDownloadDialogFragment;
-import org.mobisocial.corral.CorralDownloadClient;
-import org.mobisocial.corral.CorralDownloadHandler;
-import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
-
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 //TODO: add thumbnails
 //Add all the fields you need, hook it up, etc

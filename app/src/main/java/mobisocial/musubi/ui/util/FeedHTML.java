@@ -16,6 +16,15 @@
 
 package mobisocial.musubi.ui.util;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.util.Base64;
+import android.util.Log;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -27,15 +36,6 @@ import mobisocial.musubi.model.helpers.FeedManager;
 import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.objects.PictureObj;
 import mobisocial.musubi.objects.StatusObj;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.util.Base64;
-import android.util.Log;
 
 public class FeedHTML {
 

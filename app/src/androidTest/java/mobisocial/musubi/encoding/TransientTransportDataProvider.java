@@ -1,16 +1,19 @@
 package mobisocial.musubi.encoding;
 
+import org.javatuples.Pair;
+import org.javatuples.Quartet;
+import org.javatuples.Triplet;
+
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Random;
+
 import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.list.linked.TLongLinkedList;
 import gnu.trove.map.hash.TLongLongHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.map.hash.TObjectLongHashMap;
 import gnu.trove.procedure.TLongLongProcedure;
-
-import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.Random;
-
 import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBHashedIdentity.Authority;
@@ -21,10 +24,6 @@ import mobisocial.musubi.model.MEncodedMessage;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MIncomingSecret;
 import mobisocial.musubi.model.MOutgoingSecret;
-
-import org.javatuples.Pair;
-import org.javatuples.Quartet;
-import org.javatuples.Triplet;
 
 public class TransientTransportDataProvider implements TransportDataProvider {
 	public interface BlacklistProvider {

@@ -16,11 +16,12 @@
 
 package mobisocial.musubi.ui;
 
-import mobisocial.musubi.R;
-import mobisocial.musubi.ui.fragments.FeedListFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import mobisocial.musubi.R;
+import mobisocial.musubi.ui.fragments.FeedListFragment;
 
 /**
  * Displays a list of all user-accessible threads (feeds).

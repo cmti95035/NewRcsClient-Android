@@ -16,12 +16,13 @@
 
 package mobisocial.musubi;
 
-import mobisocial.musubi.feed.presence.Push2TalkPresence;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
+
+import mobisocial.musubi.feed.presence.Push2TalkPresence;
 
 public class RemoteControlReceiver extends BroadcastReceiver {
     private static final String TAG = "msb-remoteReceiver";

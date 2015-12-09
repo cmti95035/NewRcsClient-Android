@@ -16,13 +16,13 @@
 
 package org.mobisocial.appmanifest.test;
 
-import java.util.Arrays;
-
 import org.mobisocial.appmanifest.ApplicationManifest;
 import org.mobisocial.appmanifest.Builder;
 import org.mobisocial.appmanifest.platforms.AndroidPlatformReference;
 import org.mobisocial.appmanifest.platforms.PlatformReference;
 import org.mobisocial.appmanifest.platforms.WebPlatformReference;
+
+import java.util.Arrays;
 
 
 public class TwoPlatformTest {

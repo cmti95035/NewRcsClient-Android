@@ -16,28 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-import mobisocial.musubi.cloudstorage.CloudStorageActivity;
-import mobisocial.musubi.model.DbContactAttributes;
-import mobisocial.musubi.model.helpers.DatabaseFile;
-import mobisocial.musubi.model.helpers.IdentitiesManager;
-import mobisocial.musubi.nearby.broadcast.MulticastBroadcastTask;
-import mobisocial.musubi.service.MusubiIntentService;
-import mobisocial.musubi.service.WizardStepHandler;
-import mobisocial.musubi.ui.MusubiBaseActivity;
-import mobisocial.musubi.ui.SettingsActivity;
-import mobisocial.musubi.util.InstrumentedActivity;
-import mobisocial.musubi.util.Util;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -73,6 +51,29 @@ import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
+import mobisocial.musubi.cloudstorage.CloudBackupActivity;
+import mobisocial.musubi.cloudstorage.CloudRestoreActivity;
+import mobisocial.musubi.model.DbContactAttributes;
+import mobisocial.musubi.model.helpers.DatabaseFile;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
+import mobisocial.musubi.nearby.broadcast.MulticastBroadcastTask;
+import mobisocial.musubi.service.MusubiIntentService;
+import mobisocial.musubi.service.WizardStepHandler;
+import mobisocial.musubi.ui.MusubiBaseActivity;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.util.InstrumentedActivity;
+import mobisocial.musubi.util.Util;
 
 public class SettingsFragment extends Fragment {
 	private static MulticastBroadcastTask mMulticastBroadcast;
@@ -404,6 +405,8 @@ public class SettingsFragment extends Fragment {
 	Button devMode_;
 	TextView setRingtone_;
 	TextView vacuumDatabase_;
+	TextView backupToCloud;
+	TextView restoreFromCloud;
 	CheckedTextView globalTVMode_;
 	CheckedTextView shareApps_;
 	CheckedTextView shareContactInfo_;
@@ -436,8 +439,7 @@ public class SettingsFragment extends Fragment {
 		vibrating_ = (CheckedTextView) v.findViewById(R.id.vibrating);
 		anonStats_ = (CheckedTextView) v.findViewById(R.id.report_stats);
 		
-		//by haoyuheng
-		
+		/***
 		cloudstorage = (LinearLayout)v.findViewById(R.id.cloudstorage_section);
 		cloudstorage.setOnClickListener(new OnClickListener() {
 
@@ -449,6 +451,35 @@ public class SettingsFragment extends Fragment {
                 SettingsFragment.this.startActivity(intent); 
 			}
 			
+		});***/
+
+		backupToCloud = (TextView) v.findViewById(R.id.cloud_storage_backup);
+		backupToCloud.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(mActivity, CloudBackupActivity
+						.class);
+				SettingsFragment.this.startActivity(intent);
+			}
+
+		});
+
+		restoreFromCloud = (TextView) v.findViewById(R.id
+				.cloud_storage_restore);
+		restoreFromCloud.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(mActivity, CloudRestoreActivity
+						.class);
+				SettingsFragment.this.startActivity(intent);
+			}
+
 		});
 
 		// connect the global tv mode toggle to the shared preferences

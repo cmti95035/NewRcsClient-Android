@@ -16,21 +16,6 @@
 
 package mobisocial.musubi;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import mobisocial.musubi.feed.presence.Push2TalkPresence;
-import mobisocial.musubi.model.helpers.DatabaseFile;
-import mobisocial.musubi.objects.VoiceObj;
-import mobisocial.musubi.service.MusubiService;
-import mobisocial.socialkit.musubi.Musubi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +36,22 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import mobisocial.musubi.feed.presence.Push2TalkPresence;
+import mobisocial.musubi.model.helpers.DatabaseFile;
+import mobisocial.musubi.objects.VoiceObj;
+import mobisocial.musubi.service.MusubiService;
+import mobisocial.socialkit.musubi.Musubi;
 
 /**
  * Record a voice note after long-pressing the 'volume up' key.

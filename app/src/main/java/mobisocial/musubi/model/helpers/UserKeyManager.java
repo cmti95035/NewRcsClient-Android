@@ -16,6 +16,12 @@
 
 package mobisocial.musubi.model.helpers;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
+
 import mobisocial.crypto.IBEncryptionScheme;
 import mobisocial.crypto.IBHashedIdentity;
 import mobisocial.crypto.IBSignatureScheme;
@@ -23,11 +29,6 @@ import mobisocial.musubi.encoding.NeedsKey;
 import mobisocial.musubi.model.MEncryptionUserKey;
 import mobisocial.musubi.model.MIdentity;
 import mobisocial.musubi.model.MSignatureUserKey;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 
 public class UserKeyManager {
 	final SQLiteOpenHelper databaseSource_;

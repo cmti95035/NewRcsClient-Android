@@ -16,12 +16,31 @@
 
 package mobisocial.musubi.service;
 
-import gnu.trove.procedure.TLongProcedure;
-import gnu.trove.set.hash.TLongHashSet;
+import android.accounts.Account;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.javatuples.Pair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.Date;
 
+import gnu.trove.procedure.TLongProcedure;
+import gnu.trove.set.hash.TLongHashSet;
 import mobisocial.musubi.App;
 import mobisocial.musubi.R;
 import mobisocial.musubi.cloudstorage.Baidu;
@@ -61,26 +80,6 @@ import mobisocial.musubi.provider.TestSettingsProvider;
 import mobisocial.musubi.util.IdentityCache;
 import mobisocial.musubi.util.Util;
 import mobisocial.socialkit.Obj;
-
-import org.javatuples.Pair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.accounts.Account;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Scans for inbound encoded objects that need to be decoded.
@@ -136,7 +135,7 @@ public class MessageDecodeProcessor extends ContentObserver {
     	
 
         dp = new Dropbox();
-        dp.SetAccount(mContext.getApplicationContext());        
+        dp.setAccount(mContext.getApplicationContext());
         baidu = new Baidu();
     	//baidu.SetAccount(mContext);          	
 
@@ -553,7 +552,7 @@ public class MessageDecodeProcessor extends ContentObserver {
                 object.processed_ = false;
                 mObjectManager.insertObject(object);
                 
-                //SaveMessages(object);
+                //saveMessages(object);
 
                 // Grant app access
                 if (!MusubiContentProvider.isSuperApp(obj.appId)) {
@@ -572,12 +571,12 @@ public class MessageDecodeProcessor extends ContentObserver {
             return true;
 		}
 
-		private void SaveMessages(MObject object) {
+		private void saveMessages(MObject object) {
 			// TODO Auto-generated method stub
 			if (dp.hasLinkedAccount()) {
-     			dp.SaveMeseages(object);
+     			dp.saveMessages(object);
      		}else if(baidu.hasLinkedAccount(mContext)){
-     			baidu.SaveMeseages(object,mContext);     			//
+     			baidu.saveMessages(object,mContext);     			//
      		}else{
      			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
      		}

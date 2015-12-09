@@ -16,9 +16,6 @@
 
 package mobisocial.musubi.util;
 
-import java.io.File;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +26,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.util.Log;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * ActivityCallouts will fail if the activity called for a result causes

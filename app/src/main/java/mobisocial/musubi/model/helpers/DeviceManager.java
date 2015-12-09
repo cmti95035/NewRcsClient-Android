@@ -16,16 +16,17 @@
 
 package mobisocial.musubi.model.helpers;
 
-import java.security.SecureRandom;
-
-import mobisocial.musubi.model.MDevice;
-import mobisocial.musubi.model.MIdentity;
-import mobisocial.musubi.model.MMyDeviceName;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+
+import java.security.SecureRandom;
+
+import mobisocial.musubi.model.MDevice;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.MMyDeviceName;
 
 public class DeviceManager extends ManagerBase {
 	SQLiteStatement sqlInsertDevice_;

@@ -16,12 +16,13 @@
 
 package mobisocial.musubi.model.helpers;
 
-import mobisocial.musubi.model.MContactDataVersion;
-import mobisocial.musubi.model.MSyncState;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+
+import mobisocial.musubi.model.MContactDataVersion;
+import mobisocial.musubi.model.MSyncState;
 
 /**
  * manages the state that tracks which email addresses, etc. have

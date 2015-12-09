@@ -16,6 +16,9 @@
 
 package mobisocial.musubi.util;
 
+import android.net.wifi.ScanResult;
+import android.util.Base64;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,9 +45,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-
-import android.net.wifi.ScanResult;
-import android.util.Base64;
 
 public class Util {
 

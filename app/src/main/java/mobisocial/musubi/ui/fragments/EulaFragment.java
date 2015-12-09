@@ -16,15 +16,6 @@
 
 package mobisocial.musubi.ui.fragments;
 
-import java.io.IOException;
-import java.util.HashSet;
-
-import mobisocial.metrics.MusubiMetrics;
-import mobisocial.musubi.App;
-import mobisocial.musubi.R;
-
-import org.apache.commons.io.IOUtils;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -36,7 +27,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.SupportActivity;
-import android.text.Html;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -52,6 +42,15 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.util.HashSet;
+
+import mobisocial.metrics.MusubiMetrics;
+import mobisocial.musubi.App;
+import mobisocial.musubi.R;
 
 public class EulaFragment extends DialogFragment {
 	public interface Callback {

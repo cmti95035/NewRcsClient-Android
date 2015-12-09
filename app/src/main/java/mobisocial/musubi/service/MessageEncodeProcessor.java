@@ -16,10 +16,24 @@
 
 package mobisocial.musubi.service;
 
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.procedure.TLongProcedure;
-import gnu.trove.set.TLongSet;
-import gnu.trove.set.hash.TLongHashSet;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.mobisocial.corral.CorralDownloadClient;
+import org.mobisocial.corral.CryptUtil;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -27,10 +41,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.procedure.TLongProcedure;
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
 import mobisocial.crypto.IBHashedIdentity.Authority;
 import mobisocial.musubi.App;
 import mobisocial.musubi.cloudstorage.Baidu;
-import mobisocial.musubi.cloudstorage.CloudStorageActivity.CloudStorage;
 import mobisocial.musubi.cloudstorage.Dropbox;
 import mobisocial.musubi.encoding.MessageEncoder;
 import mobisocial.musubi.encoding.NeedsKey;
@@ -57,25 +74,6 @@ import mobisocial.musubi.objects.LikeObj;
 import mobisocial.musubi.objects.PictureObj;
 import mobisocial.musubi.provider.TestSettingsProvider;
 import mobisocial.musubi.util.Util;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.mobisocial.corral.CorralDownloadClient;
-import org.mobisocial.corral.CryptUtil;
-
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.ContentObserver;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Scans for outbound objects that need to be encoded. Encodes the messages and
@@ -130,7 +128,7 @@ public class MessageEncodeProcessor extends ContentObserver {
         mDatabaseManager = new DatabaseManager(mContext);
 
         dp = new Dropbox();
-        dp.SetAccount(mContext.getApplicationContext());        
+        dp.setAccount(mContext.getApplicationContext());
         baidu = new Baidu();
     	//baidu.SetAccount(mContext);
         
@@ -333,7 +331,7 @@ public class MessageEncodeProcessor extends ContentObserver {
 
                     Log.e(TAG, object.toString());
                     
-                    //SaveMessages(object);
+                    //saveMessages(object);
                     
                     
                     // check for auto-uploads
@@ -434,13 +432,13 @@ public class MessageEncodeProcessor extends ContentObserver {
             }
         }
 
-		private void SaveMessages(MObject object) {
+		private void saveMessages(MObject object) {
 			// TODO Auto-generated method stub
 			
      		if (dp.hasLinkedAccount()) {
-     			dp.SaveMeseages(object);
+     			dp.saveMessages(object);
      		}else if(baidu.hasLinkedAccount(mContext)){
-     			baidu.SaveMeseages(object,mContext);     			//
+     			baidu.saveMessages(object,mContext);     			//
      		}else{
      			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
      		}

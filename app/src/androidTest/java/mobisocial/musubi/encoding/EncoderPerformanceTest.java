@@ -1,5 +1,8 @@
 package mobisocial.musubi.encoding;
 
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,8 +29,6 @@ import mobisocial.musubi.protocol.Message;
 import mobisocial.musubi.protocol.Recipient;
 import mobisocial.musubi.protocol.Secret;
 import mobisocial.musubi.util.Util;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class EncoderPerformanceTest extends TestBase {
 	final static int R = 229;

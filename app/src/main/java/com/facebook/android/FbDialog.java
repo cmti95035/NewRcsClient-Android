@@ -16,7 +16,6 @@
 
 package com.facebook.android;
 
-import mobisocial.musubi.R;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -37,6 +36,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.android.Facebook.DialogListener;
+
+import mobisocial.musubi.R;
 
 public class FbDialog extends Dialog {
 

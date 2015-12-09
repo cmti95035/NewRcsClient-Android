@@ -16,9 +16,6 @@
 
 package org.mobisocial.corral;
 
-import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
-import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -27,6 +24,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
+
+import org.mobisocial.corral.CorralDownloadHandler.CorralDownloadFuture;
+import org.mobisocial.corral.CorralHelper.DownloadProgressCallback;
 
 public class BackgroundableDownloadDialogFragment extends DialogFragment
         implements DownloadProgressCallback {
