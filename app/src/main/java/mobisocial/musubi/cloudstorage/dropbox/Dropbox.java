@@ -15,7 +15,6 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 
 import mobisocial.musubi.cloudstorage.Cloud;
-import mobisocial.musubi.ui.fragments.SettingsFragment;
 
 /**
  * The new Dropbox storage client using core API.
@@ -30,16 +29,21 @@ public final class Dropbox implements Cloud {
     private static final String ACCOUNT_PREFS_NAME = "prefs";
     private static final String ACCESS_KEY_NAME = "ACCESS_KEY";
     private static final String ACCESS_SECRET_NAME = "ACCESS_SECRET";
-    private static final String BACKUP_DIR = "/backup/";
 
     DropboxAPI<AndroidAuthSession> mApi;
-    private boolean mLoggedIn = false;
-    private boolean backupStarted = false;
+    private boolean hasBackupStarted = false;
+    private boolean hasRestoreStarted = false;
 
-    Context mContext;
+    private Context mContext;
+    private static Dropbox instance;
 
-    public Dropbox(Context ctx){
-        mContext = ctx;
+    private Dropbox(){ }
+
+    public static synchronized Dropbox getInstance() {
+        if (null == instance) {
+            instance = new Dropbox();
+        }
+        return instance;
     }
 
     private void logOut() {
@@ -47,27 +51,28 @@ public final class Dropbox implements Cloud {
         mApi.getSession().unlink();
         // Clear our stored keys
         clearKeys();
-        mLoggedIn = false;
     }
 
-    /*public boolean hasLinkedAccount(Context mContext) {
-        // TODO Auto-generated method stub
-        return mDbxAcctMgr.hasLinkedAccount();
-    }*/
-
-    @Override
-    public void backup() {
+    private void auth(Context ctx) {
         // We create a new AuthSession so that we can use the Dropbox API.
         AndroidAuthSession session = buildSession();
         mApi = new DropboxAPI<AndroidAuthSession>(session);
         checkAppKeySetup();
         mApi.getSession().startOAuth2Authentication(mContext);
-        backupStarted = true;
     }
 
     @Override
-    public void restore() {
+    public void backup(Context ctx) {
+        mContext = ctx;
+        hasBackupStarted = true;
+        auth(mContext);
+    }
 
+    @Override
+    public void restore(Context ctx) {
+        mContext = ctx;
+        hasRestoreStarted = true;
+        auth(mContext);
     }
 
     /**
@@ -76,10 +81,16 @@ public final class Dropbox implements Cloud {
      */
     public void resumeFromAuth() {
 
-        if (!backupStarted) {
-            return;
+        if (hasBackupStarted) {
+            hasBackupStarted = false;
+            doBackup();
+        } else if (hasRestoreStarted) {
+            hasRestoreStarted = false;
+            doRestore();
         }
+    }
 
+    private void doBackup() {
         AndroidAuthSession session = mApi.getSession();
 
         // Dropbox authentication completes properly.
@@ -100,8 +111,12 @@ public final class Dropbox implements Cloud {
         }
     }
 
+    private void doRestore() {
+
+    }
+
     private void upload() {
-        UploadTask uploader = new UploadTask(mContext, mApi, BACKUP_DIR, null);
+        DropboxUploadTask uploader = new DropboxUploadTask(mContext, mApi, BACKUP_DIR, null);
         uploader.execute();
     }
 
@@ -174,7 +189,6 @@ public final class Dropbox implements Cloud {
             edit.putString(ACCESS_KEY_NAME, oauth1AccessToken.key);
             edit.putString(ACCESS_SECRET_NAME, oauth1AccessToken.secret);
             edit.commit();
-            return;
         }
     }
 
@@ -188,7 +202,6 @@ public final class Dropbox implements Cloud {
 
     private AndroidAuthSession buildSession() {
         AppKeyPair appKeyPair = new AppKeyPair(APP_KEY, APP_SECRET);
-
         AndroidAuthSession session = new AndroidAuthSession(appKeyPair);
         loadAuth(session);
         return session;

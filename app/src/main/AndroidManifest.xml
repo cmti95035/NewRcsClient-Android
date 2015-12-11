@@ -383,7 +383,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
+        <!-- activity android:name="com.dropbox.sync.android.DbxAuthActivity" /-->
 		<activity
 			android:name="com.dropbox.client2.android.AuthActivity"
 		  	android:launchMode="singleTask"
@@ -396,11 +396,11 @@
 		  	</intent-filter>
 		</activity>
 
-		<service
+		<!-- service
 		  	android:name="com.dropbox.sync.android.DbxSyncService"
 		  	android:enabled="true"
 		  	android:exported="false"
-		  	android:label="Dropbox Sync" />
+		  	android:label="Dropbox Sync" /-->
 		
 		<service
             android:name="com.baidu.location.f"

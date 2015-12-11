@@ -4,10 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
@@ -24,13 +20,10 @@ import com.dropbox.client2.exception.DropboxUnlinkedException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
-import mobisocial.musubi.App;
-import mobisocial.musubi.model.helpers.DatabaseFile;
+import mobisocial.musubi.cloudstorage.UploadTask;
 
-public class UploadTask extends AsyncTask<Void, Long, Boolean> {
+public class DropboxUploadTask extends UploadTask {
     private DropboxAPI<?> mApi;
     private String mPath;
     private File mFile;
@@ -39,13 +32,11 @@ public class UploadTask extends AsyncTask<Void, Long, Boolean> {
     private UploadRequest mRequest;
     private Context mContext;
     private final ProgressDialog mDialog;
-
-
+    private static final String TAG = "DropboxUploadTask";
     private String mErrorMsg;
     private boolean isDB = false;
 
-
-    public UploadTask(Context context, DropboxAPI<?> api, String
+    public DropboxUploadTask(Context context, DropboxAPI<?> api, String
             dropboxPath, File file) {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
@@ -78,13 +69,13 @@ public class UploadTask extends AsyncTask<Void, Long, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        SQLiteDatabase db = App.getDatabaseSource(mContext)
-                .getWritableDatabase();
         try {
             if (isDB) {
-                db.beginTransaction();
-                mFile = mContext.getDatabasePath(DatabaseFile
-                        .DEFAULT_DATABASE_NAME);
+                mFile = copyDbLocal(mContext, TAG);
+                if (null == mFile) {
+                    mErrorMsg = "Failed to copy file before uploading";
+                    return false;
+                }
                 mFileLen = mFile.length();
             }
 
@@ -92,13 +83,13 @@ public class UploadTask extends AsyncTask<Void, Long, Boolean> {
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
             String timeStamp = String.valueOf(System.currentTimeMillis());
-            String path = mPath + mFile.getName() + timeStamp;
+            String path = mPath + mFile.getName() + "." + timeStamp;
             mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
                         @Override
                         public long progressInterval() {
                             // Update the progress bar every half-second or so
-                            return 500;
+                            return 1000;
                         }
 
                         @Override
@@ -153,17 +144,14 @@ public class UploadTask extends AsyncTask<Void, Long, Boolean> {
             // Unknown error
             mErrorMsg = "Unknown error.  Try again.";
         } catch (FileNotFoundException e) {
-        } finally {
-            if (isDB) {
-                db.endTransaction();
-            }
         }
         return false;
     }
 
     @Override
     protected void onProgressUpdate(Long... progress) {
-        int percent = (int) (100.0 * (double) progress[0] / mFileLen + 0.5);
+        int percent = (int) ((UP_LOAD_WEIGHT * (double) progress[0] /
+                mFileLen + UP_COPY_WEIGHT) * 100.0 + 0.5);
         mDialog.setProgress(percent);
     }
 

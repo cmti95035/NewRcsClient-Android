@@ -45,8 +45,8 @@ public class AccessTokenManager implements Parcelable {
     public AccessTokenManager(Parcel source) {
         Bundle bundle = Bundle.CREATOR.createFromParcel(source);
         if (bundle != null) {
-            this.accessToken = bundle.getString(KEY_ACCESS_TOKEN);
-            this.expireTime = bundle.getLong(KEY_EXPIRE_TIME);
+            accessToken = bundle.getString(KEY_ACCESS_TOKEN);
+            expireTime = bundle.getLong(KEY_EXPIRE_TIME);
         }
         compareWithConfig();
     }
@@ -72,7 +72,7 @@ public class AccessTokenManager implements Parcelable {
 
     }
 
-    protected static void initToken(Context mcontext) {
+    public static void initToken(Context mcontext) {
     	context = mcontext;
         compareWithConfig();
         SharedPreferences sp = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE);
@@ -90,7 +90,7 @@ public class AccessTokenManager implements Parcelable {
 
     }
 
-    protected static void clearToken() {
+    public static void clearToken() {
         Editor editor = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE).edit();
         editor.remove(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN);
         editor.remove(BAIDU_SDK_CONFIG_PROP_CREATE_TIME);
@@ -100,7 +100,7 @@ public class AccessTokenManager implements Parcelable {
         expireTime = 0;
     }
 
-    protected void storeToken(Bundle values) {
+    public void storeToken(Bundle values) {
         if (values == null || values.isEmpty()) {
             return;
         }
@@ -114,7 +114,7 @@ public class AccessTokenManager implements Parcelable {
         editor.commit();
 
     }
-    protected static void storeToken(BaiduOAuthResponse values) {
+    public static void storeToken(BaiduOAuthResponse values) {
         if (values == null) {
             return;
         }
@@ -137,11 +137,11 @@ public class AccessTokenManager implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         Bundle bundle = new Bundle();
-        if (this.accessToken != null) {
-            bundle.putString(KEY_ACCESS_TOKEN, this.accessToken);
+        if (accessToken != null) {
+            bundle.putString(KEY_ACCESS_TOKEN, accessToken);
         }
-        if (this.expireTime != 0) {
-            bundle.putLong(KEY_EXPIRE_TIME, this.expireTime);
+        if (expireTime != 0) {
+            bundle.putLong(KEY_EXPIRE_TIME, expireTime);
         }
         bundle.writeToParcel(dest, flags);
     }
@@ -160,7 +160,7 @@ public class AccessTokenManager implements Parcelable {
 
     };
 
-    protected static boolean isSessionVaild(Context mContext)  {
+    public static boolean isSessionVaild(Context mContext)  {
         if (accessToken == null || expireTime == 0) {
             initToken(mContext);
         }

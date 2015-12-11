@@ -24,7 +24,7 @@ import java.io.RandomAccessFile;
 import mobisocial.musubi.model.MObject;
 import mobisocial.musubi.objects.PictureObj;
 
-public class Baidu implements CloudStorage, Cloud {
+public class Baidu implements CloudStorage{
 
 	// the api key
     /*
@@ -51,7 +51,7 @@ public class Baidu implements CloudStorage, Cloud {
 	@Override
 	public void login(final Context context, int resultcode) {		// TODO
 	// Auto-generated method stub
-	   
+
 		BaiduOAuth oauthClient = new BaiduOAuth();		
 		oauthClient.startOAuth(context, mbApiKey, new BaiduOAuth.OAuthListener() {
 			@Override
@@ -109,20 +109,6 @@ public class Baidu implements CloudStorage, Cloud {
     	}
 	}
 	
-	 private void mkdir(final String path1){
-	    	if(null != mbOauth){
-	    		Thread workThread = new Thread(new Runnable(){
-					public void run() {
-			    		BaiduPCSClient api = new BaiduPCSClient();
-			    		api.setAccessToken(mbOauth);
-			    		String path = mbRootPath + "/" + path1;
-			    		final BaiduPCSActionInfo.PCSFileInfoResponse ret = api.makeDir(path);			    		
-					}
-				});				 
-	    		workThread.start();
-	    	}
-	 }
-
 	@Override
 	public boolean hasLinkedAccount(Context mContext) {
 		// TODO Auto-generated method stub
@@ -267,19 +253,4 @@ public class Baidu implements CloudStorage, Cloud {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-    public void backup() {
-
-    }
-
-    @Override
-    public void restore() {
-
-    }
-
-    //@Override
-    public void save() {
-
-    }
 }

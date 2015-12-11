@@ -32,10 +32,8 @@ public class CloudStorageActivity extends Activity {
 	
     private static final int REQUEST_LINK_TO_DBX = 0;
     
-    private static String baiduApiKey = "jmWK4EfYlQtMpUbWcU2GRlWF"; //your api_key";
     public static String baiduAccessToken = null;
-    
-    
+
 	public  enum CloudStorage {NONE,DROPBOX,BAIDU};
 	public static CloudStorage CurrentCloudStorage = CloudStorage.NONE;
 	ListView cloud_storage_list ;
@@ -191,7 +189,7 @@ public class CloudStorageActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			ViewHolder holder = null;
+			ViewHolder holder;
             if (convertView == null) {
                  
                 holder=new ViewHolder();  
