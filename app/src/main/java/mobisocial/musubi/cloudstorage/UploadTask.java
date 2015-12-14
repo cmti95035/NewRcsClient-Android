@@ -28,7 +28,7 @@ public abstract class UploadTask extends AsyncTask<Void, Long, Boolean> {
 
     protected static final float UP_COPY_WEIGHT = 0.2f;
     protected static final float UP_LOAD_WEIGHT = 0.8f;
-    protected static final String LOCAL_DIR = "/temp/";
+    protected static final String LOCAL_BACKUP_DIR = "/temp/backup/";
 
     protected File copyDbLocal(Context myActivity, String TAG) {
         FileInputStream in = null;
@@ -45,7 +45,7 @@ public abstract class UploadTask extends AsyncTask<Void, Long, Boolean> {
 
             String extStorageDirectory = Environment
                     .getExternalStorageDirectory().toString()
-                    + LOCAL_DIR;
+                    + LOCAL_BACKUP_DIR;
             File backupDB = new File(extStorageDirectory, DatabaseFile.DEFAULT_DATABASE_NAME);
             File fileDirectory = new File(extStorageDirectory);
             fileDirectory.mkdirs();

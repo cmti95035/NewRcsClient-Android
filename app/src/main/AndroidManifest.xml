@@ -375,12 +375,17 @@
 
         <activity
             android:name="mobisocial.musubi.cloudstorage.CloudBackupActivity"
-            android:label="@string/app_name" >
+            android:label="Backup" >
         </activity>
 
         <activity
             android:name="mobisocial.musubi.cloudstorage.CloudRestoreActivity"
-            android:label="@string/app_name" >
+            android:label="Restore" >
+        </activity>
+
+        <activity
+            android:name="mobisocial.musubi.cloudstorage.dropbox.DropboxListActivity"
+            android:label="File List" >
         </activity>
 
         <!-- activity android:name="com.dropbox.sync.android.DbxAuthActivity" /-->

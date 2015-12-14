@@ -11,8 +11,12 @@ import android.widget.Toast;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.android.AuthActivity;
+import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mobisocial.musubi.cloudstorage.Cloud;
 
@@ -83,14 +87,14 @@ public final class Dropbox implements Cloud {
 
         if (hasBackupStarted) {
             hasBackupStarted = false;
-            doBackup();
+            postAuth(true);
         } else if (hasRestoreStarted) {
             hasRestoreStarted = false;
-            doRestore();
+            postAuth(false);
         }
     }
 
-    private void doBackup() {
+    private void postAuth(Boolean isBackup) {
         AndroidAuthSession session = mApi.getSession();
 
         // Dropbox authentication completes properly.
@@ -102,17 +106,24 @@ public final class Dropbox implements Cloud {
                 // Store it locally in our app for later use
                 storeAuth(session);
 
-                // Backup files now
-                upload();
+                // Backup, upload files
+                if (isBackup) {
+                    upload();
+                } else {    // Restore, download file
+                    // first, expand files to be select
+                    // upon selection, download file and restore it
+                    download();
+                }
             } catch (IllegalStateException e) {
                 showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
-                Log.i(TAG, "Error authenticating", e);
+                Log.e(TAG, "Error authenticating", e);
             }
         }
     }
 
-    private void doRestore() {
-
+    private void download() {
+        DropboxListTask lister = new DropboxListTask(mContext, mApi, BACKUP_DIR);
+        lister.execute();
     }
 
     private void upload() {

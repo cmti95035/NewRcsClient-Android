@@ -51,7 +51,7 @@
 
     <string name="about_intro">This application was developed by the Mobisocial Lab at Stanford University (http://mobisocial.stanford.edu). \n\nIcons from www.freeiconsweb.com/</string>
     <string name="search_intro">Content for the Search page goes here.</string>
-    
+
     <!--  ZXing -->
     <string name="menu_share">Share</string>
     <string name="msg_unmount_usb">Sorry, the SD card is not accessible.</string>
@@ -116,6 +116,8 @@
     <string name="country_code">+</string>
     <string name="cloud_storage_description">Please select a cloud
         storage provider from the list.</string>
+    <string name="file_list_description">Please select a backup file from the
+        list.</string>
     <string name="wrong_ip">The IP address entered is NOT well formed. Please try again!</string>
     <string name="no_ads_server">Please set ads server IP address first!</string>
     <string name="show_ads">Show Ads</string>

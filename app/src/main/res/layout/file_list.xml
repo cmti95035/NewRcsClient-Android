@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/cloud_storage_list_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -13,17 +12,16 @@
         android:paddingLeft="8.0dip">
 
         <TextView
-            android:id="@+id/storage_description"
+            android:id="@+id/file_list_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10.0dip"
             android:layout_marginTop="20.0dip"
-            android:text="@string/cloud_storage_description"
+            android:text="@string/file_list_description"
             android:textColor="#ff7d7d7d"
             android:textSize="17.0sp"/>
 
         <View
-            android:id="@+id/cloud_storage_list_top_divider"
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
             android:layout_marginLeft="1.0dip"
@@ -32,7 +30,7 @@
             android:background="@drawable/cloudstorage_fragment_list_divider"/>
 
         <ListView
-            android:id="@+id/cloud_storage_list"
+            android:id="@+id/file_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1.0dip"
@@ -41,7 +39,6 @@
             android:dividerHeight="1.0dip"/>
 
         <View
-            android:id="@+id/cloud_storage_list_top_divider"
             android:layout_width="fill_parent"
             android:layout_height="1.0dip"
             android:layout_marginLeft="1.0dip"

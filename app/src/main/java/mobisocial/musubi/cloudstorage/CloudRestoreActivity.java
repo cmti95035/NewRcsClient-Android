@@ -1,32 +1,22 @@
 package mobisocial.musubi.cloudstorage;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import mobisocial.musubi.R;
-import mobisocial.musubi.cloudstorage.baidu.*;
-import mobisocial.musubi.cloudstorage.dropbox.*;
+import mobisocial.musubi.cloudstorage.dropbox.DropboxListActivity;
+import mobisocial.musubi.cloudstorage.dropbox.DropboxListTask;
 
 public class CloudRestoreActivity extends Activity {
 
     private static final String TAG = "CloudRestoreActivity";
     static CloudAdapter adapter;
 
-    ListView cloud_storage_list ;
+    ListView cloud_storage_list;
     AdapterView.OnItemClickListener listener;
     Cloud mCloud = null;
 
@@ -35,29 +25,29 @@ public class CloudRestoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cloud_storage);
 
-        AccessTokenManager.initToken(this);
-
-        cloud_storage_list = (ListView)this.findViewById(R.id.cloud_storage_list);
+        cloud_storage_list = (ListView) this.findViewById(R.id.cloud_storage_list);
         adapter = new CloudAdapter(this);
         cloud_storage_list.setAdapter(adapter);
-        listener = new AdapterView.OnItemClickListener(){
+        listener = new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
 
-                switch(arg2){
+                switch (arg2) {
                     case 0:
                         mCloud = mobisocial.musubi.cloudstorage.dropbox.Dropbox.getInstance();
                         break;
                     case 1:
+                        AccessTokenManager.initToken(CloudRestoreActivity
+                                .this);
                         mCloud = mobisocial.musubi.cloudstorage.baidu.Baidu.getInstance();
                         break;
                     default:
                         mCloud = null;
                 }
-                if ( null!=mCloud ) {
-                    mCloud.backup(CloudRestoreActivity.this);
+                if (null != mCloud) {
+                    mCloud.restore(CloudRestoreActivity.this);
                 }
             }
         };
@@ -71,5 +61,12 @@ public class CloudRestoreActivity extends Activity {
             ((mobisocial.musubi.cloudstorage.dropbox.Dropbox) mCloud)
                     .resumeFromAuth();
         }
+    }
+
+    public void onListingReceived(String[] files, long[] lens) {
+        Intent intent = new Intent(this, DropboxListActivity.class);
+        intent.putExtra(DropboxListTask.DROPBOX_FILE_NAMES,files);
+        intent.putExtra(DropboxListTask.DROPBOX_FILE_LENGTHS,lens);
+        startActivity(intent);
     }
 }

@@ -52,6 +52,8 @@ public class CloudBackupActivity extends Activity {
                             mCloud = Dropbox.getInstance();
                             break;
                         case 1:
+                            AccessTokenManager.initToken(CloudBackupActivity
+                                    .this);
                             mCloud = Baidu.getInstance();
                             break;
                         default:
