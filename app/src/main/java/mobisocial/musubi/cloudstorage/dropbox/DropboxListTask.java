@@ -3,7 +3,6 @@ package mobisocial.musubi.cloudstorage.dropbox;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -23,10 +22,7 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
     private Context mContext;
     private DropboxAPI<?> mApi;
     private String mPath;
-    private long[] mLens;
-
-    public static final String DROPBOX_FILE_NAMES = "DropboxFileNames";
-    public static final String DROPBOX_FILE_LENGTHS = "DropboxFileLengths";
+    private List<Long> mLens = new ArrayList<Long> ();
 
     public DropboxListTask(Context context, DropboxAPI<?> api, String path) {
 
@@ -55,7 +51,7 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
 
             for (DropboxAPI.Entry ent : dirent.contents) {
                 fnames.add(ent.path);
-                mLens[i++] = ent.bytes;
+                mLens.add(ent.bytes);
             }
         } catch (DropboxException e) {
             mErrorMsg = "Unable to retrieve directory info. " + e.toString();
@@ -79,8 +75,14 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
             if (result != null && result.size() > 0) {
                 if (mContext instanceof CloudRestoreActivity) {
                     String[] res = result.toArray(new String[0]);
-                    ((CloudRestoreActivity) mContext).onListingReceived(res,
-                            mLens);
+                    int size = mLens.size();
+                    long[] lens = new long[size];
+                    for ( int i= 0; i<size; i++) {
+                        lens[i] = mLens.get(i);
+                    }
+                    ((CloudRestoreActivity) mContext).onDropboxListingReceived
+                            (res,
+                            lens);
                 }
             } else {
                 showToast("No buck-up found on Dropbox.");

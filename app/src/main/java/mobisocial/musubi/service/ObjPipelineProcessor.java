@@ -259,10 +259,10 @@ class ObjPipelineProcessor extends ContentObserver {
 	            resolver.notifyChange(MusubiContentProvider.uriForItem(Provided.OBJECTS, id), this);
 	            mNotificationHandler.handle(helper, sender.owned_, obj);
 	            
-	            if(!object.feedsnap_){
+	            /*if(!object.feedsnap_){
 	            	//save im cloud
 	            	saveMessages(object);
-	            }
+	            }*/
 	            
 	            
         	} catch(Exception e) {
@@ -320,7 +320,7 @@ class ObjPipelineProcessor extends ContentObserver {
 	}
 
 	
-	private void saveMessages(MObject object) {
+	/*private void saveMessages(MObject object) {
 		// TODO Auto-generated method stub
 		if (dp.hasLinkedAccount()) {
 			Log.e(TAG,"dropbox linked");
@@ -330,7 +330,7 @@ class ObjPipelineProcessor extends ContentObserver {
  		}else{
  			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
  		}
-	}
+	}*/
     
     DbObj getDbObj(MObject object, JSONObject json) throws JSONException {
         String appId = mDatabaseManager.getAppManager().getAppIdentifier(object.appId_);

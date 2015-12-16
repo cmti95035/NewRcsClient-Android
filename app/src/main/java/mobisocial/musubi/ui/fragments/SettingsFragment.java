@@ -731,8 +731,12 @@ public class SettingsFragment extends Fragment {
 				}
 				in.close();
 				out.close();
+
+
 				//kill because the process so that it restarts and finishes the restore
-				
+				helper_.getWritableDatabase().endTransaction();
+				helper_.close();
+
 				SharedPreferences settings = mActivity.getSharedPreferences(WizardStepHandler.WIZARD_PREFS_NAME, 0);
             	SharedPreferences.Editor editor = settings.edit();
     	    	editor.putBoolean(WizardStepHandler.DO_RESTORE, true);
@@ -744,6 +748,7 @@ public class SettingsFragment extends Fragment {
 				Log.e(TAG, "Failure restoring from SD card", e);
 				return e;
 	        } finally {
+
 	        	try {
 					if(in != null) out.close();
 					if(out != null) out.close();

@@ -32,6 +32,7 @@ import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.obj.MemObj;
 
 public class TestDatabase extends DatabaseManager {
+
     final Random random;
     final MDevice localDevice;
 

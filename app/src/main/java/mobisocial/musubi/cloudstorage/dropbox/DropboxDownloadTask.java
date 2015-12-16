@@ -2,6 +2,10 @@ package mobisocial.musubi.cloudstorage.dropbox;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.*;
+import android.os.Process;
 import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
@@ -17,8 +21,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import mobisocial.musubi.App;
 import mobisocial.musubi.cloudstorage.DownloadTask;
 import mobisocial.musubi.model.helpers.DatabaseFile;
+import mobisocial.musubi.service.WizardStepHandler;
 
 public class DropboxDownloadTask extends DownloadTask {
 
@@ -30,7 +36,7 @@ public class DropboxDownloadTask extends DownloadTask {
     private String mErrorMsg;
 
     public DropboxDownloadTask(Context context, DropboxAPI<?> api,
-                               String dropboxPath, int length) {
+                               String dropboxPath, long length) {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
@@ -39,6 +45,9 @@ public class DropboxDownloadTask extends DownloadTask {
         mFileLen = length;
 
         mDialog = new ProgressDialog(context);
+        mDialog.setMax(100);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mDialog.setProgress(0);
         mDialog.setMessage("Downloading file");
         mDialog.setCancelable(false);
         mDialog.show();
@@ -47,12 +56,24 @@ public class DropboxDownloadTask extends DownloadTask {
     @Override
     protected String doInBackground(Void... params) {
         FileOutputStream fos = null;
+        SQLiteOpenHelper helper = App.getDatabaseSource(mContext);
 
         try {
-            File file = new File(LOCAL_RESTORE_DIR, DatabaseFile
-                    .DEFAULT_DATABASE_NAME);
+            helper.getWritableDatabase().beginTransaction();
+            /* String extStorageDirectory = Environment
+                    .getExternalStorageDirectory().toString()
+                    + LOCAL_RESTORE_DIR;
 
-            fos = new FileOutputStream(file);
+            File fileDirectory = new File(extStorageDirectory);
+            fileDirectory.mkdirs();
+
+            File file = new File(extStorageDirectory, DatabaseFile
+                    .DEFAULT_DATABASE_NAME);*/
+
+            File oldDb = mContext.getDatabasePath(DatabaseFile
+                    .DEFAULT_DATABASE_NAME + ".torestore");
+
+            fos = new FileOutputStream(oldDb);
             DropboxAPI.DropboxFileInfo info = mApi.getFile(mPath, null,
                     fos, new ProgressListener() {
                         @Override
@@ -66,6 +87,18 @@ public class DropboxDownloadTask extends DownloadTask {
                             publishProgress(bytes);
                         }
                     });
+
+            helper.getWritableDatabase().endTransaction();
+            helper.close();
+
+            SharedPreferences settings = mContext.getSharedPreferences
+                    (WizardStepHandler.WIZARD_PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(WizardStepHandler.DO_RESTORE, true);
+            editor.commit();
+
+            android.os.Process.killProcess(Process.myPid());
+            return null;
 
         } catch (DropboxUnlinkedException e) {
             // The AuthSession wasn't properly authenticated or user unlinked.
@@ -111,7 +144,7 @@ public class DropboxDownloadTask extends DownloadTask {
             // Unknown error
             mErrorMsg = "Unknown error.  Try again.";
         } catch (Exception e) {
-            mErrorMsg = "Unknown non-dropbox error.  Try again.";
+            mErrorMsg = "Unknown non-dropbox error: " + e.toString();
         } finally {
             if (fos != null) {
                 try {
@@ -119,9 +152,9 @@ public class DropboxDownloadTask extends DownloadTask {
                 } catch (IOException e) {
                 }
             }
-            if (null == mErrorMsg) {
+            /*if (null == mErrorMsg) {
                 mErrorMsg = restoreDB();
-            }
+            }*/
         }
         return mErrorMsg;
     }

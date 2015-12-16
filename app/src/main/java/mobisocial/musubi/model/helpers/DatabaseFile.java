@@ -146,7 +146,18 @@ public class DatabaseFile extends SQLiteOpenHelper {
 		}
 		boolean ok = backup.renameTo(db);
 		if(!ok) {
-			Toast.makeText(context, "Could not restore backup", Toast.LENGTH_SHORT).show();
+
+			File wal = new File(db.getPath() + "-wal");
+			if (wal.exists()) {
+				wal.delete();
+			}
+			File shm = new File(db.getPath() + "-shm");
+			if (shm.exists()) {
+				shm.delete();
+			}
+			Log.e(TAG, "Could not restore backup, rename operation failed");
+		} else {
+			Log.i(TAG, "Restore backup succeeded! Rename operation succeeded!");
 		}
 		return dbName;
 	}

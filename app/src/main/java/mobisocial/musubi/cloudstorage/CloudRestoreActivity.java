@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import mobisocial.musubi.R;
 import mobisocial.musubi.cloudstorage.dropbox.DropboxListActivity;
-import mobisocial.musubi.cloudstorage.dropbox.DropboxListTask;
 
 public class CloudRestoreActivity extends Activity {
 
@@ -63,10 +62,10 @@ public class CloudRestoreActivity extends Activity {
         }
     }
 
-    public void onListingReceived(String[] files, long[] lens) {
+    public void onDropboxListingReceived(String[] files, long[] lens) {
         Intent intent = new Intent(this, DropboxListActivity.class);
-        intent.putExtra(DropboxListTask.DROPBOX_FILE_NAMES,files);
-        intent.putExtra(DropboxListTask.DROPBOX_FILE_LENGTHS,lens);
+        intent.putExtra(DropboxListActivity.DROPBOX_FILE_NAMES,files);
+        intent.putExtra(DropboxListActivity.DROPBOX_FILE_LENGTHS,lens);
         startActivity(intent);
     }
 }

@@ -571,7 +571,7 @@ public class MessageDecodeProcessor extends ContentObserver {
             return true;
 		}
 
-		private void saveMessages(MObject object) {
+		/*private void saveMessages(MObject object) {
 			// TODO Auto-generated method stub
 			if (dp.hasLinkedAccount()) {
      			dp.saveMessages(object);
@@ -580,6 +580,6 @@ public class MessageDecodeProcessor extends ContentObserver {
      		}else{
      			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
      		}
-		}
+		}*/
 	}
 }

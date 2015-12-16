@@ -43,8 +43,8 @@ public abstract class DownloadTask extends AsyncTask<Void, Long, String> {
 
 
             File newDb = new File(dbPath);
-            File oldDb = mContext.getDatabasePath(DatabaseFile
-                    .DEFAULT_DATABASE_NAME + ".torestore");
+            File oldDb = mContext.getApplicationContext().getDatabasePath
+                    (DatabaseFile.DEFAULT_DATABASE_NAME + ".torestore");
             if (!newDb.exists()) {
                 throw new RuntimeException("Backup database not found");
             }
@@ -70,17 +70,18 @@ public abstract class DownloadTask extends AsyncTask<Void, Long, String> {
             editor.putBoolean(WizardStepHandler.DO_RESTORE, true);
             editor.commit();
 
-            android.os.Process.killProcess(Process.myPid());
+            Process.killProcess(Process.myPid());
             return null;
         } catch (Exception e) {
             Log.e(TAG, "Failure restoring from SD card", e);
             return e.toString();
         } finally {
+            helper_.getWritableDatabase().endTransaction();
             try {
                 if (in != null) out.close();
                 if (out != null) out.close();
             } catch (IOException e) {
-                Log.e(TAG, "failed to close streams for backup", e);
+                Log.e(TAG, "failed to close streams for restore", e);
             }
         }
     }

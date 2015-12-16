@@ -47,7 +47,7 @@ public class FileAdapter extends BaseAdapter {
     @Override
     public Object getItem(int arg0) {
         // TODO Auto-generated method stub
-        return null;
+        return mData.get(arg0);
     }
 
     @Override

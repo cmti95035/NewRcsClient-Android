@@ -432,7 +432,7 @@ public class MessageEncodeProcessor extends ContentObserver {
             }
         }
 
-		private void saveMessages(MObject object) {
+		/*private void saveMessages(MObject object) {
 			// TODO Auto-generated method stub
 			
      		if (dp.hasLinkedAccount()) {
@@ -442,7 +442,7 @@ public class MessageEncodeProcessor extends ContentObserver {
      		}else{
      			Toast.makeText(mContext.getApplicationContext(),"Please connect to the cloud storage first if you want to upload the history in yout cloud", Toast.LENGTH_LONG).show();
      		}
-		}
+		}*/
 
 		private void SaveImages() {
 			// TODO Auto-generated method stub

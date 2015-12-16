@@ -11,18 +11,13 @@ import android.widget.Toast;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.android.AuthActivity;
-import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import mobisocial.musubi.cloudstorage.Cloud;
 
 /**
  * The new Dropbox storage client using core API.
- *
  */
 public final class Dropbox implements Cloud {
 
@@ -41,7 +36,8 @@ public final class Dropbox implements Cloud {
     private Context mContext;
     private static Dropbox instance;
 
-    private Dropbox(){ }
+    private Dropbox() {
+    }
 
     public static synchronized Dropbox getInstance() {
         if (null == instance) {
@@ -55,6 +51,10 @@ public final class Dropbox implements Cloud {
         mApi.getSession().unlink();
         // Clear our stored keys
         clearKeys();
+    }
+
+    public DropboxAPI<AndroidAuthSession> getApi() {
+        return mApi;
     }
 
     private void auth(Context ctx) {
@@ -98,7 +98,7 @@ public final class Dropbox implements Cloud {
         AndroidAuthSession session = mApi.getSession();
 
         // Dropbox authentication completes properly.
-        if (null!=session && session.authenticationSuccessful()) {
+        if (null != session && session.authenticationSuccessful()) {
             try {
                 // Mandatory call to complete the auth
                 session.finishAuthentication();
@@ -115,19 +115,22 @@ public final class Dropbox implements Cloud {
                     download();
                 }
             } catch (IllegalStateException e) {
-                showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
+                showToast("Couldn't authenticate with Dropbox:" + e
+                        .getLocalizedMessage());
                 Log.e(TAG, "Error authenticating", e);
             }
         }
     }
 
     private void download() {
-        DropboxListTask lister = new DropboxListTask(mContext, mApi, BACKUP_DIR);
+        DropboxListTask lister = new DropboxListTask(mContext, mApi,
+                BACKUP_DIR);
         lister.execute();
     }
 
     private void upload() {
-        DropboxUploadTask uploader = new DropboxUploadTask(mContext, mApi, BACKUP_DIR, null);
+        DropboxUploadTask uploader = new DropboxUploadTask(mContext, mApi,
+                BACKUP_DIR, null);
         uploader.execute();
     }
 
@@ -153,8 +156,10 @@ public final class Dropbox implements Cloud {
     }
 
     /**
-     * Shows keeping the access keys returned from Trusted Authenticator in a local
-     * store, rather than storing user name & password, and re-authenticating each
+     * Shows keeping the access keys returned from Trusted Authenticator in a
+     * local
+     * store, rather than storing user name & password, and re-authenticating
+     * each
      * time (which is not to be done, ever).
      */
     private void loadAuth(AndroidAuthSession session) {
@@ -162,10 +167,13 @@ public final class Dropbox implements Cloud {
                 (ACCOUNT_PREFS_NAME, 0);
         String key = prefs.getString(ACCESS_KEY_NAME, null);
         String secret = prefs.getString(ACCESS_SECRET_NAME, null);
-        if (key == null || secret == null || key.length() == 0 || secret.length() == 0) return;
+        if (key == null || secret == null || key.length() == 0 || secret
+                .length() == 0)
+            return;
 
         if (key.equals("oauth2:")) {
-            // If the key is set to "oauth2:", then we can assume the token is for OAuth 2.
+            // If the key is set to "oauth2:", then we can assume the token
+            // is for OAuth 2.
             session.setOAuth2AccessToken(secret);
         } else {
             // Still support using old OAuth 1 tokens.
@@ -174,8 +182,10 @@ public final class Dropbox implements Cloud {
     }
 
     /**
-     * Shows keeping the access keys returned from Trusted Authenticator in a local
-     * store, rather than storing user name & password, and re-authenticating each
+     * Shows keeping the access keys returned from Trusted Authenticator in a
+     * local
+     * store, rather than storing user name & password, and re-authenticating
+     * each
      * time (which is not to be done, ever).
      */
     private void storeAuth(AndroidAuthSession session) {
@@ -190,7 +200,8 @@ public final class Dropbox implements Cloud {
             edit.commit();
             return;
         }
-        // Store the OAuth 1 access token, if there is one.  This is only necessary if
+        // Store the OAuth 1 access token, if there is one.  This is only
+        // necessary if
         // you're still using OAuth 1.
         AccessTokenPair oauth1AccessToken = session.getAccessTokenPair();
         if (oauth1AccessToken != null) {
