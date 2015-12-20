@@ -41,7 +41,7 @@ public class DropboxUploadTask extends UploadTask {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
-        if (null==file) {
+        if (null == file) {
             isDB = true;
         } else {
             mFile = file;
@@ -58,12 +58,12 @@ public class DropboxUploadTask extends UploadTask {
         mDialog.setProgress(0);
         mDialog.setButton(ProgressDialog.BUTTON_POSITIVE, "Cancel", new
                 OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // This will cancel the putFile operation
-                mRequest.abort();
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // This will cancel the putFile operation
+                        mRequest.abort();
+                    }
+                });
         mDialog.show();
     }
 
@@ -71,9 +71,9 @@ public class DropboxUploadTask extends UploadTask {
     protected Boolean doInBackground(Void... params) {
         try {
             if (isDB) {
-                mFile = copyDbLocal(mContext, TAG);
+                mFile = getDBFile(mContext,TAG);
                 if (null == mFile) {
-                    mErrorMsg = "Failed to copy file before uploading";
+                    mErrorMsg = "Failed to prepare file before uploading";
                     return false;
                 }
                 mFileLen = mFile.length();
@@ -82,8 +82,7 @@ public class DropboxUploadTask extends UploadTask {
             // By creating a request, we get a handle to the putFile operation,
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
-            String timeStamp = String.valueOf(System.currentTimeMillis());
-            String path = mPath + mFile.getName() + "." + timeStamp;
+            String path = mPath + mFile.getName();
             mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
                         @Override
@@ -94,7 +93,10 @@ public class DropboxUploadTask extends UploadTask {
 
                         @Override
                         public void onProgress(long bytes, long total) {
-                            publishProgress(bytes);
+                            int prog = (int) (bytes / mFileLen *
+                                    UP_LOAD_WEIGHT) +
+                                    UP_COPY_WEIGHT + UP_ENCRYPT_WEIGHT;
+                            publishProgress(prog);
                         }
                     });
 
@@ -149,15 +151,16 @@ public class DropboxUploadTask extends UploadTask {
     }
 
     @Override
-    protected void onProgressUpdate(Long... progress) {
-        int percent = (int) ((UP_LOAD_WEIGHT * (double) progress[0] /
-                mFileLen + UP_COPY_WEIGHT) * 100.0 + 0.5);
-        mDialog.setProgress(percent);
+    protected void onProgressUpdate(Integer... progress) {
+        mDialog.setProgress(progress[0].intValue());
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
         mDialog.dismiss();
+        if ( null != mFile) {
+            mFile.delete();
+        }
         if (result) {
             showToast("Backup successfully uploaded");
         } else {

@@ -63,13 +63,14 @@ public class BaiduUploadTask extends UploadTask {
             BaiduPCSClient api = new BaiduPCSClient();
             api.setAccessToken(AccessTokenManager.getAccessToken());
 
+
             final BaiduPCSActionInfo.PCSFileInfoResponse response =
                     api.uploadFile(mFile.getAbsolutePath(), path, new
                             BaiduPCSStatusListener() {
 
                         @Override
                         public void onProgress(long bytes, long total) {
-                            publishProgress(bytes);
+                            publishProgress((int) bytes);
                         }
 
                         @Override
@@ -91,7 +92,7 @@ public class BaiduUploadTask extends UploadTask {
 
 
     @Override
-    protected void onProgressUpdate(Long... progress) {
+    protected void onProgressUpdate(Integer... progress) {
         int percent = (int) ((UP_LOAD_WEIGHT  * (double) progress[0] /
                 mFileLen + UP_COPY_WEIGHT)* 100.0 + 0.5);
         mDialog.setProgress(percent);

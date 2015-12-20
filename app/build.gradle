@@ -55,4 +55,8 @@ dependencies {
     compile files('libs/commons-validator-1.4.1.jar')
     compile files('libs/dropbox-android-sdk-1.6.3.jar')
     compile files('libs/json_simple-1.1.jar')
+    compile files('libs/api-data-template.jar')
+    compile files('libs/api-rest-client.jar')
+    compile files('libs/conceal_android.jar')
+    compile files('libs/libconceal.jar')
 }

@@ -11,4 +11,5 @@ public interface Cloud {
     int STORAGE_BAIDU = 2;
 
     String BACKUP_DIR = "/backup/";
+    String ENCRYPT_FILE_POSTFIX = "_backup";
 }

@@ -60,16 +60,6 @@ public class DropboxDownloadTask extends DownloadTask {
 
         try {
             helper.getWritableDatabase().beginTransaction();
-            /* String extStorageDirectory = Environment
-                    .getExternalStorageDirectory().toString()
-                    + LOCAL_RESTORE_DIR;
-
-            File fileDirectory = new File(extStorageDirectory);
-            fileDirectory.mkdirs();
-
-            File file = new File(extStorageDirectory, DatabaseFile
-                    .DEFAULT_DATABASE_NAME);*/
-
             File oldDb = mContext.getDatabasePath(DatabaseFile
                     .DEFAULT_DATABASE_NAME + ".torestore");
 
@@ -91,12 +81,7 @@ public class DropboxDownloadTask extends DownloadTask {
             helper.getWritableDatabase().endTransaction();
             helper.close();
 
-            SharedPreferences settings = mContext.getSharedPreferences
-                    (WizardStepHandler.WIZARD_PREFS_NAME, 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean(WizardStepHandler.DO_RESTORE, true);
-            editor.commit();
-
+            storePref();
             android.os.Process.killProcess(Process.myPid());
             return null;
 
@@ -152,9 +137,6 @@ public class DropboxDownloadTask extends DownloadTask {
                 } catch (IOException e) {
                 }
             }
-            /*if (null == mErrorMsg) {
-                mErrorMsg = restoreDB();
-            }*/
         }
         return mErrorMsg;
     }
