@@ -40,7 +40,18 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected static final int UP_LOAD_WEIGHT = 50;
     protected static final String LOCAL_BACKUP_DIR = "/temp/backup/";
 
+
+    /* public static Crypto crypto;  = new Crypto(new CloudedKeyChain(true), new
+            SystemNativeCryptoLibrary());*/
+
+
+
+
     protected File copyDbLocal(Context myActivity, String TAG) {
+        /*crypto = new Crypto(
+                new SharedPrefsBackedKeyChain(myActivity),
+                new SystemNativeCryptoLibrary());*/
+
         FileInputStream in = null;
         FileOutputStream out = null;
         File result;
@@ -62,15 +73,12 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
                 fileDirectory.mkdirs();
             }
 
-            long file_size = currentDB.length();
             in = new FileInputStream(currentDB);
             out = new FileOutputStream(backupDB);
             byte[] buf = new byte[65536];
             int len;
-            long so_far = 0;
             while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
-                so_far += len;
             }
             publishProgress(UP_COPY_WEIGHT);
             result = backupDB;
@@ -89,7 +97,7 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
         return result;
     }
 
-    protected File encrypt(Context myActivity, File file, String TAG) {
+    protected File encrypt(File file, String TAG) {
         // Use mock key for now
         // Creates a new Crypto object with customized implementations of
         // a key chain as well as native library.
@@ -117,7 +125,7 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
             // Creates an output stream which encrypts the data as
             // it is written to it and writes it out to the file.
             OutputStream outputStream = crypto.getCipherOutputStream(
-                    fileStream, new Entity(newFile.getName()));
+                    fileStream, new Entity("text"));
 
             byte[] buff = new byte[65536];
             int len;
@@ -138,7 +146,7 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected File getDBFile(Context myActivity, String TAG) {
         File plain = copyDbLocal(myActivity, TAG);
         if ( null != plain) {
-            return encrypt(myActivity, plain, TAG);
+            return encrypt(plain, TAG);
         }
         return null;
     }

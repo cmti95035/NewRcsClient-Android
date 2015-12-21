@@ -34,6 +34,7 @@ public class DropboxDownloadTask extends DownloadTask {
     private long mFileLen;
 
     private String mErrorMsg;
+    private static final String TAG = "DropboxDownloadTask";
 
     public DropboxDownloadTask(Context context, DropboxAPI<?> api,
                                String dropboxPath, long length) {
@@ -57,11 +58,12 @@ public class DropboxDownloadTask extends DownloadTask {
     protected String doInBackground(Void... params) {
         FileOutputStream fos = null;
         SQLiteOpenHelper helper = App.getDatabaseSource(mContext);
+        File oldDb;
 
         try {
             helper.getWritableDatabase().beginTransaction();
-            File oldDb = mContext.getDatabasePath(DatabaseFile
-                    .DEFAULT_DATABASE_NAME + ".torestore");
+            oldDb = mContext.getDatabasePath(DatabaseFile
+                    .DEFAULT_DATABASE_NAME + ".to");
 
             fos = new FileOutputStream(oldDb);
             DropboxAPI.DropboxFileInfo info = mApi.getFile(mPath, null,
@@ -81,10 +83,14 @@ public class DropboxDownloadTask extends DownloadTask {
             helper.getWritableDatabase().endTransaction();
             helper.close();
 
-            storePref();
-            android.os.Process.killProcess(Process.myPid());
-            return null;
-
+            String fileName = getBackupFileName(mPath);
+            String ret = decrypt(oldDb, fileName, TAG);
+            if ( null == ret) {
+                storePref();
+                android.os.Process.killProcess(Process.myPid());
+                return null;
+            }
+            mErrorMsg = "Failed to decrypt file: " + ret;
         } catch (DropboxUnlinkedException e) {
             // The AuthSession wasn't properly authenticated or user unlinked.
         } catch (DropboxPartialFileException e) {
