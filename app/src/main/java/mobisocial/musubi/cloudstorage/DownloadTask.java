@@ -3,29 +3,25 @@ package mobisocial.musubi.cloudstorage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.facebook.crypto.Crypto;
 import com.facebook.crypto.Entity;
 import com.facebook.crypto.util.SystemNativeCryptoLibrary;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import mobisocial.crypto.CloudedKeyChain;
 import mobisocial.musubi.service.WizardStepHandler;
 
-public abstract class DownloadTask extends AsyncTask<Void, Long, String> {
+public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
 
     protected static final String LOCAL_RESTORE_DIR = "/temp/restore/";
     protected Context mContext;
     private static final String TAG = "DownloadTask";
-    protected static final float DOWN_COPY_WEIGHT = 0.25f;
-    protected static final float DOWN_LOAD_WEIGHT = 0.75f;
+    protected static final int DOWN_LOAD_WEIGHT = 75;
 
     protected void storePref() {
         SharedPreferences settings = mContext.getSharedPreferences
@@ -57,11 +53,11 @@ public abstract class DownloadTask extends AsyncTask<Void, Long, String> {
 
 
             InputStream inputStream = crypto.getCipherInputStream(fileStream,
-                    new Entity("text"));
+                    new Entity(fileName));
             FileOutputStream outputStream = new FileOutputStream(newFile);
 
             // Read into a byte array.
-         /*   int len;
+            int len;
             byte[] buffer = new byte[65536];
 
             // You must read the entire stream to completion.
@@ -70,21 +66,22 @@ public abstract class DownloadTask extends AsyncTask<Void, Long, String> {
             // a security bug.
             while ((len = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, len);
-            }*/
-            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            }
+          /*  ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[65536];
             int read;
             while ((read = inputStream.read(buffer, 0, buffer.length)) != -1) {
                 byteStream.write(buffer, 0, read);
-            }
+            }*/
 
             inputStream.close();
 
-            byteStream.writeTo(outputStream);
-            byteStream.close();
+            //byteStream.writeTo(outputStream);
+            //byteStream.close();
             outputStream.close();
+            publishProgress(100);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             err = e.toString();
         } finally {
             if (file.exists()) {
@@ -95,6 +92,6 @@ public abstract class DownloadTask extends AsyncTask<Void, Long, String> {
     }
 
     protected String getBackupFileName(String path) {
-        return path.substring(path.lastIndexOf("/")+1, path.length());
+        return path.substring(path.lastIndexOf("/") + 1, path.length());
     }
 }

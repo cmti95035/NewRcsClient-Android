@@ -87,8 +87,8 @@ public class DropboxUploadTask extends UploadTask {
                     new ProgressListener() {
                         @Override
                         public long progressInterval() {
-                            // Update the progress bar every half-second or so
-                            return 1000;
+                            // Update the progress bar every other second
+                            return 2000;
                         }
 
                         @Override

@@ -2,9 +2,7 @@ package mobisocial.musubi.cloudstorage.dropbox;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.*;
 import android.os.Process;
 import android.widget.Toast;
 
@@ -24,7 +22,6 @@ import java.io.IOException;
 import mobisocial.musubi.App;
 import mobisocial.musubi.cloudstorage.DownloadTask;
 import mobisocial.musubi.model.helpers.DatabaseFile;
-import mobisocial.musubi.service.WizardStepHandler;
 
 public class DropboxDownloadTask extends DownloadTask {
 
@@ -70,13 +67,14 @@ public class DropboxDownloadTask extends DownloadTask {
                     fos, new ProgressListener() {
                         @Override
                         public long progressInterval() {
-                            // Update the progress bar every half-second or so
-                            return 1000;
+                            // Update the progress bar every other second or so
+                            return 2000;
                         }
 
                         @Override
                         public void onProgress(long bytes, long total) {
-                            publishProgress(bytes);
+                            publishProgress((int) (bytes / mFileLen *
+                                    DOWN_LOAD_WEIGHT));
                         }
                     });
 
@@ -85,7 +83,7 @@ public class DropboxDownloadTask extends DownloadTask {
 
             String fileName = getBackupFileName(mPath);
             String ret = decrypt(oldDb, fileName, TAG);
-            if ( null == ret) {
+            if (null == ret) {
                 storePref();
                 android.os.Process.killProcess(Process.myPid());
                 return null;
@@ -148,15 +146,14 @@ public class DropboxDownloadTask extends DownloadTask {
     }
 
     @Override
-    protected void onProgressUpdate(Long... progress) {
-        int percent = (int) (100.0 * (double) progress[0] / mFileLen + 0.5);
-        mDialog.setProgress(percent);
+    protected void onProgressUpdate(Integer... progress) {
+        mDialog.setProgress(progress[0]);
     }
 
     @Override
     protected void onPostExecute(String result) {
         mDialog.dismiss();
-        if (null==mErrorMsg ) {
+        if (null == mErrorMsg) {
             showToast("Restore succeeded");
         } else {
             // Couldn't download it, so show an error

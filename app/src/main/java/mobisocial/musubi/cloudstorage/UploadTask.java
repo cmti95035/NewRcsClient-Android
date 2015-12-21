@@ -125,7 +125,7 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
             // Creates an output stream which encrypts the data as
             // it is written to it and writes it out to the file.
             OutputStream outputStream = crypto.getCipherOutputStream(
-                    fileStream, new Entity("text"));
+                    fileStream, new Entity(newFile.getName()));
 
             byte[] buff = new byte[65536];
             int len;
