@@ -104,12 +104,14 @@ public class EulaFragment extends DialogFragment {
 		mRequired = required;
 	}
 
+	// Eula loading stucks, remove
 	public static boolean needsEULA(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(EulaFragment.PREFS_NAME, 0);
+        /*SharedPreferences prefs = context.getSharedPreferences(EulaFragment
+				.PREFS_NAME, 0);
         int old_version = prefs.getInt(EulaFragment.EULA_VERSION_KEY, -1);
         if(old_version < 0 || old_version < EulaFragment.CURRENT_VERSION) {
         	return true;
-        }
+        }*/
         return false;
 	}
 

@@ -104,9 +104,16 @@ public class FileAdapter extends BaseAdapter {
                 int index = str.lastIndexOf(".");
                 int start = str.lastIndexOf("/");
                 String dt = str.substring(index + 1, str.length());
+                // server does not use real time stamp long
                 Date d;
                 try {
-                    d = new Date(Long.valueOf(dt));
+                    //d = new Date(Long.valueOf(dt));
+                    d = new Date(Integer.parseInt(dt.substring(0,4))-1900,
+                            Integer.parseInt(dt.substring(4,6))-1,
+                            Integer.parseInt(dt.substring(6,8)),
+                            Integer.parseInt(dt.substring(8,10)),
+                            Integer.parseInt(dt.substring(10,12)),
+                            Integer.parseInt(dt.substring(12,14)));
                 } catch (Exception e) {
                     Log.e(TAG, "File name parsing error", e);
                     continue;

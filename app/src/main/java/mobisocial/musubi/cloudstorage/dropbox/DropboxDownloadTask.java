@@ -35,9 +35,7 @@ public class DropboxDownloadTask extends DownloadTask {
 
     public DropboxDownloadTask(Context context, DropboxAPI<?> api,
                                String dropboxPath, long length) {
-        // We set the context this way so we don't accidentally leak activities
-        mContext = context.getApplicationContext();
-
+        super(context);
         mApi = api;
         mPath = dropboxPath;
         mFileLen = length;

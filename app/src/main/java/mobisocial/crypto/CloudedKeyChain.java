@@ -1,5 +1,9 @@
 package mobisocial.crypto;
 
+import android.content.Context;
+import android.telephony.TelephonyManager;
+
+import com.chinamobile.cloudStorageProxy.server.EncryptionKey;
 import com.facebook.crypto.exception.KeyChainException;
 import com.facebook.crypto.keychain.KeyChain;
 import com.facebook.crypto.mac.NativeMac;
@@ -7,65 +11,51 @@ import com.facebook.crypto.cipher.NativeGCMCipher;
 
 import java.util.Arrays;
 
+import mobisocial.musubi.cloudstorage.Utils;
+
 public class CloudedKeyChain implements KeyChain {
 
-    private byte[] mCipher; // must be 16 bytes
-    private byte[] mMac;    // must be 64 bytes
-    private byte[] mIV;     // must be 12 bytes
+    private byte[] raw;
+    private long timestamp;
 
-    private static final byte[] mock = {0x32, 0x43, 0x4e, 0x2a, 0x72, 0x19,
-            0x0c,
-            0x55, 0x6f, 0x33, 0x48, 0x7e, 0x66, 0x51, 0x28, 0x11};
 
-    public CloudedKeyChain(boolean isMock) {
+    public CloudedKeyChain(Context context) {
+        EncryptionKey key = Utils.requestKey(context);
+        raw = key.getHash().getBytes();
+        timestamp = key.getTimestamp();
+    }
 
-        if (isMock) {
-            mCipher = mock;
-        } else {
-            // Need request from server, set null for now
-            mCipher= null;
-        }
-        mMac = getMac(mock);
-        mIV = getIV(mock);
-
+    public CloudedKeyChain(String hash, long timestamp) {
+        raw = hash.getBytes();
+        this.timestamp = timestamp;
     }
 
     @Override
     public byte[] getCipherKey() throws KeyChainException {
-        return mCipher;
+        return Arrays.copyOf(raw, NativeGCMCipher.KEY_LENGTH);
     }
 
     @Override
     public byte[] getMacKey() throws KeyChainException {
-        return mMac;
+        // must be 64 bytes
+        return Arrays.copyOf(raw, NativeMac.KEY_LENGTH);
     }
 
     @Override
     public byte[] getNewIV() throws KeyChainException {
-        return mIV;
+        // must be 12 bytes
+        return Arrays.copyOf(raw, NativeGCMCipher.IV_LENGTH);
     }
 
     @Override
     public void destroyKeys() {
-        if (mCipher != null) {
-            Arrays.fill(mCipher, (byte) 0);
+        if (raw != null) {
+            Arrays.fill(raw, (byte) 0);
         }
-        if (mMac != null) {
-            Arrays.fill(mMac, (byte) 0);
-        }
-        mMac = null;
-        mCipher = null;
-    }
+        raw = null;
+     }
 
-    private byte[] getMac(byte[] input) {
-        byte[] result = new byte[NativeMac.KEY_LENGTH];
-        for (int i = 0; i< 4; i++) {
-            System.arraycopy(input, 0, result, input.length*i, input.length);
-        }
-        return result;
-    }
-
-    private byte[] getIV(byte[] input) {
-        return Arrays.copyOf(input, NativeGCMCipher.IV_LENGTH);
+    public long getTimestamp() {
+        return timestamp;
     }
 }

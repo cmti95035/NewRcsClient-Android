@@ -26,6 +26,8 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import mobisocial.metrics.MusubiExceptionHandler;
@@ -49,7 +51,8 @@ import mobisocial.socialkit.Obj;
 import mobisocial.socialkit.User;
 import mobisocial.socialkit.musubi.Musubi;
 
-public class App extends Application implements DBProvider, MusubiProvider, UICacheProvider {
+public class App extends MultiDexApplication implements DBProvider,
+		MusubiProvider, UICacheProvider {
     /**
      * The protocol version we speak, affecting things like wire protocol
      * format and physical network support, available features, app api, etc.
@@ -111,10 +114,10 @@ public class App extends Application implements DBProvider, MusubiProvider, UICa
 	    if (!p.getBoolean(SettingsActivity.PREF_ANONYMOUS_STATS, true)) {
 	        m.setReportingLevel(ReportingLevel.DISABLED);
 	    }
-	    
+
 	    return m;
 	}
-	
+
 	public static Musubi getMusubi(Context c) {
 		Context app_as_context = c.getApplicationContext();
 		if(app_as_context instanceof MusubiProvider) {
@@ -269,9 +272,15 @@ public class App extends Application implements DBProvider, MusubiProvider, UICa
 
 	@Override
 	public void onLowMemory() {
+		super.onLowMemory();
 		Log.d(TAG, "++++ low system memory ++++");
 		if (mContactCache != null) {
 			mContactCache.evictAll();
 		}
+	}
+
+	protected void attachBaseContext(Context base) {
+		super.attachBaseContext(base);
+		MultiDex.install(this);
 	}
 }

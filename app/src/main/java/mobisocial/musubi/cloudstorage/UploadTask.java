@@ -27,40 +27,30 @@ import mobisocial.musubi.model.helpers.DatabaseFile;
 public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected String mPath;
     protected File mFile;
-
     protected long mFileLen;
-    protected Context mContext;
-    protected ProgressDialog mDialog;
 
+    protected ProgressDialog mDialog;
     protected String mErrorMsg;
     protected boolean isDB = false;
+
+    public Context mContext;
 
     protected static final int UP_COPY_WEIGHT = 20;
     protected static final int UP_ENCRYPT_WEIGHT = 30;
     protected static final int UP_LOAD_WEIGHT = 50;
     protected static final String LOCAL_BACKUP_DIR = "/temp/backup/";
 
-
-    /* public static Crypto crypto;  = new Crypto(new CloudedKeyChain(true), new
-            SystemNativeCryptoLibrary());*/
-
-
-
-
-    protected File copyDbLocal(Context myActivity, String TAG) {
-        /*crypto = new Crypto(
-                new SharedPrefsBackedKeyChain(myActivity),
-                new SystemNativeCryptoLibrary());*/
+    protected File copyDbLocal(String TAG) {
 
         FileInputStream in = null;
         FileOutputStream out = null;
         File result;
 
-        SQLiteDatabase db = App.getDatabaseSource(myActivity)
+        SQLiteDatabase db = App.getDatabaseSource(mContext)
                 .getWritableDatabase();
         db.beginTransaction();
         try {
-            File currentDB = myActivity.getDatabasePath(DatabaseFile
+            File currentDB = mContext.getDatabasePath(DatabaseFile
                     .DEFAULT_DATABASE_NAME);
 
             String extStorageDirectory = Environment
@@ -98,21 +88,18 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
     protected File encrypt(File file, String TAG) {
-        // Use mock key for now
         // Creates a new Crypto object with customized implementations of
         // a key chain as well as native library.
-        Crypto crypto = new Crypto(new CloudedKeyChain(true), new
-                SystemNativeCryptoLibrary());
-
-        // Check for whether the crypto functionality is available
-        // This might fail if android does not load libaries correctly.
-        // Tested and worked on Samsung S3 and LG G2. Failed on Samsung S6
-        if (!crypto.isAvailable()) {
-            return null;
-        }
+        CloudedKeyChain keyChain = new CloudedKeyChain(mContext);
+        String timeStamp = String.valueOf(keyChain.getTimestamp());
 
         try {
-            String timeStamp = String.valueOf(System.currentTimeMillis());
+            // This might fail if android does not load libaries correctly.
+            // Or there is no native support at all.
+            // Tested and worked on Samsung S3 and LG G2. Failed on Samsung S6
+
+            Crypto crypto = new Crypto(keyChain, new
+                    SystemNativeCryptoLibrary());
 
             File newFile = new File(file.getAbsolutePath() + "." + timeStamp);
 
@@ -126,6 +113,7 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
             // it is written to it and writes it out to the file.
             OutputStream outputStream = crypto.getCipherOutputStream(
                     fileStream, new Entity(newFile.getName()));
+
 
             byte[] buff = new byte[65536];
             int len;
@@ -143,8 +131,8 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
         return null;
     }
 
-    protected File getDBFile(Context myActivity, String TAG) {
-        File plain = copyDbLocal(myActivity, TAG);
+    protected File getDBFile(String TAG) {
+        File plain = copyDbLocal(TAG);
         if ( null != plain) {
             return encrypt(plain, TAG);
         }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
+import com.chinamobile.cloudStorageProxy.server.BackupRecord;
 import com.facebook.crypto.Crypto;
 import com.facebook.crypto.Entity;
 import com.facebook.crypto.util.SystemNativeCryptoLibrary;
@@ -18,10 +19,12 @@ import mobisocial.musubi.service.WizardStepHandler;
 
 public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
 
-    protected static final String LOCAL_RESTORE_DIR = "/temp/restore/";
     protected Context mContext;
-    private static final String TAG = "DownloadTask";
     protected static final int DOWN_LOAD_WEIGHT = 75;
+
+    public DownloadTask(Context context) {
+        mContext = context.getApplicationContext();
+    }
 
     protected void storePref() {
         SharedPreferences settings = mContext.getSharedPreferences
@@ -35,22 +38,27 @@ public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
         // Use mock key for now
         // Creates a new Crypto object with customized implementations of
         // a key chain as well as native library.
-        Crypto crypto = new Crypto(new CloudedKeyChain(true), new
-                SystemNativeCryptoLibrary());
-
-        /*Crypto crypto = UploadTask.crypto;*/
-        // Check for whether the crypto functionality is available
-        // This might fail if android does not load libaries correctly.
-        // Tested and worked on Samsung S3 and LG G2. Failed on Samsung S6
-        if (!crypto.isAvailable()) {
-            return null;
-        }
 
         String err = null;
         try {
             File newFile = new File(file.getAbsolutePath() + "restore");
             FileInputStream fileStream = new FileInputStream(file);
 
+            long ts = Utils.getTimestamp(fileName);
+            String id = Utils.getId(mContext);
+            BackupRecord backupRecord = Utils.retrieveBackupRecord(id, ts);
+
+            CloudedKeyChain keyChain = new CloudedKeyChain(backupRecord
+                    .getHash(), ts);
+            Crypto crypto = new Crypto(keyChain, new
+                    SystemNativeCryptoLibrary());
+
+            // Check for whether the crypto functionality is available
+            // This might fail if android does not load libaries correctly.
+            // Tested and worked on Samsung S3 and LG G2. Failed on Samsung S6
+            if (!crypto.isAvailable()) {
+                return null;
+            }
 
             InputStream inputStream = crypto.getCipherInputStream(fileStream,
                     new Entity(fileName));
@@ -67,17 +75,8 @@ public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
             while ((len = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, len);
             }
-          /*  ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[65536];
-            int read;
-            while ((read = inputStream.read(buffer, 0, buffer.length)) != -1) {
-                byteStream.write(buffer, 0, read);
-            }*/
 
             inputStream.close();
-
-            //byteStream.writeTo(outputStream);
-            //byteStream.close();
             outputStream.close();
             publishProgress(100);
 

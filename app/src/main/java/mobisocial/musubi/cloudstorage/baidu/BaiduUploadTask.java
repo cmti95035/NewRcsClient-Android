@@ -17,6 +17,7 @@ import mobisocial.musubi.cloudstorage.UploadTask;
 public class BaiduUploadTask extends UploadTask {
 
     private static final String TAG = "BaiduUploadTask";
+    private Context mContext;
 
 
     public BaiduUploadTask(Context context, String
@@ -47,7 +48,7 @@ public class BaiduUploadTask extends UploadTask {
 
         try {
             if (isDB) {
-                mFile = copyDbLocal(mContext, TAG);
+                mFile = copyDbLocal(/*mContext, */TAG);
                 if (null == mFile) {
                     mErrorMsg = "Failed to copy file before uploading";
                     return false;
@@ -81,7 +82,6 @@ public class BaiduUploadTask extends UploadTask {
 
 
         } catch (Exception e) {
-            //e.printStackTrace();
             Log.e(TAG, e.toString());
             mErrorMsg = e.toString();
             return false;

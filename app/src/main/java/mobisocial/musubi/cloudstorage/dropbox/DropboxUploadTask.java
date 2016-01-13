@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.Toast;
 
+import com.chinamobile.cloudStorageProxy.server.BackupRecord;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.DropboxAPI.UploadRequest;
 import com.dropbox.client2.ProgressListener;
@@ -22,23 +23,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import mobisocial.musubi.cloudstorage.UploadTask;
+import mobisocial.musubi.cloudstorage.Utils;
 
 public class DropboxUploadTask extends UploadTask {
     private DropboxAPI<?> mApi;
-    private String mPath;
-    private File mFile;
-
-    private long mFileLen;
     private UploadRequest mRequest;
-    private Context mContext;
-    private final ProgressDialog mDialog;
     private static final String TAG = "DropboxUploadTask";
-    private String mErrorMsg;
-    private boolean isDB = false;
 
     public DropboxUploadTask(Context context, DropboxAPI<?> api, String
             dropboxPath, File file) {
-        // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
         if (null == file) {
@@ -71,7 +64,7 @@ public class DropboxUploadTask extends UploadTask {
     protected Boolean doInBackground(Void... params) {
         try {
             if (isDB) {
-                mFile = getDBFile(mContext,TAG);
+                mFile = getDBFile(/*mContext,*/TAG);
                 if (null == mFile) {
                     mErrorMsg = "Failed to prepare file before uploading";
                     return false;
@@ -162,6 +155,10 @@ public class DropboxUploadTask extends UploadTask {
             mFile.delete();
         }
         if (result) {
+            Utils.insertBackupRecord(new BackupRecord().setTimestamp
+                    (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
+                    (mContext))
+                    .setBackupFileName(mPath + mFile.getName()));
             showToast("Backup successfully uploaded");
         } else {
             showToast(mErrorMsg);
