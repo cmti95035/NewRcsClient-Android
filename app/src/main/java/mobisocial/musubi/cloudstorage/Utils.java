@@ -125,24 +125,8 @@ public class Utils {
     }
 
     public static long getTimestamp(String fileName) {
-        String dt = fileName.substring(fileName.lastIndexOf(".") +
+        return Long.parseLong(fileName.substring(fileName.lastIndexOf(".") +
                 1, fileName
-                .length());
-        Date d = new Date(Integer.parseInt(dt.substring(0,4))-1900,
-                Integer.parseInt(dt.substring(4,6))-1,
-                Integer.parseInt(dt.substring(6,8)),
-                Integer.parseInt(dt.substring(8,10)),
-                Integer.parseInt(dt.substring(10,12)),
-                Integer.parseInt(dt.substring(12,14)));
-
-        return d.getTime();
-
-        /*return Long.parseLong(fileName.substring(fileName.lastIndexOf(".") +
-                1, fileName
-                .length()));*/
-
-        /*return Long.parseLong(fileName.substring(fileName.lastIndexOf(".") +
-                1, fileName
-                .length()));*/
+                .length()));
     }
 }

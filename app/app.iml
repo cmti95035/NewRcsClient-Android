@@ -96,7 +96,6 @@
     <orderEntry type="library" exported="" name="r2-netty-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="dropbox-android-sdk-1.6.3" level="project" />
     <orderEntry type="library" exported="" name="commons-io-1.4" level="project" />
-    <orderEntry type="library" exported="" name="libconceal" level="project" />
     <orderEntry type="library" exported="" name="javatuples-1.2" level="project" />
     <orderEntry type="library" exported="" name="restli-common-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="locSDK_5.01" level="project" />
@@ -105,7 +104,6 @@
     <orderEntry type="library" exported="" name="netty-all-4.0.27.Final" level="project" />
     <orderEntry type="library" exported="" name="api-data-template" level="project" />
     <orderEntry type="library" exported="" name="api-rest-client" level="project" />
-    <orderEntry type="library" exported="" name="conceal_android" level="project" />
     <orderEntry type="library" exported="" name="slf4j-api-1.6.2" level="project" />
     <orderEntry type="library" exported="" name="commons-validator-1.4.1" level="project" />
     <orderEntry type="library" exported="" name="javax.servlet-api-3.0.1" level="project" />
@@ -115,6 +113,7 @@
     <orderEntry type="library" exported="" name="generator-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="r2-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="li-jersey-uri-2.6.0" level="project" />
+    <orderEntry type="library" exported="" name="conceal-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="trove-3.0.2" level="project" />
     <orderEntry type="library" exported="" name="restli-client-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="AdSdk_4.1.6" level="project" />

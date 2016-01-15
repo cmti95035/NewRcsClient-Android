@@ -64,7 +64,7 @@ public class DropboxUploadTask extends UploadTask {
     protected Boolean doInBackground(Void... params) {
         try {
             if (isDB) {
-                mFile = getDBFile(/*mContext,*/TAG);
+                mFile = getDBFile(TAG);
                 if (null == mFile) {
                     mErrorMsg = "Failed to prepare file before uploading";
                     return false;

@@ -17,8 +17,6 @@ import mobisocial.musubi.cloudstorage.UploadTask;
 public class BaiduUploadTask extends UploadTask {
 
     private static final String TAG = "BaiduUploadTask";
-    private Context mContext;
-
 
     public BaiduUploadTask(Context context, String
             baiduPath, File file) {
@@ -48,7 +46,7 @@ public class BaiduUploadTask extends UploadTask {
 
         try {
             if (isDB) {
-                mFile = copyDbLocal(/*mContext, */TAG);
+                mFile = copyDbLocal(TAG);
                 if (null == mFile) {
                     mErrorMsg = "Failed to copy file before uploading";
                     return false;
@@ -56,10 +54,7 @@ public class BaiduUploadTask extends UploadTask {
                 mFileLen = mFile.length();
             }
 
-            // By creating a request, we get a handle to the putFile operation,
-            // so we can cancel it later if we want to
-            String timeStamp = String.valueOf(System.currentTimeMillis());
-            String path = mPath + mFile.getName() + "."+ timeStamp;
+            String path = mPath + mFile.getName();
 
             BaiduPCSClient api = new BaiduPCSClient();
             api.setAccessToken(AccessTokenManager.getAccessToken());
@@ -76,7 +71,7 @@ public class BaiduUploadTask extends UploadTask {
 
                         @Override
                         public long progressInterval() {
-                            return 1000;
+                            return 2000;
                         }
                     });
 
@@ -93,8 +88,8 @@ public class BaiduUploadTask extends UploadTask {
 
     @Override
     protected void onProgressUpdate(Integer... progress) {
-        int percent = (int) ((UP_LOAD_WEIGHT  * (double) progress[0] /
-                mFileLen + UP_COPY_WEIGHT)* 100.0 + 0.5);
+        int percent = (int) (UP_LOAD_WEIGHT  * (double) progress[0] /
+                mFileLen) + UP_COPY_WEIGHT + UP_ENCRYPT_WEIGHT;
         mDialog.setProgress(percent);
     }
 

@@ -35,9 +35,9 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
 
     public Context mContext;
 
-    protected static final int UP_COPY_WEIGHT = 20;
+    protected static final int UP_COPY_WEIGHT = 10;
     protected static final int UP_ENCRYPT_WEIGHT = 30;
-    protected static final int UP_LOAD_WEIGHT = 50;
+    protected static final int UP_LOAD_WEIGHT = 60;
     protected static final String LOCAL_BACKUP_DIR = "/temp/backup/";
 
     protected File copyDbLocal(String TAG) {
