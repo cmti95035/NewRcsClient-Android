@@ -108,22 +108,6 @@ public class DropboxUploadTask extends UploadTask {
             // We canceled the operation
             mErrorMsg = "Upload canceled";
         } catch (DropboxServerException e) {
-            // Server-side exception.  These are examples of what could happen,
-            // but we don't do anything special with them here.
-            if (e.error == DropboxServerException._401_UNAUTHORIZED) {
-                // Unauthorized, so we should unlink them.  You may want to
-                // automatically log the user out in this case.
-            } else if (e.error == DropboxServerException._403_FORBIDDEN) {
-                // Not allowed to access this
-            } else if (e.error == DropboxServerException._404_NOT_FOUND) {
-                // path not found (or if it was the thumbnail, can't be
-                // thumbnailed)
-            } else if (e.error == DropboxServerException
-                    ._507_INSUFFICIENT_STORAGE) {
-                // user is over quota
-            } else {
-                // Something else
-            }
             // This gets the Dropbox error, translated into the user's language
             mErrorMsg = e.body.userError;
             if (mErrorMsg == null) {
@@ -151,9 +135,6 @@ public class DropboxUploadTask extends UploadTask {
     @Override
     protected void onPostExecute(Boolean result) {
         mDialog.dismiss();
-        if ( null != mFile) {
-            mFile.delete();
-        }
         if (result) {
             Utils.insertBackupRecord(new BackupRecord().setTimestamp
                     (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
@@ -163,13 +144,11 @@ public class DropboxUploadTask extends UploadTask {
         } else {
             showToast(mErrorMsg);
         }
-    }
 
-    private void showToast(String msg) {
-        Toast error = Toast.makeText(mContext, msg, Toast.LENGTH_LONG);
-        error.show();
+        if ( null != mFile) {
+            mFile.delete();
+        }
     }
-
 }
 
 

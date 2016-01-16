@@ -1,11 +1,14 @@
-package mobisocial.musubi.cloudstorage.dropbox;
+package mobisocial.musubi.cloudstorage.baidu;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Process;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.baidu.pcs.BaiduPCSActionInfo;
+import com.baidu.pcs.BaiduPCSClient;
+import com.baidu.pcs.BaiduPCSStatusListener;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
 import com.dropbox.client2.exception.DropboxException;
@@ -20,19 +23,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import mobisocial.musubi.App;
+import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.DownloadTask;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 
-public class DropboxDownloadTask extends DownloadTask {
+public class BaiduDownloadTask extends DownloadTask {
 
-    private DropboxAPI<?> mApi;
-    private static final String TAG = "DropboxDownloadTask";
+    private static final String TAG = "BaiduDownloadTask";
 
-    public DropboxDownloadTask(Context context, DropboxAPI<?> api,
-                               String dropboxPath, long length) {
+    public BaiduDownloadTask(Context context, String baiduPath, long length) {
         super(context);
-        mApi = api;
-        mPath = dropboxPath;
+        mPath = baiduPath;
         mFileLen = length;
 
         mDialog = new ProgressDialog(context);
@@ -55,21 +56,24 @@ public class DropboxDownloadTask extends DownloadTask {
             oldDb = mContext.getDatabasePath(DatabaseFile
                     .DEFAULT_DATABASE_NAME + ".to");
 
-            fos = new FileOutputStream(oldDb);
-            DropboxAPI.DropboxFileInfo info = mApi.getFile(mPath, null,
-                    fos, new ProgressListener() {
-                        @Override
-                        public long progressInterval() {
-                            // Update the progress bar every other second or so
-                            return 2000;
-                        }
+            BaiduPCSClient api = new BaiduPCSClient();
+            api.setAccessToken(AccessTokenManager.getAccessToken());
 
-                        @Override
-                        public void onProgress(long bytes, long total) {
-                            publishProgress((int) (bytes / mFileLen *
-                                    DOWN_LOAD_WEIGHT));
-                        }
-                    });
+            final BaiduPCSActionInfo.PCSSimplefiedResponse response = api
+                    .downloadFileFromStream(mPath, oldDb.getAbsolutePath(), new
+                            BaiduPCSStatusListener() {
+                                @Override
+                                public void onProgress(long bytes, long total) {
+                                    publishProgress((int) (bytes / total *
+                                            DOWN_LOAD_WEIGHT));
+                                }
+
+                                @Override
+                                public long progressInterval() {
+                                    return 2000;
+                                }
+
+                            });
 
             helper.getWritableDatabase().endTransaction();
             helper.close();
@@ -78,39 +82,14 @@ public class DropboxDownloadTask extends DownloadTask {
             String ret = decrypt(oldDb, fileName, TAG);
             if (null == ret) {
                 storePref();
-                android.os.Process.killProcess(Process.myPid());
+                android.os.Process.killProcess(android.os.Process.myPid());
                 return null;
             }
             mErrorMsg = "Failed to decrypt file: " + ret;
-        } catch (DropboxUnlinkedException e) {
             // The AuthSession wasn't properly authenticated or user unlinked.
-        } catch (DropboxPartialFileException e) {
-            // We canceled the operation
-            mErrorMsg = "Download canceled";
-        } catch (DropboxServerException e) {
-            // This gets the Dropbox error, translated into the user's language
-            mErrorMsg = e.body.userError;
-            if (mErrorMsg == null) {
-                mErrorMsg = e.body.error;
-            }
-        } catch (DropboxIOException e) {
-            // Happens all the time, probably want to retry automatically.
-            mErrorMsg = "Network error.  Try again.";
-        } catch (DropboxParseException e) {
-            // Probably due to Dropbox server restarting, should retry
-            mErrorMsg = "Dropbox error.  Try again.";
-        } catch (DropboxException e) {
-            // Unknown error
-            mErrorMsg = "Unknown error.  Try again.";
         } catch (Exception e) {
-            mErrorMsg = "Unknown non-dropbox error: " + e.toString();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                }
-            }
+            Log.e(TAG, e.toString());
+            mErrorMsg = e.toString();
         }
         return mErrorMsg;
     }

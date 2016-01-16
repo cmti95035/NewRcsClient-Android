@@ -5,6 +5,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.chinamobile.cloudStorageProxy.server.ActionsRequestBuilders;
 import com.chinamobile.cloudStorageProxy.server.BackupRecord;
@@ -128,5 +129,10 @@ public class Utils {
         return Long.parseLong(fileName.substring(fileName.lastIndexOf(".") +
                 1, fileName
                 .length()));
+    }
+
+    public static void showToast(Context context, String msg) {
+        Toast error = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+        error.show();
     }
 }

@@ -15,6 +15,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 
 import mobisocial.musubi.cloudstorage.Cloud;
+import static mobisocial.musubi.cloudstorage.Utils.showToast;
 
 /**
  * The new Dropbox storage client using core API.
@@ -115,7 +116,7 @@ public final class Dropbox implements Cloud {
                     download();
                 }
             } catch (IllegalStateException e) {
-                showToast("Couldn't authenticate with Dropbox:" + e
+                showToast(mContext, "Couldn't authenticate with Dropbox:" + e
                         .getLocalizedMessage());
                 Log.e(TAG, "Error authenticating", e);
             }
@@ -143,16 +144,11 @@ public final class Dropbox implements Cloud {
         testIntent.setData(Uri.parse(uri));
         PackageManager pm = mContext.getPackageManager();
         if (0 == pm.queryIntentActivities(testIntent, 0).size()) {
-            showToast("URL scheme in your app's " +
+            showToast(mContext, "URL scheme in your app's " +
                     "manifest is not set up correctly. You should have a " +
                     "com.dropbox.client2.android.AuthActivity with the " +
                     "scheme: " + scheme);
         }
-    }
-
-    private void showToast(String msg) {
-        Toast error = Toast.makeText(mContext, msg, Toast.LENGTH_LONG);
-        error.show();
     }
 
     /**

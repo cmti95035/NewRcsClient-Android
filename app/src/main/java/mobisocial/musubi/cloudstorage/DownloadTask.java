@@ -1,10 +1,12 @@
 package mobisocial.musubi.cloudstorage;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import com.chinamobile.cloudStorageProxy.server.BackupRecord;
+import com.dropbox.client2.DropboxAPI;
 import com.facebook.crypto.Crypto;
 import com.facebook.crypto.Entity;
 import com.facebook.crypto.util.SystemNativeCryptoLibrary;
@@ -21,6 +23,10 @@ public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
 
     protected Context mContext;
     protected static final int DOWN_LOAD_WEIGHT = 75;
+    protected ProgressDialog mDialog;
+    protected String mPath;
+    protected long mFileLen;
+    protected String mErrorMsg;
 
     public DownloadTask(Context context) {
         mContext = context.getApplicationContext();

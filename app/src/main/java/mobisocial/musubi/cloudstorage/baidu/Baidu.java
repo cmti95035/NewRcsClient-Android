@@ -156,6 +156,11 @@ public final class Baidu implements Cloud {
     }
 
     private void doRestore() {
-
+        mbOauth = AccessTokenManager.getAccessToken();
+        if (null != mbOauth) {
+            BaiduListTask lister=new BaiduListTask(mContext,
+                    "/apps/musubi/");
+            lister.execute();
+        }
     }
 }

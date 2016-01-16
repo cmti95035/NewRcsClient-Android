@@ -385,7 +385,7 @@
         </activity>
 
         <activity
-            android:name="mobisocial.musubi.cloudstorage.dropbox.DropboxListActivity"
+            android:name=".cloudstorage.FileListActivity"
             android:label="File List" >
         </activity>
 

@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import mobisocial.musubi.R;
-import mobisocial.musubi.cloudstorage.dropbox.DropboxListActivity;
 
 public class CloudRestoreActivity extends Activity {
 
@@ -63,9 +62,20 @@ public class CloudRestoreActivity extends Activity {
     }
 
     public void onDropboxListingReceived(String[] files, long[] lens) {
-        Intent intent = new Intent(this, DropboxListActivity.class);
-        intent.putExtra(DropboxListActivity.DROPBOX_FILE_NAMES,files);
-        intent.putExtra(DropboxListActivity.DROPBOX_FILE_LENGTHS,lens);
+        Intent intent = new Intent(this, FileListActivity.class);
+        intent.putExtra(FileListActivity.FILE_NAMES,files);
+        intent.putExtra(FileListActivity.FILE_LENGTHS,lens);
+        intent.putExtra(FileListActivity.CLOUD_NAME,FileListActivity
+                .CLOUD_NAME_DROPBOX);
+        startActivity(intent);
+    }
+
+    public void onBaiduListingReceived(String[] files, long[] lens) {
+        Intent intent = new Intent(this, FileListActivity.class);
+        intent.putExtra(FileListActivity.FILE_NAMES,files);
+        intent.putExtra(FileListActivity.FILE_LENGTHS,lens);
+        intent.putExtra(FileListActivity.CLOUD_NAME,FileListActivity
+                .CLOUD_NAME_BAIDU);
         startActivity(intent);
     }
 }

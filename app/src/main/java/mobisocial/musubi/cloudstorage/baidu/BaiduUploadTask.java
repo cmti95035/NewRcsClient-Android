@@ -8,11 +8,13 @@ import android.widget.Toast;
 import com.baidu.pcs.BaiduPCSActionInfo;
 import com.baidu.pcs.BaiduPCSClient;
 import com.baidu.pcs.BaiduPCSStatusListener;
+import com.chinamobile.cloudStorageProxy.server.BackupRecord;
 
 import java.io.File;
 
 import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.UploadTask;
+import mobisocial.musubi.cloudstorage.Utils;
 
 public class BaiduUploadTask extends UploadTask {
 
@@ -45,13 +47,8 @@ public class BaiduUploadTask extends UploadTask {
     protected Boolean doInBackground(Void... params) {
 
         try {
-            if (isDB) {
-                mFile = copyDbLocal(TAG);
-                if (null == mFile) {
-                    mErrorMsg = "Failed to copy file before uploading";
-                    return false;
-                }
-                mFileLen = mFile.length();
+            if (isDB && !prepareDB(TAG)) {
+                return false;
             }
 
             String path = mPath + mFile.getName();
@@ -97,15 +94,16 @@ public class BaiduUploadTask extends UploadTask {
     protected void onPostExecute(Boolean result) {
         mDialog.dismiss();
         if (result) {
+            Utils.insertBackupRecord(new BackupRecord().setTimestamp
+                    (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
+                    (mContext))
+                    .setBackupFileName(mPath + mFile.getName()));
             showToast("Backup successfully uploaded");
         } else {
             showToast(mErrorMsg);
         }
+        if ( null != mFile) {
+            mFile.delete();
+        }
     }
-
-    private void showToast(String msg) {
-        Toast error = Toast.makeText(mContext, msg, Toast.LENGTH_LONG);
-        error.show();
-    }
-
 }

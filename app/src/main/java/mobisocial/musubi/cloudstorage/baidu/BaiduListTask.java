@@ -1,34 +1,31 @@
-package mobisocial.musubi.cloudstorage.dropbox;
-
+package mobisocial.musubi.cloudstorage.baidu;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.exception.DropboxException;
+import com.baidu.pcs.BaiduPCSActionInfo;
+import com.baidu.pcs.BaiduPCSClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.CloudRestoreActivity;
 import static mobisocial.musubi.cloudstorage.Utils.showToast;
 
-public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
+public class BaiduListTask  extends AsyncTask<Void, Integer, List<String>> {
 
     private final ProgressDialog mDialog;
-    private static final String TAG = "DropboxListTask";
+    private static final String TAG = "BaiduListTask";
     private String mErrorMsg;
     private Context mContext;
-    private DropboxAPI<?> mApi;
     private String mPath;
     private List<Long> mLens = new ArrayList<> ();
 
-    public DropboxListTask(Context context, DropboxAPI<?> api, String path) {
+    public BaiduListTask(Context context, String path) {
 
         mContext = context;
-        mApi = api;
         mPath = path;
 
         mDialog = new ProgressDialog(context);
@@ -43,14 +40,18 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
         List<String> fnames = new ArrayList<>();
 
         try {
-            DropboxAPI.Entry dirent = mApi.metadata(mPath, 1000, null, true,
-                    null);
+            BaiduPCSClient api = new BaiduPCSClient();
+            api.setAccessToken(AccessTokenManager.getAccessToken());
 
-            for (DropboxAPI.Entry ent : dirent.contents) {
-                fnames.add(ent.path);
-                mLens.add(ent.bytes);
+            final BaiduPCSActionInfo.PCSListInfoResponse ret = api.list
+                    (mPath, "time", "desc");
+
+            for ( BaiduPCSActionInfo.PCSCommonFileInfo pcsCommonFileInfo :
+                    ret.list) {
+                fnames.add(pcsCommonFileInfo.path);
+                mLens.add(pcsCommonFileInfo.size);
             }
-        } catch (DropboxException e) {
+        } catch (Exception e) {
             mErrorMsg = "Unable to retrieve directory info. " + e.toString();
         }
 
@@ -77,13 +78,15 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
                     for ( int i= 0; i<size; i++) {
                         lens[i] = mLens.get(i);
                     }
-                    ((CloudRestoreActivity) mContext).onDropboxListingReceived
-                            (res,
-                            lens);
+                    ((CloudRestoreActivity) mContext).onBaiduListingReceived
+                            (res,  lens);
                 }
             } else {
-                showToast(mContext, "No buck-up record found on Dropbox.");
+                showToast(mContext, "No buck-up record found on Baidu.");
             }
         }
     }
 }
+
+
+

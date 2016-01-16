@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.crypto.Crypto;
 import com.facebook.crypto.Entity;
@@ -23,6 +24,8 @@ import java.io.OutputStream;
 import mobisocial.crypto.CloudedKeyChain;
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.helpers.DatabaseFile;
+import static mobisocial.musubi.cloudstorage.Utils.showToast;
+
 
 public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected String mPath;
@@ -137,5 +140,19 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
             return encrypt(plain, TAG);
         }
         return null;
+    }
+
+    protected void showToast(String msg) {
+        Utils.showToast(mContext, msg);
+    }
+
+    protected boolean prepareDB(String TAG) {
+        mFile = getDBFile(TAG);
+        if (null == mFile) {
+            mErrorMsg = "Failed to copy file before uploading";
+            return false;
+        }
+        mFileLen = mFile.length();
+        return true;
     }
 }
