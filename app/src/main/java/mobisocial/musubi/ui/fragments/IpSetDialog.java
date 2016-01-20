@@ -16,14 +16,13 @@ import org.apache.commons.validator.routines.InetAddressValidator;
 import mobisocial.musubi.R;
 import mobisocial.musubi.ui.SettingsActivity;
 
-/**
- * Created by charlie on 3/12/15.
- */
+
 public class IpSetDialog extends DialogFragment {
 
     EditText edIP;
 
-    // Charlie: stop on persistent it to shared Pref
+    // Persistent Server IP to shared Pref. Initially for Ads
+    // Server, using it as AMQP server for now.
     public static final String ADS_SERVER_IP = "adsServerIP";
 
     public static IpSetDialog newInstance() {
@@ -37,7 +36,8 @@ public class IpSetDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog d = super.onCreateDialog(savedInstanceState);
         d.setContentView(R.layout.ad_server_ip);
-        d.setTitle(getResources().getString(R.string.set_server_ip));
+        //d.setTitle(getResources().getString(R.string.set_server_ip));
+        d.setTitle("Set the messaging server IP:");
         edIP = (EditText) d.findViewById(R.id.ads_server_ip);
         final SharedPreferences pref = getActivity().getSharedPreferences(
                 SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);

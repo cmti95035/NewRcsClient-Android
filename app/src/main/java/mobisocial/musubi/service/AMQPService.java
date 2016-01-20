@@ -19,7 +19,9 @@ package mobisocial.musubi.service;
 
 import android.app.Service;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
@@ -66,6 +68,8 @@ import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.protocol.Message;
 import mobisocial.musubi.provider.MusubiContentProvider;
 import mobisocial.musubi.provider.MusubiContentProvider.Provided;
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.IpSetDialog;
 
 //TODO:XXX
 //amqp is not quite perfect so this implementation delivers the routing
@@ -74,9 +78,8 @@ public class AMQPService extends Service {
 	public static boolean DBG = false;
 	public static final String TAG = AMQPService.class.getName();
 	static final String AMQP_QUEUE_GLOBAL_PREFIX = "msb";
-    //AWS RibbitMQ Server
-	private static final String AMQP_HOST = "52.10.209.5";
-
+	//AWS RibbitMQ Server
+	private String AMQP_HOST = "54.153.48.244";
 
 	private static final int AMQP_PORT = 5672;
 	private static final String AMQP_VHOST = "chat";
@@ -109,14 +112,15 @@ public class AMQPService extends Service {
 	final static long MIN_DELAY = 10 * 1000;
 	final static long MAX_DELAY = 30 * 60 * 1000;
 	long mFailureDelay = MIN_DELAY;
+
 	enum FailedOperationType {
 		FailedNone,
 		FailedConnect,
 		FailedPublish,
 		FailedReceive,
 	}
-	FailedOperationType mFailedOperation = FailedOperationType.FailedConnect;
 
+	FailedOperationType mFailedOperation = FailedOperationType.FailedConnect;
 
 	public AMQPService() {
 		super();
@@ -188,6 +192,10 @@ public class AMQPService extends Service {
 		Log.w(TAG, "service is now running");
 	}
 	private void initializeAMQP() {
+		SharedPreferences pref = getSharedPreferences(
+                SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+		AMQP_HOST = pref.getString(IpSetDialog.ADS_SERVER_IP, "54.153.48.244");
+
 		mIdentitiesManager = new IdentitiesManager(mDatabaseSource);
 		mDeviceManager = new DeviceManager(mDatabaseSource);
 		mEncodedMessageManager = new EncodedMessageManager(mDatabaseSource);
@@ -420,7 +428,8 @@ public class AMQPService extends Service {
 		}
 
 		Log.v(TAG, "basicConsume " + device_queue_name);
-		mIncomingChannel.basicConsume(device_queue_name, false, "", true, true, null, consumer);
+		mIncomingChannel.basicConsume(device_queue_name, false, "", true,
+                true, null, consumer);
 	}
 	void initiateConnection() {
 		if(mConnection != null) {
@@ -532,17 +541,17 @@ public class AMQPService extends Service {
 	public void onDestroy() {
 		//kick the background thread into shutdown mode
 		mAMQPHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				closeConnection(FailedOperationType.FailedNone);
-				//give it half a second to close down
-				mAMQPHandler.postDelayed(new Runnable() {
-					public void run() {
-						mThread.getLooper().quit();
-					}
-				}, 500);
-			}
-		});
+            @Override
+            public void run() {
+                closeConnection(FailedOperationType.FailedNone);
+                //give it half a second to close down
+                mAMQPHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        mThread.getLooper().quit();
+                    }
+                }, 500);
+            }
+        });
 		//wait for it to clean up
 		try {
 			mAMQPHandler.getLooper().getThread().join();

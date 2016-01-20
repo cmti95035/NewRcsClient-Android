@@ -1,6 +1,7 @@
 package mobisocial.musubi.cloudstorage;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
@@ -22,6 +23,9 @@ import com.linkedin.restli.client.RestClient;
 import java.util.Collections;
 import java.util.Date;
 
+import mobisocial.musubi.ui.SettingsActivity;
+import mobisocial.musubi.ui.fragments.IpSetDialog;
+
 public class Utils {
 
     // The ID must be persistent through device reset, so we use hardware
@@ -33,9 +37,20 @@ public class Utils {
     private static final HttpClientFactory http = new HttpClientFactory();
     private static final Client r2Client = new TransportClientAdapter(
             http.getClient(Collections.<String, String>emptyMap()));
-    private static final String BASE_URL = "http://54.67.120" +
-            ".12:7777/cloudStorageProxy/";
-    private static RestClient restClient = new RestClient(r2Client, BASE_URL);
+    private static final String BASE_URL_HEAD = "http://";
+    private static final String BASE_URL_TAIL = ":7777/cloudStorageProxy/";
+    private static RestClient restClient;
+
+    private static synchronized RestClient getRestClient(Context context) {
+        if (null == restClient) {
+            SharedPreferences pref = context.getSharedPreferences(
+                    SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+            String server = pref.getString(IpSetDialog.ADS_SERVER_IP,
+                    "54.153.48.244");
+            restClient = new RestClient(r2Client, BASE_URL_HEAD+server+BASE_URL_TAIL);
+        }
+        return restClient;
+    }
 
     public static String getId(Context context) {
         String id;
@@ -67,7 +82,8 @@ public class Utils {
                 .actionRequestKey().userIdParam(userId).build();
 
         try {
-            ResponseFuture<EncryptionKey> responseFuture = restClient
+            ResponseFuture<EncryptionKey> responseFuture = getRestClient
+                    (context)
                     .sendRequest(actionRequest);
             Response<EncryptionKey> response = responseFuture.getResponse();
 
@@ -82,13 +98,15 @@ public class Utils {
         }
     }
 
-    public static Boolean insertBackupRecord(BackupRecord backupRecord) {
+    public static Boolean insertBackupRecord(Context context, BackupRecord
+                                             backupRecord) {
         ActionRequest<Boolean> actionRequest = actionsRequestBuilders
                 .actionInsertBackupRecord().backupRecordParam(backupRecord)
                 .build();
 
         try {
-            ResponseFuture<Boolean> responseFuture = restClient.sendRequest
+            ResponseFuture<Boolean> responseFuture = getRestClient(context)
+                    .sendRequest
                     (actionRequest);
             Response<Boolean> response = responseFuture.getResponse();
 
@@ -103,14 +121,15 @@ public class Utils {
         }
     }
 
-    public static BackupRecord retrieveBackupRecord(String userId, Long
+    public static BackupRecord retrieveBackupRecord(Context context, String
+                                                    userId, Long
             timestamp) {
         ActionRequest<BackupRecord> actionRequest = actionsRequestBuilders
                 .actionRetrieveBackupRecord().userIdParam(userId)
                 .timestampParam(timestamp).build();
 
         try {
-            ResponseFuture<BackupRecord> responseFuture = restClient
+            ResponseFuture<BackupRecord> responseFuture = getRestClient(context)
                     .sendRequest(actionRequest);
             Response<BackupRecord> response = responseFuture.getResponse();
 

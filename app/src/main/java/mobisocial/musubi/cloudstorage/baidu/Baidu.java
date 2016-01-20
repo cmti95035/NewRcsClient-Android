@@ -2,22 +2,12 @@ package mobisocial.musubi.cloudstorage.baidu;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.oauth.BaiduOAuth;
-import com.baidu.pcs.BaiduPCSActionInfo;
-import com.baidu.pcs.BaiduPCSClient;
-import com.baidu.pcs.BaiduPCSStatusListener;
-
-import org.json.JSONException;
-
-import java.io.File;
-import java.io.IOException;
 
 import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.Cloud;
-import mobisocial.musubi.cloudstorage.UploadTask;
 
 public final class Baidu implements Cloud {
     // the default root folder
@@ -148,7 +138,7 @@ public final class Baidu implements Cloud {
     private void doBackup() {
         mbOauth = AccessTokenManager.getAccessToken();
         if (null != mbOauth) {
-            BaiduUploadTask uploader=new BaiduUploadTask(mContext,
+            BaiduUploadTask uploader = new BaiduUploadTask(mContext,
                     "/apps/musubi/",
                     null);
             uploader.execute();
@@ -158,7 +148,7 @@ public final class Baidu implements Cloud {
     private void doRestore() {
         mbOauth = AccessTokenManager.getAccessToken();
         if (null != mbOauth) {
-            BaiduListTask lister=new BaiduListTask(mContext,
+            BaiduListTask lister = new BaiduListTask(mContext,
                     "/apps/musubi/");
             lister.execute();
         }

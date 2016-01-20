@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.chinamobile.cloudStorageProxy.server.BackupRecord;
 import com.facebook.crypto.Crypto;
 import com.facebook.crypto.Entity;
 import com.facebook.crypto.util.SystemNativeCryptoLibrary;
@@ -24,7 +24,6 @@ import java.io.OutputStream;
 import mobisocial.crypto.CloudedKeyChain;
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.helpers.DatabaseFile;
-import static mobisocial.musubi.cloudstorage.Utils.showToast;
 
 
 public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
@@ -136,7 +135,7 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
 
     protected File getDBFile(String TAG) {
         File plain = copyDbLocal(TAG);
-        if ( null != plain) {
+        if (null != plain) {
             return encrypt(plain, TAG);
         }
         return null;
@@ -155,4 +154,23 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
         mFileLen = mFile.length();
         return true;
     }
+
+    @Override
+    protected void onPostExecute(Boolean result) {
+        mDialog.dismiss();
+        if (result) {
+            Utils.insertBackupRecord(mContext, new BackupRecord().setTimestamp
+                    (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
+                    (mContext))
+                    .setBackupFileName(mPath + mFile.getName()));
+            showToast("Backup successfully uploaded");
+        } else {
+            showToast(mErrorMsg);
+        }
+
+        if (null != mFile) {
+            mFile.delete();
+        }
+    }
+
 }

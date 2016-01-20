@@ -6,41 +6,29 @@ import org.json.JSONObject;
 
 import mobisocial.musubi.model.MObject;
 
-/*
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileInfo;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
-*/
 
-
-/**
- * This one is built on Dropbox Sync API.
- * It conflicts with Dropbox Core API. So need comment most of code for now.
- */
 public class Dropbox implements CloudStorage {
 
 	
 	private static final String dropboxAppKey = "3bduqwpgg381rlj";
     private static final String dropboxAppSecret = "h8a2ka5f2vm8ttk";
 	//private DbxAccountManager mDbxAcctMgr;
-	
+
 	public Dropbox(){
 		
 	}
-	
+
 	@Override
 	public void setAccount(Context context) {
 	//	mDbxAcctMgr = DbxAccountManager.getInstance(context, dropboxAppKey,
 	//			dropboxAppSecret);
 	}
-	
+
 	@Override
 	public void login(Context context,int resultcode) {
 	//	mDbxAcctMgr.startLink((Activity)context, resultcode);
 	}
-	
+
 	@Override
 	public void saveMessages(final MObject object,Context context) {
 		

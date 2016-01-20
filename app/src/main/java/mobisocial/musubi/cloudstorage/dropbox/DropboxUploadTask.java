@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.widget.Toast;
 
 import com.chinamobile.cloudStorageProxy.server.BackupRecord;
 import com.dropbox.client2.DropboxAPI;
@@ -132,23 +131,6 @@ public class DropboxUploadTask extends UploadTask {
         mDialog.setProgress(progress[0].intValue());
     }
 
-    @Override
-    protected void onPostExecute(Boolean result) {
-        mDialog.dismiss();
-        if (result) {
-            Utils.insertBackupRecord(new BackupRecord().setTimestamp
-                    (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
-                    (mContext))
-                    .setBackupFileName(mPath + mFile.getName()));
-            showToast("Backup successfully uploaded");
-        } else {
-            showToast(mErrorMsg);
-        }
-
-        if ( null != mFile) {
-            mFile.delete();
-        }
-    }
 }
 
 

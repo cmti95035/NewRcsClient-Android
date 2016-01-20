@@ -4,7 +4,6 @@ package mobisocial.musubi.cloudstorage.dropbox;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobisocial.musubi.cloudstorage.CloudRestoreActivity;
+
 import static mobisocial.musubi.cloudstorage.Utils.showToast;
 
 public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
@@ -23,7 +23,7 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
     private Context mContext;
     private DropboxAPI<?> mApi;
     private String mPath;
-    private List<Long> mLens = new ArrayList<> ();
+    private List<Long> mLens = new ArrayList<>();
 
     public DropboxListTask(Context context, DropboxAPI<?> api, String path) {
 
@@ -74,12 +74,12 @@ public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
                     String[] res = result.toArray(new String[0]);
                     int size = mLens.size();
                     long[] lens = new long[size];
-                    for ( int i= 0; i<size; i++) {
+                    for (int i = 0; i < size; i++) {
                         lens[i] = mLens.get(i);
                     }
                     ((CloudRestoreActivity) mContext).onDropboxListingReceived
                             (res,
-                            lens);
+                                    lens);
                 }
             } else {
                 showToast(mContext, "No buck-up record found on Dropbox.");

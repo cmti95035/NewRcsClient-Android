@@ -3,7 +3,6 @@ package mobisocial.musubi.cloudstorage.baidu;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.baidu.pcs.BaiduPCSActionInfo;
 import com.baidu.pcs.BaiduPCSClient;
@@ -25,7 +24,7 @@ public class BaiduUploadTask extends UploadTask {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
-        if (null==file) {
+        if (null == file) {
             isDB = true;
         } else {
             mFile = file;
@@ -61,16 +60,16 @@ public class BaiduUploadTask extends UploadTask {
                     api.uploadFile(mFile.getAbsolutePath(), path, new
                             BaiduPCSStatusListener() {
 
-                        @Override
-                        public void onProgress(long bytes, long total) {
-                            publishProgress((int) bytes);
-                        }
+                                @Override
+                                public void onProgress(long bytes, long total) {
+                                    publishProgress((int) bytes);
+                                }
 
-                        @Override
-                        public long progressInterval() {
-                            return 2000;
-                        }
-                    });
+                                @Override
+                                public long progressInterval() {
+                                    return 2000;
+                                }
+                            });
 
 
         } catch (Exception e) {
@@ -82,28 +81,10 @@ public class BaiduUploadTask extends UploadTask {
     }
 
 
-
     @Override
     protected void onProgressUpdate(Integer... progress) {
-        int percent = (int) (UP_LOAD_WEIGHT  * (double) progress[0] /
+        int percent = (int) (UP_LOAD_WEIGHT * (double) progress[0] /
                 mFileLen) + UP_COPY_WEIGHT + UP_ENCRYPT_WEIGHT;
         mDialog.setProgress(percent);
-    }
-
-    @Override
-    protected void onPostExecute(Boolean result) {
-        mDialog.dismiss();
-        if (result) {
-            Utils.insertBackupRecord(new BackupRecord().setTimestamp
-                    (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
-                    (mContext))
-                    .setBackupFileName(mPath + mFile.getName()));
-            showToast("Backup successfully uploaded");
-        } else {
-            showToast(mErrorMsg);
-        }
-        if ( null != mFile) {
-            mFile.delete();
-        }
     }
 }
