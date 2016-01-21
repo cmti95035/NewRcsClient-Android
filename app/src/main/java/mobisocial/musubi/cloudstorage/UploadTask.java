@@ -159,10 +159,6 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onPostExecute(Boolean result) {
         mDialog.dismiss();
         if (result) {
-            Utils.insertBackupRecord(mContext, new BackupRecord().setTimestamp
-                    (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
-                    (mContext))
-                    .setBackupFileName(mPath + mFile.getName()));
             showToast("Backup successfully uploaded");
         } else {
             showToast(mErrorMsg);

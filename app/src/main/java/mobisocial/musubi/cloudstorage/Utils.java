@@ -46,7 +46,7 @@ public class Utils {
             SharedPreferences pref = context.getSharedPreferences(
                     SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);
             String server = pref.getString(IpSetDialog.ADS_SERVER_IP,
-                    "54.153.48.244");
+                    "cmti-webrtc.com");
             restClient = new RestClient(r2Client, BASE_URL_HEAD+server+BASE_URL_TAIL);
         }
         return restClient;

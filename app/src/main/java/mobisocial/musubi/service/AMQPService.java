@@ -79,7 +79,7 @@ public class AMQPService extends Service {
 	public static final String TAG = AMQPService.class.getName();
 	static final String AMQP_QUEUE_GLOBAL_PREFIX = "msb";
 	//AWS RibbitMQ Server
-	private String AMQP_HOST = "54.153.48.244";
+	private String AMQP_HOST = "cmti-webrtc.com";
 
 	private static final int AMQP_PORT = 5672;
 	private static final String AMQP_VHOST = "chat";
@@ -194,7 +194,7 @@ public class AMQPService extends Service {
 	private void initializeAMQP() {
 		SharedPreferences pref = getSharedPreferences(
                 SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE);
-		AMQP_HOST = pref.getString(IpSetDialog.ADS_SERVER_IP, "54.153.48.244");
+		AMQP_HOST = pref.getString(IpSetDialog.ADS_SERVER_IP, "cmti-webrtc.com");
 
 		mIdentitiesManager = new IdentitiesManager(mDatabaseSource);
 		mDeviceManager = new DeviceManager(mDatabaseSource);
@@ -272,82 +272,106 @@ public class AMQPService extends Service {
 		TLongLinkedList potentiallUnsent = mEncodedMessageManager.getUnsentOutboundIdsNotPending();
 
 		potentiallUnsent.forEach(new TLongProcedure() {
-			@Override
-			public boolean execute(long id) {
-				if(mMessageWaitingForAck.contains(id))
-					return true;
+            @Override
+            public boolean execute(long id) {
+                if (mMessageWaitingForAck.contains(id))
+                    return true;
 
-				try {
-					byte[] encodedBytes = mEncodedMessageManager.lookupEncodedDataById(id);
+                try {
+                    byte[] encodedBytes = mEncodedMessageManager
+                            .lookupEncodedDataById(id);
 
-					byte[] group_exchange_name_bytes;
-					//TODO: load this from an in memory cache of recently encoded messages
-					//TODO: major performance gain on sending
-					IBHashedIdentity[] hid_for_queue;
-					try {
-						Message m = getObjectMapper().readValue(encodedBytes, Message.class);
-						MIdentity[] ids = new MIdentity[m.r.length];
-						hid_for_queue = new IBHashedIdentity[m.r.length];
-						for(int i = 0; i < ids.length; ++i) {
-							hid_for_queue[i] = new IBHashedIdentity(m.r[i].i).at(0);
-							ids[i] = new MIdentity();
-							ids[i].principalHash_ = hid_for_queue[i].hashed_;
-							ids[i].type_ = Authority.values()[hid_for_queue[i].authority_.ordinal()];
-						}
-						group_exchange_name_bytes = FeedManager.computeFixedIdentifier(ids);
-					} catch (IOException e) {
-						Log.e(TAG, "failed to compute group exchange name");
-						return true;
-					}
+                    byte[] group_exchange_name_bytes;
+                    //TODO: load this from an in memory cache of recently
+                    // encoded messages
+                    //TODO: major performance gain on sending
+                    IBHashedIdentity[] hid_for_queue;
+                    try {
+                        Message m = getObjectMapper().readValue(encodedBytes,
+                                Message.class);
+                        MIdentity[] ids = new MIdentity[m.r.length];
+                        hid_for_queue = new IBHashedIdentity[m.r.length];
+                        for (int i = 0; i < ids.length; ++i) {
+                            hid_for_queue[i] = new IBHashedIdentity(m.r[i].i)
+                                    .at(0);
+                            ids[i] = new MIdentity();
+                            ids[i].principalHash_ = hid_for_queue[i].hashed_;
+                            ids[i].type_ = Authority.values()
+                                    [hid_for_queue[i].authority_.ordinal()];
+                        }
+                        group_exchange_name_bytes = FeedManager
+                                .computeFixedIdentifier(ids);
+                    } catch (IOException e) {
+                        Log.e(TAG, "failed to compute group exchange name");
+                        return true;
+                    }
 
-					String group_exchange_name = encodeAMQPname("ibetgroup-", group_exchange_name_bytes);
-					if(!mDeclaredGroups.contains(group_exchange_name)) {
-						if(DBG) Log.v(TAG, "exchangeDeclare " + group_exchange_name);
-						mOutgoingChannel.exchangeDeclare(group_exchange_name, "fanout", false);
-						for (IBHashedIdentity recipient : hid_for_queue){
-							String dest = encodeAMQPname("ibeidentity-", recipient.identity_);
-							if(DBG) Log.v(TAG, "exchangeDeclarePassive " + dest);
-							try {
-								if(mGroupProbeChannel == null)
-									mGroupProbeChannel = mConnection.createChannel();
-								if(DBG) Log.v(TAG, "exchangeDeclarePassive " + dest);
-								mGroupProbeChannel.exchangeDeclarePassive(dest);
-							} catch(IOException e) {
-								mGroupProbeChannel = null;
-								//TODO: XXX hack
-								//if the user hasn't connected yet, we have to dump their messages
-								//into a specific well known queue, because we don't know what the name
-								//of their device key is
-								if(DBG) Log.v(TAG, "queueDeclare " + "initial-" + dest);
-								mOutgoingChannel.queueDeclare("initial-" + dest, true, false, false, null);
-								if(DBG) Log.v(TAG, "exchangeDeclare " + dest);
-								mOutgoingChannel.exchangeDeclare(dest, "fanout", true);
-								if(DBG) Log.v(TAG, "queueBind " + "initial-" + dest + " " + dest);
-								mOutgoingChannel.queueBind("initial-" + dest, dest, "");
-							}
-							if(DBG) Log.v(TAG, "exchangeBind " + dest + " " + group_exchange_name);
-							mOutgoingChannel.exchangeBind(dest, group_exchange_name, "");
-						}
-						mDeclaredGroups.add(group_exchange_name);
-					}
+                    String group_exchange_name = encodeAMQPname("ibetgroup-",
+                            group_exchange_name_bytes);
+                    if (!mDeclaredGroups.contains(group_exchange_name)) {
+                        if (DBG)
+                            Log.v(TAG, "exchangeDeclare " +
+                                    group_exchange_name);
+                        mOutgoingChannel.exchangeDeclare(group_exchange_name,
+                                "fanout", false);
+                        for (IBHashedIdentity recipient : hid_for_queue) {
+                            String dest = encodeAMQPname("ibeidentity-",
+                                    recipient.identity_);
+                            if (DBG)
+                                Log.v(TAG, "exchangeDeclarePassive " + dest);
+                            try {
+                                if (mGroupProbeChannel == null)
+                                    mGroupProbeChannel = mConnection
+                                            .createChannel();
+                                if (DBG)
+                                    Log.v(TAG, "exchangeDeclarePassive " +
+                                            dest);
+                                mGroupProbeChannel.exchangeDeclarePassive(dest);
+                            } catch (IOException e) {
+                                mGroupProbeChannel = null;
+                                //TODO: XXX hack
+                                //if the user hasn't connected yet, we have
+                                // to dump their messages
+                                //into a specific well known queue, because
+                                // we don't know what the name
+                                //of their device key is
+                                if (DBG)
+                                    Log.v(TAG, "queueDeclare " + "initial-" +
+                                            dest);
+                                mOutgoingChannel.queueDeclare("initial-" +
+                                        dest, true, false, false, null);
+                                if (DBG) Log.v(TAG, "exchangeDeclare " + dest);
+                                mOutgoingChannel.exchangeDeclare(dest,
+                                        "fanout", true);
+                                if (DBG)
+                                    Log.v(TAG, "queueBind " + "initial-" + dest + " " + dest);
+                                mOutgoingChannel.queueBind("initial-" + dest, dest, "");
+                            }
+                            if (DBG)
+                                Log.v(TAG, "exchangeBind " + dest + " " + group_exchange_name);
+                            mOutgoingChannel.exchangeBind(dest, group_exchange_name, "");
+                        }
+                        mDeclaredGroups.add(group_exchange_name);
+                    }
 
-					if(DBG) Log.v(TAG, "basicPublish => " + group_exchange_name);
-					long delivery_tag = mOutgoingChannel.getNextPublishSeqNo();
-					mOutgoingChannel.basicPublish(group_exchange_name, "", true, false, null, encodedBytes);
-					mMessageWaitingForAck.add(id);
-					mMessageWaitingForAckByTag.put(delivery_tag, id);
-					if(mFailedOperation == FailedOperationType.FailedPublish) {
-						mFailureDelay = MIN_DELAY;
-						mFailedOperation = FailedOperationType.FailedNone;
-					}
-					return true;
-				} catch (Throwable e) {
-					Log.e(TAG, "Failed to send message, aborting connection", e);
-					closeConnection(FailedOperationType.FailedPublish);
-					return false;
-				}
-			}
-		});
+                    if (DBG)
+                        Log.v(TAG, "basicPublish => " + group_exchange_name);
+                    long delivery_tag = mOutgoingChannel.getNextPublishSeqNo();
+                    mOutgoingChannel.basicPublish(group_exchange_name, "", true, false, null, encodedBytes);
+                    mMessageWaitingForAck.add(id);
+                    mMessageWaitingForAckByTag.put(delivery_tag, id);
+                    if (mFailedOperation == FailedOperationType.FailedPublish) {
+                        mFailureDelay = MIN_DELAY;
+                        mFailedOperation = FailedOperationType.FailedNone;
+                    }
+                    return true;
+                } catch (Throwable e) {
+                    Log.e(TAG, "Failed to send message, aborting connection", e);
+                    closeConnection(FailedOperationType.FailedPublish);
+                    return false;
+                }
+            }
+        });
 	}
 	void attachToQueues() throws IOException {
 		Log.i(TAG, "Setting up identity exchange and device queue");

@@ -77,6 +77,10 @@ public class BaiduUploadTask extends UploadTask {
             mErrorMsg = e.toString();
             return false;
         }
+        Utils.insertBackupRecord(mContext, new BackupRecord().setTimestamp
+                (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
+                (mContext))
+                .setBackupFileName(mPath + mFile.getName()));
         return true;
     }
 

@@ -94,6 +94,10 @@ public class DropboxUploadTask extends UploadTask {
 
             if (mRequest != null) {
                 mRequest.upload();
+                Utils.insertBackupRecord(mContext, new BackupRecord().setTimestamp
+                        (Utils.getTimestamp(mFile.getName())).setUserId(Utils.getId
+                        (mContext))
+                        .setBackupFileName(mPath + mFile.getName()));
                 return true;
             }
 
