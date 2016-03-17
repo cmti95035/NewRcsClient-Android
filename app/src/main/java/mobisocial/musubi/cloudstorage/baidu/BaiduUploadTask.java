@@ -15,6 +15,9 @@ import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.UploadTask;
 import mobisocial.musubi.cloudstorage.Utils;
 
+/**
+ * Asynchronously upload the backup file to baidu cloud storage.
+ */
 public class BaiduUploadTask extends UploadTask {
 
     private static final String TAG = "BaiduUploadTask";

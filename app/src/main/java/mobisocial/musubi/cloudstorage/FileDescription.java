@@ -2,6 +2,9 @@ package mobisocial.musubi.cloudstorage;
 
 import java.util.Date;
 
+/**
+ * Stores properties of a file description.
+ */
 public class FileDescription {
     private String fileName;
     private String displayName;

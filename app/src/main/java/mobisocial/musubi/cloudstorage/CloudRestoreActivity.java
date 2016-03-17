@@ -9,6 +9,9 @@ import android.widget.ListView;
 
 import mobisocial.musubi.R;
 
+/**
+ * The activity to list all the supported cloud storage for restore.
+ */
 public class CloudRestoreActivity extends Activity {
 
     private static final String TAG = "CloudRestoreActivity";

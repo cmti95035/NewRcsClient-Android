@@ -15,6 +15,10 @@ import mobisocial.musubi.cloudstorage.CloudRestoreActivity;
 
 import static mobisocial.musubi.cloudstorage.Utils.showToast;
 
+/**
+ * Asynchronously list all the backup file from dropbox cloud storage that
+ * associate with this user.
+ */
 public class DropboxListTask extends AsyncTask<Void, Integer, List<String>> {
 
     private final ProgressDialog mDialog;

@@ -18,6 +18,10 @@ import java.io.InputStream;
 import mobisocial.crypto.CloudedKeyChain;
 import mobisocial.musubi.service.WizardStepHandler;
 
+/**
+ * Asynchronously download the backup file from the cloud storage, request
+ * the encryption key from the server and decrypt the file.
+ */
 public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
 
     protected Context mContext;
@@ -39,10 +43,15 @@ public abstract class DownloadTask extends AsyncTask<Void, Integer, String> {
         editor.commit();
     }
 
+    /**
+     * Request the key and decrpt the file
+     * @param file the data file in local storage
+     * @param fileName the backup file on the cloud storage with time stamp
+     *                 being part of the file name
+     * @param TAG the caller's tag, usually the caller's class name
+     * @return error message if any
+     */
     protected String decrypt(File file, String fileName, String TAG) {
-        // Use mock key for now
-        // Creates a new Crypto object with customized implementations of
-        // a key chain as well as native library.
 
         String err = null;
         try {

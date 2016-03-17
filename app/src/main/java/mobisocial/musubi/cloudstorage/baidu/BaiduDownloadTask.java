@@ -18,6 +18,9 @@ import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.DownloadTask;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 
+/**
+ * Asynchronously download the backup file to baidu cloud storage.
+ */
 public class BaiduDownloadTask extends DownloadTask {
 
     private static final String TAG = "BaiduDownloadTask";

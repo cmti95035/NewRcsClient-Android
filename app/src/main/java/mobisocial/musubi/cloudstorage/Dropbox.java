@@ -12,7 +12,6 @@ public class Dropbox implements CloudStorage {
 	
 	private static final String dropboxAppKey = "3bduqwpgg381rlj";
     private static final String dropboxAppSecret = "h8a2ka5f2vm8ttk";
-	//private DbxAccountManager mDbxAcctMgr;
 
 	public Dropbox(){
 		
@@ -20,8 +19,7 @@ public class Dropbox implements CloudStorage {
 
 	@Override
 	public void setAccount(Context context) {
-	//	mDbxAcctMgr = DbxAccountManager.getInstance(context, dropboxAppKey,
-	//			dropboxAppSecret);
+
 	}
 
 	@Override

@@ -25,7 +25,10 @@ import mobisocial.crypto.CloudedKeyChain;
 import mobisocial.musubi.App;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 
-
+/**
+ * Asynchronously upload the backup file to the cloud storage. It also requests
+ * the encryption key from the server and encrypt the file before uploading.
+ */
 public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected String mPath;
     protected File mFile;
@@ -42,6 +45,11 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
     protected static final int UP_LOAD_WEIGHT = 60;
     protected static final String LOCAL_BACKUP_DIR = "/temp/backup/";
 
+    /**
+     * Make a copy of the local database file.
+     * @param TAG the tag from the caller, usually the caller's class name
+     * @return the copied file
+     */
     protected File copyDbLocal(String TAG) {
 
         FileInputStream in = null;
@@ -89,6 +97,12 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
         return result;
     }
 
+    /**
+     * Encrpt the bakcup file before uploading it.
+     * @param file the backup data file
+     * @param TAG the tag from caller, usually the caller's class name
+     * @return the encrypted the backup file
+     */
     protected File encrypt(File file, String TAG) {
         // Creates a new Crypto object with customized implementations of
         // a key chain as well as native library.
@@ -133,6 +147,13 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
         return null;
     }
 
+    /**
+     * Prepare the backup file to be uploaded, it take two steps:
+     * 1. copy the local database file
+     * 2. encrypt the copied local database file
+     * @param TAG the tag from caller, usually the caller's class name
+     * @return the encrypted back-up file
+     */
     protected File getDBFile(String TAG) {
         File plain = copyDbLocal(TAG);
         if (null != plain) {

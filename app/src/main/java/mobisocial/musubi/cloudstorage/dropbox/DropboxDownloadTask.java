@@ -23,6 +23,9 @@ import mobisocial.musubi.App;
 import mobisocial.musubi.cloudstorage.DownloadTask;
 import mobisocial.musubi.model.helpers.DatabaseFile;
 
+/**
+ * Asynchronously download the backup file to dropbox cloud storage.
+ */
 public class DropboxDownloadTask extends DownloadTask {
 
     private DropboxAPI<?> mApi;

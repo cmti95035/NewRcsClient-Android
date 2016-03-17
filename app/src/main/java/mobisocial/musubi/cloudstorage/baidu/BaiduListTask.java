@@ -14,6 +14,10 @@ import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.CloudRestoreActivity;
 import static mobisocial.musubi.cloudstorage.Utils.showToast;
 
+/**
+ * Asynchronously list all the backup file from Baidu cloud storage that
+ * associate with this user.
+ */
 public class BaiduListTask  extends AsyncTask<Void, Integer, List<String>> {
 
     private final ProgressDialog mDialog;

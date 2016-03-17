@@ -11,6 +11,10 @@ import mobisocial.musubi.R;
 import mobisocial.musubi.cloudstorage.baidu.BaiduDownloadTask;
 import mobisocial.musubi.cloudstorage.dropbox.*;
 
+/**
+ * The activity listing all the backup files from a single storage once it
+ * has bee selected
+ */
 public class FileListActivity extends Activity {
 
     private FileAdapter mAdapter;

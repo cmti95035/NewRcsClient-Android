@@ -15,6 +15,9 @@ import java.util.Map;
 
 import mobisocial.musubi.R;
 
+/**
+ * The adapter to hold all the cloud stroages.
+ */
 public class CloudAdapter extends BaseAdapter {
 
     private static final String CLOUD_STORAGE_NAME = "cloud_storage_name";

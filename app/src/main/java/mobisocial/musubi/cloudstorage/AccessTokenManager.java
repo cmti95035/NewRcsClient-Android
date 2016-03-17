@@ -14,7 +14,9 @@ import android.os.Parcelable;
 import com.baidu.oauth.BaiduOAuth.BaiduOAuthResponse;
 
 
-
+/**
+ * Manage Baidu storage access token.
+ */
 public class AccessTokenManager implements Parcelable {
 
     private static final String BAIDU_SDK_CONFIG = "baidu_sdk_config";
@@ -72,6 +74,9 @@ public class AccessTokenManager implements Parcelable {
 
     }
 
+    /**
+     * Initialize Baidu access token.
+     */
     public static void initToken(Context mcontext) {
     	context = mcontext;
         compareWithConfig();
@@ -90,6 +95,9 @@ public class AccessTokenManager implements Parcelable {
 
     }
 
+    /**
+     * Clear Baidu access token.
+     */
     public static void clearToken() {
         Editor editor = context.getSharedPreferences(BAIDU_SDK_CONFIG, Context.MODE_PRIVATE).edit();
         editor.remove(BAIDU_SDK_CONFIG_PROP_ACCESS_TOKEN);
@@ -100,6 +108,9 @@ public class AccessTokenManager implements Parcelable {
         expireTime = 0;
     }
 
+    /**
+     * Store Baidu storage access token from a bundle object.
+     */
     public void storeToken(Bundle values) {
         if (values == null || values.isEmpty()) {
             return;
@@ -114,6 +125,10 @@ public class AccessTokenManager implements Parcelable {
         editor.commit();
 
     }
+
+    /**
+     * Store Baidu storage access token from a BaiduOAuthResponse Object.
+     */
     public static void storeToken(BaiduOAuthResponse values) {
         if (values == null) {
             return;
@@ -160,6 +175,11 @@ public class AccessTokenManager implements Parcelable {
 
     };
 
+    /**
+     * Check if the access token is valid.
+     * @return true if token is valid, false if token expired
+     *
+     */
     public static boolean isSessionVaild(Context mContext)  {
         if (accessToken == null || expireTime == 0) {
             initToken(mContext);
@@ -168,6 +188,10 @@ public class AccessTokenManager implements Parcelable {
 			    && System.currentTimeMillis() < expireTime;
     }
 
+    /**
+     * get access token, if it is null, initialize it
+     * @return aceess token
+     */
     public static String getAccessToken() {
         if (accessToken == null) {
             initToken(context);

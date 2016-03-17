@@ -49,6 +49,9 @@ public class Baidu implements CloudStorage{
 	}
 
 	@Override
+	/**
+	 * Handles Baidu cloud storage authentication.
+	 */
 	public void login(final Context context, int resultcode) {		// TODO
 	// Auto-generated method stub
 
@@ -80,6 +83,9 @@ public class Baidu implements CloudStorage{
 	
 
 	@Override
+	/**
+	 * Logout from Baidu cloud storage.
+	 */
 	public void logout(final Context context) {
 		// TODO Auto-generated method stub
 		if(null != mbOauth){    	
@@ -116,7 +122,7 @@ public class Baidu implements CloudStorage{
 	}
 
 	
-	 public  void writeTxtFile(String strcontent,File file)
+	 public  void writeTxtFile(String strcontent, File file)
 	 {
 	      String strContent=strcontent+"\n";
 	      try {
@@ -165,8 +171,7 @@ public class Baidu implements CloudStorage{
 						e.printStackTrace();
 					}
 		           }
-					//String tmpFile = "/mnt/sdcard/zzzz.jpg";
-				    
+
 					writeTxtFile(object.GetCloudJson().toString(), file);
 					
 		    		BaiduPCSClient api = new BaiduPCSClient();

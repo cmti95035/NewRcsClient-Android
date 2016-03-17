@@ -26,10 +26,11 @@ import java.util.Date;
 import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.ui.fragments.IpSetDialog;
 
+/**
+ * Common utils for backup data to cloud storage and restore data from cloud
+ * storage.
+ */
 public class Utils {
-
-    // The ID must be persistent through device reset, so we use hardware
-    // related properties. The priority is: IMEI/MEID > IMSI > Mac Address
 
     private static ActionsRequestBuilders actionsRequestBuilders = new
             ActionsRequestBuilders();
@@ -52,6 +53,13 @@ public class Utils {
         return restClient;
     }
 
+    //
+
+    /**
+     * Generate an ID. The ID must be persistent through device reset, so we use hardware
+     * related properties. The priority is: IMEI/MEID > IMSI > Mac Address
+     * @return the ID generated from hardware properties
+     */
     public static String getId(Context context) {
         String id;
 
@@ -76,6 +84,10 @@ public class Utils {
         return id;
     }
 
+    /**
+     * Reqeust an encryption key from the server/
+     * @return the encryption key
+     */
     public static EncryptionKey requestKey(Context context) {
         String userId = getId(context);
         ActionRequest<EncryptionKey> actionRequest = actionsRequestBuilders
@@ -98,6 +110,15 @@ public class Utils {
         }
     }
 
+    /**
+     * Once data is successfully backed up to the cloud storage, insert a
+     * back up record on the server. So server keep the mapping table for
+     * <backup_file, encryption_key>. When we need restore the data, server
+     * can retrieve the encryption key accordingly.
+     * @param backupRecord the backup record needs to be inserted
+     * @return true if backup record has been inserted successfully, false
+     * otherwise
+     */
     public static Boolean insertBackupRecord(Context context, BackupRecord
                                              backupRecord) {
         ActionRequest<Boolean> actionRequest = actionsRequestBuilders
@@ -121,6 +142,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Retrieve a backup record from the server based on user id and time stamp
+     * @param userId user ID based on hardware properties
+     * @param timestamp the time stamp when the data was backed
+     * @return the backup record based on user id and time stamp
+     */
     public static BackupRecord retrieveBackupRecord(Context context, String
                                                     userId, Long
             timestamp) {
@@ -144,6 +171,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Parse the file name and retrieve the time stamp
+     * @param fileName the backup file name with a time stamp being a part of it
+     * @return the time stamp retrieved from the file name
+     */
     public static long getTimestamp(String fileName) {
         return Long.parseLong(fileName.substring(fileName.lastIndexOf(".") +
                 1, fileName

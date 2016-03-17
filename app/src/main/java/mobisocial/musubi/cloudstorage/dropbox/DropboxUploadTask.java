@@ -24,6 +24,9 @@ import java.io.FileNotFoundException;
 import mobisocial.musubi.cloudstorage.UploadTask;
 import mobisocial.musubi.cloudstorage.Utils;
 
+/**
+ * Asynchronously upload the backup file to dropbox cloud storage.
+ */
 public class DropboxUploadTask extends UploadTask {
     private DropboxAPI<?> mApi;
     private UploadRequest mRequest;

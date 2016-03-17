@@ -22,6 +22,9 @@ import mobisocial.musubi.R;
 import mobisocial.musubi.cloudstorage.baidu.Baidu;
 import mobisocial.musubi.cloudstorage.dropbox.Dropbox;
 
+/**
+ * The activity to list all the supported cloud storage for backup.
+ */
 public class CloudBackupActivity extends Activity {
 
     private static final String TAG = "CloudBackupActivity";

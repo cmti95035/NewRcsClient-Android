@@ -9,20 +9,20 @@ import com.baidu.oauth.BaiduOAuth;
 import mobisocial.musubi.cloudstorage.AccessTokenManager;
 import mobisocial.musubi.cloudstorage.Cloud;
 
+/**
+ * Baidu cloud storage.
+ */
 public final class Baidu implements Cloud {
-    // the default root folder
+    //
     /*
-     * mbRootPath should be your app_path, please instead of
-     * "/apps/pcstest_oauth"
+     * the default root folder
      */
     private final static String mbRootPath = "/apps/StickyPOMI";
 
-    // api_key";
-    // the api key
     /*
-     * mbApiKey should be your app_key, please instead of "your api_key"
+     * mbApiKey this app's API key from Baidu storage
      */
-    private static String mbApiKey = "jmWK4EfYlQtMpUbWcU2GRlWF"; //your
+    private static String mbApiKey = "jmWK4EfYlQtMpUbWcU2GRlWF";
     private static Baidu instance;
     private String mbOauth = null;
     // the handler
@@ -35,6 +35,10 @@ public final class Baidu implements Cloud {
         mbUiThreadHandler = new Handler();
     }
 
+    /**
+     *
+     * @return A Baidu cloud storage instance
+     */
     public static synchronized Baidu getInstance() {
         if (null == instance) {
             instance = new Baidu();
@@ -42,6 +46,9 @@ public final class Baidu implements Cloud {
         return instance;
     }
 
+    /**
+     * Handles Baidu cloud storage login
+     */
     public void login(final Context context) {
 
         if (AccessTokenManager.isSessionVaild(mContext)) {
@@ -92,7 +99,9 @@ public final class Baidu implements Cloud {
         }
     }
 
-
+    /**
+     * Handles Baidu cloud storage log-out
+     */
     public void logout(final Context context) {
         if (null != mbOauth) {
             /**

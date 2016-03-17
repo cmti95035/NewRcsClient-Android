@@ -18,6 +18,9 @@ import java.util.List;
 
 import mobisocial.musubi.R;
 
+/**
+ * The adapter to hold all the backup files from a single cloud storage.
+ */
 public class FileAdapter extends BaseAdapter {
 
     private static final String TAG = "FileAdapter";
