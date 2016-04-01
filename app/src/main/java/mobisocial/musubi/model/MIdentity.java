@@ -163,4 +163,15 @@ public class MIdentity {
     public long updatedAt_;
     public boolean hasSentEmail_;
     public boolean whitelisted_;
+
+    public String toString() {
+        return "ID: " + id_
+                + "; Type: " + type_
+                + "; Principal: " + principal_
+                + "; PrincipalShortHash: " + principalShortHash_
+                + "; Owned: " + owned_
+                + "; ContactId: " + contactId_
+                + "; Name: " + name_
+                + "; MusubiName: " + musubiName_ +"\n";
+    }
 }

@@ -2,6 +2,7 @@ package mobisocial.musubi.cloudstorage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
@@ -23,6 +24,10 @@ import com.linkedin.restli.client.RestClient;
 import java.util.Collections;
 import java.util.Date;
 
+import mobisocial.crypto.IBHashedIdentity;
+import mobisocial.musubi.App;
+import mobisocial.musubi.model.MIdentity;
+import mobisocial.musubi.model.helpers.IdentitiesManager;
 import mobisocial.musubi.ui.SettingsActivity;
 import mobisocial.musubi.ui.fragments.IpSetDialog;
 
@@ -56,32 +61,22 @@ public class Utils {
     //
 
     /**
-     * Generate an ID. The ID must be persistent through device reset, so we use hardware
-     * related properties. The priority is: IMEI/MEID > IMSI > Mac Address
-     * @return the ID generated from hardware properties
+     * Get the user ID
      */
     public static String getId(Context context) {
+        android.database.sqlite.SQLiteOpenHelper SQLiteOpenHelper = App
+                .getDatabaseSource(context);
+        IdentitiesManager identitiesManager = new IdentitiesManager(SQLiteOpenHelper);
         String id;
-
-        TelephonyManager telephonyManager =
-                (TelephonyManager) context.getSystemService(Context
-                        .TELEPHONY_SERVICE);
-
-        id = telephonyManager.getDeviceId();
-        if (id != null) {
-            return id;
+        for ( MIdentity identity: identitiesManager.getOwnedIdentities()) {
+            if ( identity.type_ == IBHashedIdentity.Authority.PhoneNumber
+                && identity.owned_) {
+                return identity.principal_;
+            }
         }
 
-        id = telephonyManager.getSubscriberId();
-        if (id != null) {
-            return id;
-        }
-
-        WifiManager wifiManager =
-                (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wInfo = wifiManager.getConnectionInfo();
-        id = wInfo.getMacAddress();
-        return id;
+        throw new NullPointerException("Failed to retrieve the phone number, " +
+                "please set up the phone number in settings->Accounts");
     }
 
     /**
