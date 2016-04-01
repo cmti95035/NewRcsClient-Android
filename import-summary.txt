@@ -1,0 +1,170 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .DS_Store
+* .gitignore
+* README.md
+* README.txt
+* default.properties
+* proguard.cfg
+* test/
+* test/.classpath
+* test/.project
+* test/.project~
+* test/.settings/
+* test/.settings/org.eclipse.jdt.core.prefs
+* test/bin/
+* test/bin/AndroidManifest.xml
+* test/bin/classes/
+* test/bin/classes/.gitignore
+* test/bin/classes/mobisocial/
+* test/bin/classes/mobisocial/crypto/
+* test/bin/classes/mobisocial/crypto/CryptoPerformanceTest.class
+* test/bin/classes/mobisocial/crypto/IBCryptoTest.class
+* test/bin/classes/mobisocial/crypto/IBScheme.class
+* test/bin/classes/mobisocial/musubi/
+* test/bin/classes/mobisocial/musubi/encoding/
+* test/bin/classes/mobisocial/musubi/encoding/EncoderPerformanceTest.class
+* test/bin/classes/mobisocial/musubi/encoding/EncodingTest.class
+* test/bin/classes/mobisocial/musubi/encoding/ObjEncodingTest.class
+* test/bin/classes/mobisocial/musubi/encoding/PersistentEncodingTest.class
+* test/bin/classes/mobisocial/musubi/encoding/TestBase$DebugSQLiteCursorFactory.class
+* test/bin/classes/mobisocial/musubi/encoding/TestBase.class
+* test/bin/classes/mobisocial/musubi/encoding/TransientTransportDataProvider$BlacklistProvider.class
+* test/bin/classes/mobisocial/musubi/encoding/TransientTransportDataProvider$EncryptionController.class
+* test/bin/classes/mobisocial/musubi/encoding/TransientTransportDataProvider$SignatureController.class
+* test/bin/classes/mobisocial/musubi/encoding/TransientTransportDataProvider.class
+* test/bin/classes/mobisocial/musubi/feed/
+* test/bin/classes/mobisocial/musubi/feed/FixedFeedTest.class
+* test/bin/classes/mobisocial/musubi/identity/
+* test/bin/classes/mobisocial/musubi/identity/IdentityProviderTest.class
+* test/bin/classes/mobisocial/musubi/model/
+* test/bin/classes/mobisocial/musubi/model/helpers/
+* test/bin/classes/mobisocial/musubi/model/helpers/AppManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/ContactDataVersionManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/DBPatternTest$MTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/DBPatternTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/EncodedMessageManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/FactManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/FeedManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/IdentityManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/MyAccountManagerTest.class
+* test/bin/classes/mobisocial/musubi/model/helpers/ObjectManagerTest.class
+* test/bin/classes/mobisocial/musubi/provider/
+* test/bin/classes/mobisocial/musubi/provider/ContentProviderTest$BasicTestObj.class
+* test/bin/classes/mobisocial/musubi/provider/ContentProviderTest.class
+* test/bin/classes/mobisocial/musubi/service/
+* test/bin/classes/mobisocial/musubi/service/AMQPListener.class
+* test/bin/classes/mobisocial/musubi/service/AMQPServiceTest.class
+* test/bin/classes/mobisocial/musubi/service/EncodeDecodeTest.class
+* test/bin/classes/mobisocial/musubi/service/ObjPipelineHandlerTest.class
+* test/bin/classes/mobisocial/musubi/service/ProfilePushTest.class
+* test/bin/classes/mobisocial/musubi/service/TwoMusubisTest.class
+* test/bin/classes/mobisocial/musubi/service/WizardServiceTest.class
+* test/bin/classes/mobisocial/musubi/sync/
+* test/bin/classes/mobisocial/musubi/sync/DelegatedMockContext.class
+* test/bin/classes/mobisocial/musubi/sync/SyncAdapterTest.class
+* test/bin/classes/mobisocial/musubi/test/
+* test/bin/classes/mobisocial/musubi/test/BuildConfig.class
+* test/bin/classes/mobisocial/musubi/test/R$attr.class
+* test/bin/classes/mobisocial/musubi/test/R$drawable.class
+* test/bin/classes/mobisocial/musubi/test/R$layout.class
+* test/bin/classes/mobisocial/musubi/test/R$string.class
+* test/bin/classes/mobisocial/musubi/test/R.class
+* test/bin/classes/mobisocial/musubi/webapp/
+* test/bin/classes/mobisocial/musubi/webapp/SocialKitJsTest.class
+* test/bin/classes/mobisocial/test/
+* test/bin/classes/mobisocial/test/DatabaseManager.class
+* test/bin/classes/mobisocial/test/MockMusubiAppContext$AMQPServiceWrapper.class
+* test/bin/classes/mobisocial/test/MockMusubiAppContext.class
+* test/bin/classes/mobisocial/test/MusubiProviderTestCase.class
+* test/bin/classes/mobisocial/test/NMusubisTestBase.class
+* test/bin/classes/mobisocial/test/NServicesTestCase.class
+* test/bin/classes/mobisocial/test/TestBase$DebugSQLiteCursorFactory.class
+* test/bin/classes/mobisocial/test/TestBase.class
+* test/bin/classes/mobisocial/test/TestDatabase.class
+* test/bin/jarlist.cache
+* test/gen/
+* test/gen/.gitignore
+* test/gen/mobisocial/
+* test/gen/mobisocial/musubi/
+* test/gen/mobisocial/musubi/test/
+* test/gen/mobisocial/musubi/test/BuildConfig.java
+* test/gen/mobisocial/musubi/test/R.java
+* test/proguard.cfg
+* test/project.properties
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+guava-r08.jar => com.google.guava:guava:17.0
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* assets/ => app/src/main/assets/
+* libs/Baidu_OAuth_SDK_Android_G-2.0.0.0.jar => app/libs/Baidu_OAuth_SDK_Android_G-2.0.0.0.jar
+* libs/Baidu_PCS_SDK_Android-2.0.0.0.jar => app/libs/Baidu_PCS_SDK_Android-2.0.0.0.jar
+* libs/arm64-v8a/liblocSDK5.so => app/src/main/jniLibs/arm64-v8a/liblocSDK5.so
+* libs/armeabi-v7a/libDropboxSync.so => app/src/main/jniLibs/armeabi-v7a/libDropboxSync.so
+* libs/armeabi-v7a/libiLBC_codec.so => app/src/main/jniLibs/armeabi-v7a/libiLBC_codec.so
+* libs/armeabi-v7a/liblocSDK5.so => app/src/main/jniLibs/armeabi-v7a/liblocSDK5.so
+* libs/armeabi/libDropboxSync.so => app/src/main/jniLibs/armeabi/libDropboxSync.so
+* libs/armeabi/libiLBC_codec.so => app/src/main/jniLibs/armeabi/libiLBC_codec.so
+* libs/armeabi/liblocSDK5.so => app/src/main/jniLibs/armeabi/liblocSDK5.so
+* libs/bson4jackson-1.3.0.jar => app/libs/bson4jackson-1.3.0.jar
+* libs/commons-httpclient-3.1.jar => app/libs/commons-httpclient-3.1.jar
+* libs/commons-io-1.2.jar => app/libs/commons-io-1.2.jar
+* libs/commons-lang3-3.1.jar => app/libs/commons-lang3-3.1.jar
+* libs/core.jar => app/libs/core.jar
+* libs/dropbox-sync-sdk-android.jar => app/libs/dropbox-sync-sdk-android.jar
+* libs/easynfc-0.3.3.jar => app/libs/easynfc-0.3.3.jar
+* libs/httpmime-4.2.jar => app/libs/httpmime-4.2.jar
+* libs/jackson-all-1.9.4.jar => app/libs/jackson-all-1.9.4.jar
+* libs/javatuples-1.2.jar => app/libs/javatuples-1.2.jar
+* libs/locSDK_5.01.jar => app/libs/locSDK_5.01.jar
+* libs/mips/libDropboxSync.so => app/src/main/jniLibs/mips/libDropboxSync.so
+* libs/mips/liblocSDK5.so => app/src/main/jniLibs/mips/liblocSDK5.so
+* libs/mips64/liblocSDK5.so => app/src/main/jniLibs/mips64/liblocSDK5.so
+* libs/rabbitmq-client.jar => app/libs/rabbitmq-client.jar
+* libs/socialkit-0.3.0.jar => app/libs/socialkit-0.3.0.jar
+* libs/trove-3.0.2.jar => app/libs/trove-3.0.2.jar
+* libs/twilio-java-sdk-3.4.6.jar => app/libs/twilio-java-sdk-3.4.6.jar
+* libs/x86/libDropboxSync.so => app/src/main/jniLibs/x86/libDropboxSync.so
+* libs/x86/liblocSDK5.so => app/src/main/jniLibs/x86/liblocSDK5.so
+* libs/x86_64/liblocSDK5.so => app/src/main/jniLibs/x86_64/liblocSDK5.so
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+* test/res/ => app/src/androidTest/res/
+* test/src/ => app/src/androidTest/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

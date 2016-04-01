@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stat_ok">确认</string>
+    <string name="stat_cancel">取消</string>
+    <string name="set_server_ip">设置广告服务器地址</string>
+    <string name="input_text">输入新的IP: </string>
+    <string name="wrong_ip">输入的IP地址格式有误!请重试。</string>
+    <string name="no_ads_server">请先设置广告服务器地址!</string>
+    <string name="show_ads">显示广告</string>
+    <string name="no_ad_found">没有找到广告！</string>
+    <string name="cloud_storage_description">请选择云存储供应商。</string>
+</resources>

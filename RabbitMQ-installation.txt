@@ -1,0 +1,45 @@
+rabbitmq-server install 
+====================================================
+
+1.install the dependences of erlang
+# 	yum -y install make gcc gcc-c++ kernel-devel m4 ncurses-devel openssl-devel
+
+2.import erlang source, and install erlang
+# 	rpm --import http://binaries.erlang-solutions.com/debian/erlang_solutions.asc
+# 	wget -O /etc/yum.repos.d/erlang_solutions.repo  http://binaries.erlang-solutions.com/rpm/centos/erlang_solutions.repo
+# 	wget http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+# 	rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
+# 	rpm -i rpmforge-release-0.5.2-2.el6.rf.*.rpm
+# 	yum install erlang
+# 	erl
+
+3.download and install rabbitmq	(as of 4/3/2015, 3.5.1 is the latest version)
+# 	wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.1/rabbitmq-server-3.5.1.tar.gz
+#	tar zvxf rabbitmq-server-3.5.1.tar.gz
+# 	cd rabbitmq-server-3.5.1
+#	./configure
+#	make 
+#	yum install libxslt	
+#	make install
+#	yum -y install xmlto
+
+4.enable rabbitmanagemnt	
+http://www.rabbitmq.com/management.html
+
+5. start and stop rabbitmq
+start:	rabbitmq-server –detached
+stop:	rabbitmqctl stop
+
+6.user management
+create user:		rabbitmqctl add_user xxx pwd
+delete user:   		rabbitmqctl delete_user xxx
+chang pawssword: 	rabbimqctlchange_password {username} {newpassword}
+set user role：		rabbitmqctlset_user_tags {username} {tag ...}
+					Tag can be administrator,monitoring, management
+
+Then it needs to update the Musubi client with the rabbitmq-server IP address in the AMQPService.java:
+
+	static final String AMQP_SERVICE = "x.x.x.x";	// put the RabbitMQ-Server-IP-Address here
+	
+If in the future that we can use a FQDN such as "musubi.org" and have a registered domain, then the above IP address
+can be changed to be the FQDN.
