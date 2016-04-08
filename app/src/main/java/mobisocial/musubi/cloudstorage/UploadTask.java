@@ -2,6 +2,7 @@ package mobisocial.musubi.cloudstorage;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -56,9 +57,18 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
         FileOutputStream out = null;
         File result;
 
-        SQLiteDatabase db = App.getDatabaseSource(mContext)
-                .getWritableDatabase();
-        db.beginTransaction();
+        Cursor cursor = null;
+        SQLiteDatabase db = null;
+        try {
+            db = App.getDatabaseSource(mContext)
+                    .getWritableDatabase();
+            cursor = db.rawQuery("PRAGMA wal_checkpoint", null);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
         try {
             File currentDB = mContext.getDatabasePath(DatabaseFile
                     .DEFAULT_DATABASE_NAME);
@@ -86,7 +96,6 @@ public abstract class UploadTask extends AsyncTask<Void, Integer, Boolean> {
             Log.e(TAG, "Failure backing up to local SD card", e);
             return null;
         } finally {
-            db.endTransaction();
             try {
                 if (in != null) in.close();
                 if (out != null) in.close();

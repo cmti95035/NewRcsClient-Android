@@ -50,11 +50,9 @@ public class DropboxDownloadTask extends DownloadTask {
     @Override
     protected String doInBackground(Void... params) {
         FileOutputStream fos = null;
-        SQLiteOpenHelper helper = App.getDatabaseSource(mContext);
         File oldDb;
 
         try {
-            helper.getWritableDatabase().beginTransaction();
             oldDb = mContext.getDatabasePath(DatabaseFile
                     .DEFAULT_DATABASE_NAME + ".to");
 
@@ -73,9 +71,6 @@ public class DropboxDownloadTask extends DownloadTask {
                                     DOWN_LOAD_WEIGHT));
                         }
                     });
-
-            helper.getWritableDatabase().endTransaction();
-            helper.close();
 
             String fileName = getBackupFileName(mPath);
             String ret = decrypt(oldDb, fileName, TAG);
